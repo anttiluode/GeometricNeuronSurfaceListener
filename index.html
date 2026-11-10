@@ -24,7 +24,7 @@ code{background:#25313d;border-radius:4px;padding:1px 5px;font-size:.88em}pre{ov
 <h1>Two deerskins meet.</h1>
 <p class="lede">What if a neuron listens to another through <strong>its own moving surface</strong>? The sender broadcasts the 16 samples of its checkerboard. The receiver's present checkerboard becomes its receptor mosaic. Their overlap determines how much one affects the other.</p>
 <div class="tag">The original 59-tick forgetting clock is unchanged. No training, no imported theta rhythm.</div>
-<p class="footnote"><a href="#round2">Second round</a>: why the colony goes silent, and a hold-and-release switch. <a href="#round3">Third round</a>: a two-way chain taught by that switch alone.</p>
+<p class="footnote"><a href="#round2">Second round</a>: why the colony goes silent, and a hold-and-release switch. <a href="#round3">Third round</a>: a two-way chain taught by that switch alone. <a href="#round4">Fourth round</a>: what the checkerboard history tells a listener that beat times do not.</p>
 <section class="panel" aria-label="Live experiment">
 <h2>Live, deterministic two-unit experiment</h2>
 <div class="controls">
@@ -114,6 +114,16 @@ code{background:#25313d;border-radius:4px;padding:1px 5px;font-size:.88em}pre{ov
 <p class="footnote">Fraction of 96 trials in which units 0 to 3 beat in exactly the cued order within 40 ticks. A cue never produced the opposite order. Every colony was scrambled by a random-order release before testing.</p>
 <p>A colony can be given two orders through its input alone and replay whichever is cued. It works for release gaps of 3 and 4 ticks, weakly for 1, 2 and 5, and not at 8.</p>
 <p class="warning">The trigger and refractory that make replay possible are hand-written and on only at test. The count is a tally kept beside the colony. The order is still chosen from outside. Numbers: <a href="results/round3.json">results/round3.json</a>.</p></section>
+<section class="panel" id="round4"><div class="overline">Fourth round · Fable 5.2 · 10 November 2026</div>
+<h2>What the checkerboard history tells a listener</h2>
+<p>A unit's rows form a sequence in time. One unit lives a disturbed life (random holds and pulses), and a reader has to call each beat before it happens. Readers are plain lookup tables, so the comparison is about what each signal contains.</p>
+<table><thead><tr><th>Reader</th><th>Regular beats called<br>4 ticks ahead</th><th>Disturbed beats called<br>4 ticks ahead</th><th>False alarms<br>per beat</th></tr></thead><tbody>
+<tr><td>Beat times only</td><td>1.00</td><td>0.37</td><td>0.33</td></tr>
+<tr><td>Current row only</td><td>0.99</td><td>0.46</td><td>0.36</td></tr>
+<tr><td><strong>Last 4 rows</strong></td><td><strong>1.00</strong></td><td><strong>0.93</strong></td><td>0.03</td></tr>
+<tr><td>Last 4 rows, order thrown away</td><td>1.00</td><td>0.94</td><td>0.03</td></tr></tbody></table>
+<p>Beat times are a clock: perfect until the unit is disturbed. The last four rows warn of over 90% of disturbed beats, four ticks early, which is the loop delay. For that warning the order of the rows does not matter. Order matters only for the long view: 32 rows in order call every regular beat 8 ticks ahead, and none when shuffled.</p>
+<p class="warning">The reader here is a table outside the loop, not a receptor inside a colony. The hand-written trigger from the earlier rounds ignores this warning: it waits for the beat and then overrides the listener's output. Numbers: <a href="results/round4.json">results/round4.json</a>.</p></section>
 <p class="footnote">Scientific boundary: these are real-valued sampled images and Pearson correlation. Their overlap is reciprocal at one instant. It is not quantum interference, not learned attention, and not proof of task-dependent neural communication. The original closed-loop controller and sample table are copied unchanged for audit.</p>
 </main><script src="taps.js"></script><script src="lab.js"></script><script>
 (function(){

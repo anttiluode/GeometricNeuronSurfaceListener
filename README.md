@@ -4,6 +4,35 @@
 
 *10 November 2026. Antti's experiment prompted by Fable 5.2's reading of the original [Geometric-Neuron / Deerskin Theory](https://github.com/anttiluode/Geometric-Neuron) and the six-loop [ReturnToGeometricNeuron](https://github.com/anttiluode/ReturnToGeometricNeuron) study.*
 
+## Fourth round: what the checkerboard history tells a listener
+
+*Fable 5.2, 10 November 2026. Antti's question and Sol's proposed test. Code: [experiments/round4.py](experiments/round4.py). Numbers: [results/round4.json](results/round4.json).*
+
+A unit's checkerboard rows form a sequence in time. Does that sequence hold anything its beat times do not? One unit lives a disturbed life (random holds, random heard pulses). A reader must call each beat some ticks before it happens. Every reader is a plain lookup table learned on 400,000 ticks and tested on another 150,000, so the comparison is about what each signal contains.
+
+Share of beats called in advance, **regular / disturbed**, with false alarms per beat in brackets. A beat is regular if the one before it came exactly 59 ticks earlier with no input between (751 beats); otherwise disturbed (842 beats).
+
+| Reader | 1 tick ahead | 4 ticks ahead | 8 ticks ahead | 20 ticks ahead |
+|---|---:|---:|---:|---:|
+| Beat times (ticks since last beat) | 1.00 / 0.37 (0.22) | 1.00 / 0.37 (0.33) | 1.00 / 0.37 (0.33) | 1.00 / 0.37 (0.33) |
+| Current row only | 0.00 / 0.10 (0.04) | 0.99 / 0.46 (0.36) | 0 / 0 | 0 / 0 |
+| **Last 4 rows** | **1.00 / 0.91 (0.01)** | **1.00 / 0.93 (0.03)** | 0 / 0 | 0 / 0 |
+| Last 4 rows, order thrown away | 1.00 / 0.91 (0.01) | 1.00 / 0.94 (0.03) | 0 / 0 | 0 / 0 |
+| Last 32 rows | 1.00 / 0.89 (0.00) | 1.00 / 0.89 (0.02) | 1.00 / 0.39 (0.28) | 1.00 / 0.79 (0.08) |
+| Last 32 rows, order thrown away | 1.00 / 0.90 (0.01) | 1.00 / 0.93 (0.02) | 0.00 / 0.01 (0.01) | 0.99 / 0.53 (0.11) |
+
+- **Yes, the surface holds something beat times discard.** A beat-time code is a clock: perfect while nothing disturbs the unit, and it calls only 37% of disturbed beats. Four checkerboard rows call over 90% of disturbed beats up to 4 ticks ahead, with almost no false alarms. Four ticks is the loop delay: the lead-up is on the surface before the beat is.
+- **One row is not enough, and for the short warning the order does not matter.** The last four rows work as well shuffled as in order. It is which rows were recently shown that counts.
+- **Order matters only for the long view.** With 32 rows the surface also works as a clock, and there the order is needed: 8 ticks ahead it calls every regular beat in order and none when shuffled.
+
+The two codes are complementary: beat times give a long-range clock that breaks when the unit is disturbed, and recent rows give a short, reliable warning that survives disturbance.
+
+**What this says about the earlier rounds.** The hand-written trigger listens to outputs 0 and 1, which are silent until the beat itself, and then overrides the listener's output. So replay runs at a fixed 5 ticks per hop whatever was taught, and a triggered beat has no lead-up of its own to pass on. The warning measured here is exactly what that trigger ignores.
+
+**Not shown.** That any listener in a colony uses this. A lookup table is a reader outside the loop, not a receptor. I also checked whether an input pulse can bring a beat forward, which a lead-up-driven trigger would need: small negative pulses (0.05 to 0.3, one tick) changed the next beat at none of 58 phases, so there is still no excitation through the input port.
+
+---
+
 ## Third round: a chain taught by hold and release
 
 *Fable 5.2, 10 November 2026. Code: [experiments/round3.py](experiments/round3.py). Numbers: [results/round3.json](results/round3.json).*
@@ -188,6 +217,7 @@ Python 3.11+, NumPy:
     python experiments/probe.py
     python experiments/round2.py
     python experiments/round3.py
+    python experiments/round4.py
 
 The experiment writes the full numerical receipt to results/probe.json, including every phase pair. The committed [summary](results/summary.json) contains the primary results.
 
