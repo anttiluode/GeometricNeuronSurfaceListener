@@ -1,0 +1,290 @@
+{
+  "date": "2026-11-10",
+  "status": "Reproduced by GitHub Actions on parent original Python core (not independent physics validation)",
+  "source_run": "https://github.com/anttiluode/GeometricNeuronSurfaceListener/actions/runs/42859969157",
+  "readme_note": "See the workflow artifact for the 59x59 correlation matrix and all 59 phase-by-phase causal receipts. This compact JSON is a faithful subset of the workflow's SUMMARY line.",
+  "analytical": {
+    "orbit_unique_q": [
+      -11,
+      -9,
+      23,
+      40,
+      42,
+      43,
+      48,
+      49,
+      51,
+      78,
+      84
+    ],
+    "surface_mean_offdiagonal": 0.4957823721336845,
+    "surface_min_offdiagonal": -0.20006492172075946,
+    "surface_max_offdiagonal": 1.0000000000000002,
+    "surface_symmetry_max_error": 0,
+    "surface_dynamic_range": 1.2000649217207597
+  },
+  "causal_phase_pulses": {
+    "surface": {
+      "speaker_to_listener": {
+        "observed_beat_shifts_n": 55,
+        "nonzero_beat_shift_n": 28,
+        "mean_abs_beat_shift": 13.2,
+        "mean_receiver_read_l1_first40": 6.458938209357095,
+        "affected_read_n": 59,
+        "affected_output_n": 59
+      },
+      "listener_to_speaker": {
+        "observed_beat_shifts_n": 58,
+        "nonzero_beat_shift_n": 8,
+        "mean_abs_beat_shift": 6.155172413793103,
+        "mean_receiver_read_l1_first40": 7.159171530155091,
+        "affected_read_n": 59,
+        "affected_output_n": 59
+      }
+    },
+    "raw": {
+      "speaker_to_listener": {
+        "observed_beat_shifts_n": 41,
+        "nonzero_beat_shift_n": 20,
+        "mean_abs_beat_shift": 7.975609756097561,
+        "mean_receiver_read_l1_first40": 1.8288201909109763,
+        "affected_read_n": 59,
+        "affected_output_n": 59
+      },
+      "listener_to_speaker": {
+        "observed_beat_shifts_n": 32,
+        "nonzero_beat_shift_n": 31,
+        "mean_abs_beat_shift": 28.8125,
+        "mean_receiver_read_l1_first40": 2.380556395741463,
+        "affected_read_n": 59,
+        "affected_output_n": 59
+      }
+    },
+    "fixed": {
+      "speaker_to_listener": {
+        "observed_beat_shifts_n": 15,
+        "nonzero_beat_shift_n": 5,
+        "mean_abs_beat_shift": 4.133333333333334,
+        "mean_receiver_read_l1_first40": 4.228362649516722,
+        "affected_read_n": 59,
+        "affected_output_n": 59
+      },
+      "listener_to_speaker": {
+        "observed_beat_shifts_n": 48,
+        "nonzero_beat_shift_n": 13,
+        "mean_abs_beat_shift": 1.6041666666666667,
+        "mean_receiver_read_l1_first40": 6.821564556708656,
+        "affected_read_n": 59,
+        "affected_output_n": 59
+      }
+    },
+    "shifted": {
+      "speaker_to_listener": {
+        "observed_beat_shifts_n": 29,
+        "nonzero_beat_shift_n": 6,
+        "mean_abs_beat_shift": 4.137931034482759,
+        "mean_receiver_read_l1_first40": 13.263077752805712,
+        "affected_read_n": 59,
+        "affected_output_n": 59
+      },
+      "listener_to_speaker": {
+        "observed_beat_shifts_n": 28,
+        "nonzero_beat_shift_n": 27,
+        "mean_abs_beat_shift": 3.142857142857143,
+        "mean_receiver_read_l1_first40": 13.280555184748552,
+        "affected_read_n": 59,
+        "affected_output_n": 59
+      }
+    },
+    "fixed_taps": {
+      "speaker_to_listener": {
+        "observed_beat_shifts_n": 46,
+        "nonzero_beat_shift_n": 38,
+        "mean_abs_beat_shift": 35.391304347826086,
+        "mean_receiver_read_l1_first40": 12.1154706079576,
+        "affected_read_n": 59,
+        "affected_output_n": 59
+      },
+      "listener_to_speaker": {
+        "observed_beat_shifts_n": 53,
+        "nonzero_beat_shift_n": 53,
+        "mean_abs_beat_shift": 1.1886792452830188,
+        "mean_receiver_read_l1_first40": 16.816649537015767,
+        "affected_read_n": 59,
+        "affected_output_n": 59
+      }
+    },
+    "null": {
+      "speaker_to_listener": {
+        "observed_beat_shifts_n": 59,
+        "nonzero_beat_shift_n": 0,
+        "mean_abs_beat_shift": 0,
+        "mean_receiver_read_l1_first40": 0,
+        "affected_read_n": 0,
+        "affected_output_n": 0
+      },
+      "listener_to_speaker": {
+        "observed_beat_shifts_n": 59,
+        "nonzero_beat_shift_n": 0,
+        "mean_abs_beat_shift": 0,
+        "mean_receiver_read_l1_first40": 0,
+        "affected_read_n": 0,
+        "affected_output_n": 0
+      }
+    }
+  },
+  "six_unit": {
+    "0.02": {
+      "surface": {
+        "events_per_unit_mean": 8.083333333333332,
+        "silent_units": 0,
+        "identical_pair_fraction": 0.05,
+        "total_beats": 48.5
+      },
+      "raw": {
+        "events_per_unit_mean": 11.166666666666668,
+        "silent_units": 0,
+        "identical_pair_fraction": 0.13333333333333336,
+        "total_beats": 67
+      },
+      "fixed": {
+        "events_per_unit_mean": 9,
+        "silent_units": 0,
+        "identical_pair_fraction": 0.13333333333333333,
+        "total_beats": 54
+      },
+      "shifted": {
+        "events_per_unit_mean": 6.958333333333334,
+        "silent_units": 0,
+        "identical_pair_fraction": 0.2333333333333333,
+        "total_beats": 41.75
+      },
+      "fixed_taps": {
+        "events_per_unit_mean": 10.208333333333334,
+        "silent_units": 0,
+        "identical_pair_fraction": 0.06666666666666667,
+        "total_beats": 61.25
+      },
+      "null": {
+        "events_per_unit_mean": 8.041666666666666,
+        "silent_units": 0,
+        "identical_pair_fraction": 0.03333333333333333,
+        "total_beats": 48.25
+      }
+    },
+    "0.05": {
+      "surface": {
+        "events_per_unit_mean": 4.25,
+        "silent_units": 3,
+        "identical_pair_fraction": 0.5666666666666667,
+        "total_beats": 25.5
+      },
+      "raw": {
+        "events_per_unit_mean": 0,
+        "silent_units": 6,
+        "identical_pair_fraction": 1,
+        "total_beats": 0
+      },
+      "fixed": {
+        "events_per_unit_mean": 7.666666666666667,
+        "silent_units": 0.5,
+        "identical_pair_fraction": 0.7166666666666667,
+        "total_beats": 46
+      },
+      "shifted": {
+        "events_per_unit_mean": 0,
+        "silent_units": 6,
+        "identical_pair_fraction": 1,
+        "total_beats": 0
+      },
+      "fixed_taps": {
+        "events_per_unit_mean": 6.666666666666667,
+        "silent_units": 0,
+        "identical_pair_fraction": 0.18333333333333332,
+        "total_beats": 40
+      },
+      "null": {
+        "events_per_unit_mean": 8.041666666666666,
+        "silent_units": 0,
+        "identical_pair_fraction": 0.03333333333333333,
+        "total_beats": 48.25
+      }
+    },
+    "0.1": {
+      "surface": {
+        "events_per_unit_mean": 0,
+        "silent_units": 6,
+        "identical_pair_fraction": 1,
+        "total_beats": 0
+      },
+      "raw": {
+        "events_per_unit_mean": 0,
+        "silent_units": 6,
+        "identical_pair_fraction": 1,
+        "total_beats": 0
+      },
+      "fixed": {
+        "events_per_unit_mean": 0,
+        "silent_units": 6,
+        "identical_pair_fraction": 1,
+        "total_beats": 0
+      },
+      "shifted": {
+        "events_per_unit_mean": 0,
+        "silent_units": 6,
+        "identical_pair_fraction": 1,
+        "total_beats": 0
+      },
+      "fixed_taps": {
+        "events_per_unit_mean": 0,
+        "silent_units": 6,
+        "identical_pair_fraction": 1,
+        "total_beats": 0
+      },
+      "null": {
+        "events_per_unit_mean": 8.041666666666666,
+        "silent_units": 0,
+        "identical_pair_fraction": 0.03333333333333333,
+        "total_beats": 48.25
+      }
+    },
+    "0.2": {
+      "surface": {
+        "events_per_unit_mean": 0,
+        "silent_units": 6,
+        "identical_pair_fraction": 1,
+        "total_beats": 0
+      },
+      "raw": {
+        "events_per_unit_mean": 0,
+        "silent_units": 6,
+        "identical_pair_fraction": 1,
+        "total_beats": 0
+      },
+      "fixed": {
+        "events_per_unit_mean": 0,
+        "silent_units": 6,
+        "identical_pair_fraction": 1,
+        "total_beats": 0
+      },
+      "shifted": {
+        "events_per_unit_mean": 0,
+        "silent_units": 6,
+        "identical_pair_fraction": 1,
+        "total_beats": 0
+      },
+      "fixed_taps": {
+        "events_per_unit_mean": 0,
+        "silent_units": 6,
+        "identical_pair_fraction": 1,
+        "total_beats": 0
+      },
+      "null": {
+        "events_per_unit_mean": 8.041666666666666,
+        "silent_units": 0,
+        "identical_pair_fraction": 0.03333333333333333,
+        "total_beats": 48.25
+      }
+    }
+  }
+}
