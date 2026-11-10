@@ -4,6 +4,50 @@
 
 *10 November 2026. Antti's experiment prompted by Fable 5.2's reading of the original [Geometric-Neuron / Deerskin Theory](https://github.com/anttiluode/Geometric-Neuron) and the six-loop [ReturnToGeometricNeuron](https://github.com/anttiluode/ReturnToGeometricNeuron) study.*
 
+## Fifth round: a receptor learned from a neighbour's rows
+
+*Fable 5.2, 10 November 2026. Code: [experiments/round5.py](experiments/round5.py). Numbers: [results/round5.json](results/round5.json).*
+
+This joins the last two rounds. Teaching is round three's hold and release, both orders, outputs never forced, and here the units are not connected at all while they are taught. What each unit learns is a receptor for each neighbour: a table over that neighbour's last one to three checkerboard rows. At its own beat a unit looks back 9 ticks at what the neighbour that beat just before it was showing, and credits that short row sequence. No connection weight exists; the tables are the only thing learned.
+
+At test units 0 to 3 are held silent by the rhythm, so the only beats are cued or triggered. One end is cued. A unit starts a beat when a neighbour shows a row sequence its table credited more than 30% of the times it appeared.
+
+Colonies of 12 that replayed the cued order, and replayed it with every hop within one tick of the lag teaching wrote for that pair:
+
+| Release gap in teaching | Lags actually written (ticks per hop) | Cue 0 → 0123 | Cue 3 → 3210 | Hop in replay (median) |
+|---|---|---:|---:|---:|
+| 5 | 6, 5, 4 | 0 | 0 | none |
+| **6** | 6, 7, 6 | **12** | **10** | 6 |
+| **7** | 7, 7, 8 | **11** | **10** | 7 |
+| **8** | 8, 8, 8 | **12** | **12** | 8 |
+| 9 | 5, 14, 9 | 0 | 0 | none |
+| 10 | 11, 10, 9 | 0 | 0 | none |
+| 12 | 13, 11, 13 | 0 | 0 | none |
+
+Every replay that had the right order also had the right timing. No cue ever produced the opposite order, and with no cue a taught colony stayed silent in every trial.
+
+| Control (gaps 6, 7, 8) | Result |
+|---|---|
+| Receptor sees only the current row | 0 of 12 at every gap |
+| Rows in the receptor's window with their order thrown away | Same as in order |
+| Random release order every block | 0 of 12 |
+| No teaching | 0 of 12 |
+
+**What is new here.** The beat tally of round three replays at a fixed 5 ticks per hop whatever was taught. This receptor replays 6, 7 or 8 ticks per hop according to what it was taught, in both directions, from one fixed set of tables. The timing is carried by which rows of the neighbour's lead-up the receptor learned to answer. And, as round four predicted, one row is not enough and the order of the few rows does not matter.
+
+**It only works in a narrow band.** A hop of 4 ticks is too fast: the trigger needs 9 ticks from decision to beat, and the neighbour's lead-up shows only 4 ticks before its beat. Hops of 9 ticks and more fail too. I did not diagnose that; my guess is that the rows after a triggered beat in a held unit differ from those after a natural beat, so the tables never see them at test.
+
+**What is still hand-built.**
+- The trigger. It plays the unit's own recorded beat (four lead-up outputs, two beat outputs) by overriding its output. It is on only at test. There is still no way to make a unit beat through its input.
+- A 30-tick refractory after a beat or a trigger.
+- The nearest-predecessor credit, which is Sol's rule from the earlier repo. Without it the tables also learn shortcuts, and at a gap of 8 the two taught directions close into a loop that beats without a cue (0→2→3→1→0, seen in a trial run before the credit rule was added).
+- The 30% threshold, the 9-tick look-back and the window of three rows.
+- The hold at test. It removes natural beats so that a replay can be read cleanly; a free colony was not tested with this receptor.
+
+**Not shown.** Any task. More than four units or more than two orders. Robustness: each colony's test is deterministic once it is held, so these are 12 colonies, not 96 independent trials. A learned linear filter over the rows, in place of a lookup table, was not tried.
+
+---
+
 ## Fourth round: what the checkerboard history tells a listener
 
 *Fable 5.2, 10 November 2026. Antti's question and Sol's proposed test. Code: [experiments/round4.py](experiments/round4.py). Numbers: [results/round4.json](results/round4.json).*
@@ -218,6 +262,7 @@ Python 3.11+, NumPy:
     python experiments/round2.py
     python experiments/round3.py
     python experiments/round4.py
+    python experiments/round5.py
 
 The experiment writes the full numerical receipt to results/probe.json, including every phase pair. The committed [summary](results/summary.json) contains the primary results.
 

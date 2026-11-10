@@ -1,0 +1,428 @@
+{
+ "spec": {
+  "seeds": 12,
+  "trials_per_seed": 8,
+  "refractory": 30,
+  "threshold": 0.3,
+  "latency": 9,
+  "window": 80,
+  "wave": [
+   1.5806,
+   1.4633,
+   1.4655,
+   1.4692,
+   -0.3362,
+   -0.2874
+  ],
+  "timed_means": "every hop within 1 tick of the lag teaching actually wrote for that pair"
+ },
+ "conditions": {
+  "receptor_gap5": {
+   "cue0_order": 0.0,
+   "cue0_timed": 0.0,
+   "cue3_order": 0.0,
+   "cue3_timed": 0.0,
+   "cue0_wrong": 0.0,
+   "cue3_wrong": 0.0,
+   "nocue_any_beat": 0.0,
+   "median_hop_ticks": null,
+   "n": 96,
+   "taught_hop_ticks": [
+    4,
+    5,
+    6
+   ]
+  },
+  "receptor_order_thrown_away_gap5": {
+   "cue0_order": 0.0,
+   "cue0_timed": 0.0,
+   "cue3_order": 0.0,
+   "cue3_timed": 0.0,
+   "cue0_wrong": 0.0,
+   "cue3_wrong": 0.0,
+   "nocue_any_beat": 0.0,
+   "median_hop_ticks": null,
+   "n": 96,
+   "taught_hop_ticks": [
+    4,
+    5,
+    6
+   ]
+  },
+  "receptor_one_row_gap5": {
+   "cue0_order": 0.0,
+   "cue0_timed": 0.0,
+   "cue3_order": 0.0,
+   "cue3_timed": 0.0,
+   "cue0_wrong": 0.0,
+   "cue3_wrong": 0.0,
+   "nocue_any_beat": 0.0,
+   "median_hop_ticks": null,
+   "n": 96,
+   "taught_hop_ticks": [
+    4,
+    5,
+    6
+   ]
+  },
+  "receptor_gap6": {
+   "cue0_order": 1.0,
+   "cue0_timed": 1.0,
+   "cue3_order": 0.8333333333333334,
+   "cue3_timed": 0.8333333333333334,
+   "cue0_wrong": 0.0,
+   "cue3_wrong": 0.0,
+   "nocue_any_beat": 0.0,
+   "median_hop_ticks": 6.0,
+   "n": 96,
+   "taught_hop_ticks": [
+    6,
+    7
+   ]
+  },
+  "receptor_order_thrown_away_gap6": {
+   "cue0_order": 1.0,
+   "cue0_timed": 1.0,
+   "cue3_order": 0.8333333333333334,
+   "cue3_timed": 0.8333333333333334,
+   "cue0_wrong": 0.0,
+   "cue3_wrong": 0.0,
+   "nocue_any_beat": 0.0,
+   "median_hop_ticks": 6.0,
+   "n": 96,
+   "taught_hop_ticks": [
+    6,
+    7
+   ]
+  },
+  "receptor_one_row_gap6": {
+   "cue0_order": 0.0,
+   "cue0_timed": 0.0,
+   "cue3_order": 0.0,
+   "cue3_timed": 0.0,
+   "cue0_wrong": 0.0,
+   "cue3_wrong": 0.0,
+   "nocue_any_beat": 0.0,
+   "median_hop_ticks": null,
+   "n": 96,
+   "taught_hop_ticks": [
+    6,
+    7
+   ]
+  },
+  "receptor_gap7": {
+   "cue0_order": 0.9166666666666666,
+   "cue0_timed": 0.9166666666666666,
+   "cue3_order": 0.8333333333333334,
+   "cue3_timed": 0.8333333333333334,
+   "cue0_wrong": 0.0,
+   "cue3_wrong": 0.0,
+   "nocue_any_beat": 0.0,
+   "median_hop_ticks": 7.0,
+   "n": 96,
+   "taught_hop_ticks": [
+    7,
+    8
+   ]
+  },
+  "receptor_order_thrown_away_gap7": {
+   "cue0_order": 0.9166666666666666,
+   "cue0_timed": 0.9166666666666666,
+   "cue3_order": 0.8333333333333334,
+   "cue3_timed": 0.8333333333333334,
+   "cue0_wrong": 0.0,
+   "cue3_wrong": 0.0,
+   "nocue_any_beat": 0.0,
+   "median_hop_ticks": 7.0,
+   "n": 96,
+   "taught_hop_ticks": [
+    7,
+    8
+   ]
+  },
+  "receptor_one_row_gap7": {
+   "cue0_order": 0.0,
+   "cue0_timed": 0.0,
+   "cue3_order": 0.0,
+   "cue3_timed": 0.0,
+   "cue0_wrong": 0.0,
+   "cue3_wrong": 0.0,
+   "nocue_any_beat": 0.0,
+   "median_hop_ticks": null,
+   "n": 96,
+   "taught_hop_ticks": [
+    7,
+    8
+   ]
+  },
+  "receptor_gap8": {
+   "cue0_order": 1.0,
+   "cue0_timed": 1.0,
+   "cue3_order": 1.0,
+   "cue3_timed": 1.0,
+   "cue0_wrong": 0.0,
+   "cue3_wrong": 0.0,
+   "nocue_any_beat": 0.0,
+   "median_hop_ticks": 8.0,
+   "n": 96,
+   "taught_hop_ticks": [
+    8
+   ]
+  },
+  "receptor_order_thrown_away_gap8": {
+   "cue0_order": 1.0,
+   "cue0_timed": 1.0,
+   "cue3_order": 1.0,
+   "cue3_timed": 1.0,
+   "cue0_wrong": 0.0,
+   "cue3_wrong": 0.0,
+   "nocue_any_beat": 0.0,
+   "median_hop_ticks": 8.0,
+   "n": 96,
+   "taught_hop_ticks": [
+    8
+   ]
+  },
+  "receptor_one_row_gap8": {
+   "cue0_order": 0.0,
+   "cue0_timed": 0.0,
+   "cue3_order": 0.0,
+   "cue3_timed": 0.0,
+   "cue0_wrong": 0.0,
+   "cue3_wrong": 0.0,
+   "nocue_any_beat": 0.0,
+   "median_hop_ticks": null,
+   "n": 96,
+   "taught_hop_ticks": [
+    8
+   ]
+  },
+  "receptor_gap9": {
+   "cue0_order": 0.0,
+   "cue0_timed": 0.0,
+   "cue3_order": 0.0,
+   "cue3_timed": 0.0,
+   "cue0_wrong": 0.0,
+   "cue3_wrong": 0.0,
+   "nocue_any_beat": 0.0,
+   "median_hop_ticks": null,
+   "n": 96,
+   "taught_hop_ticks": [
+    5,
+    9,
+    14
+   ]
+  },
+  "receptor_order_thrown_away_gap9": {
+   "cue0_order": 0.0,
+   "cue0_timed": 0.0,
+   "cue3_order": 0.0,
+   "cue3_timed": 0.0,
+   "cue0_wrong": 0.0,
+   "cue3_wrong": 0.0,
+   "nocue_any_beat": 0.0,
+   "median_hop_ticks": null,
+   "n": 96,
+   "taught_hop_ticks": [
+    5,
+    9,
+    14
+   ]
+  },
+  "receptor_one_row_gap9": {
+   "cue0_order": 0.0,
+   "cue0_timed": 0.0,
+   "cue3_order": 0.0,
+   "cue3_timed": 0.0,
+   "cue0_wrong": 0.0,
+   "cue3_wrong": 0.0,
+   "nocue_any_beat": 0.0,
+   "median_hop_ticks": null,
+   "n": 96,
+   "taught_hop_ticks": [
+    5,
+    9,
+    14
+   ]
+  },
+  "receptor_gap10": {
+   "cue0_order": 0.0,
+   "cue0_timed": 0.0,
+   "cue3_order": 0.0,
+   "cue3_timed": 0.0,
+   "cue0_wrong": 0.0,
+   "cue3_wrong": 0.0,
+   "nocue_any_beat": 0.0,
+   "median_hop_ticks": null,
+   "n": 96,
+   "taught_hop_ticks": [
+    9,
+    10,
+    11
+   ]
+  },
+  "receptor_order_thrown_away_gap10": {
+   "cue0_order": 0.0,
+   "cue0_timed": 0.0,
+   "cue3_order": 0.0,
+   "cue3_timed": 0.0,
+   "cue0_wrong": 0.0,
+   "cue3_wrong": 0.0,
+   "nocue_any_beat": 0.0,
+   "median_hop_ticks": null,
+   "n": 96,
+   "taught_hop_ticks": [
+    9,
+    10,
+    11
+   ]
+  },
+  "receptor_one_row_gap10": {
+   "cue0_order": 0.0,
+   "cue0_timed": 0.0,
+   "cue3_order": 0.0,
+   "cue3_timed": 0.0,
+   "cue0_wrong": 0.0,
+   "cue3_wrong": 0.0,
+   "nocue_any_beat": 0.0,
+   "median_hop_ticks": null,
+   "n": 96,
+   "taught_hop_ticks": [
+    9,
+    10,
+    11
+   ]
+  },
+  "receptor_gap12": {
+   "cue0_order": 0.0,
+   "cue0_timed": 0.0,
+   "cue3_order": 0.0,
+   "cue3_timed": 0.0,
+   "cue0_wrong": 0.0,
+   "cue3_wrong": 0.0,
+   "nocue_any_beat": 0.0,
+   "median_hop_ticks": null,
+   "n": 96,
+   "taught_hop_ticks": [
+    11,
+    13
+   ]
+  },
+  "receptor_order_thrown_away_gap12": {
+   "cue0_order": 0.0,
+   "cue0_timed": 0.0,
+   "cue3_order": 0.0,
+   "cue3_timed": 0.0,
+   "cue0_wrong": 0.0,
+   "cue3_wrong": 0.0,
+   "nocue_any_beat": 0.0,
+   "median_hop_ticks": null,
+   "n": 96,
+   "taught_hop_ticks": [
+    11,
+    13
+   ]
+  },
+  "receptor_one_row_gap12": {
+   "cue0_order": 0.0,
+   "cue0_timed": 0.0,
+   "cue3_order": 0.0,
+   "cue3_timed": 0.0,
+   "cue0_wrong": 0.0,
+   "cue3_wrong": 0.0,
+   "nocue_any_beat": 0.0,
+   "median_hop_ticks": null,
+   "n": 96,
+   "taught_hop_ticks": [
+    11,
+    13
+   ]
+  },
+  "random_order_teaching_gap6": {
+   "cue0_order": 0.0,
+   "cue0_timed": 0.0,
+   "cue3_order": 0.0,
+   "cue3_timed": 0.0,
+   "cue0_wrong": 0.0,
+   "cue3_wrong": 0.0,
+   "nocue_any_beat": 0.0,
+   "median_hop_ticks": null,
+   "n": 96,
+   "taught_hop_ticks": [
+    6,
+    7,
+    13,
+    19
+   ]
+  },
+  "untaught_gap6": {
+   "cue0_order": 0.0,
+   "cue0_timed": 0.0,
+   "cue3_order": 0.0,
+   "cue3_timed": 0.0,
+   "cue0_wrong": 0.0,
+   "cue3_wrong": 0.0,
+   "nocue_any_beat": 0.25,
+   "median_hop_ticks": null,
+   "n": 96,
+   "taught_hop_ticks": [
+    1,
+    2,
+    3,
+    5,
+    6,
+    7,
+    8,
+    9,
+    11,
+    12,
+    16,
+    17
+   ]
+  },
+  "random_order_teaching_gap9": {
+   "cue0_order": 0.0,
+   "cue0_timed": 0.0,
+   "cue3_order": 0.0,
+   "cue3_timed": 0.0,
+   "cue0_wrong": 0.0,
+   "cue3_wrong": 0.0,
+   "nocue_any_beat": 0.0,
+   "median_hop_ticks": null,
+   "n": 96,
+   "taught_hop_ticks": [
+    5,
+    9,
+    14,
+    19,
+    23,
+    28
+   ]
+  },
+  "untaught_gap9": {
+   "cue0_order": 0.0,
+   "cue0_timed": 0.0,
+   "cue3_order": 0.0,
+   "cue3_timed": 0.0,
+   "cue0_wrong": 0.0,
+   "cue3_wrong": 0.0,
+   "nocue_any_beat": 0.25,
+   "median_hop_ticks": null,
+   "n": 96,
+   "taught_hop_ticks": [
+    1,
+    2,
+    3,
+    5,
+    6,
+    7,
+    8,
+    9,
+    11,
+    12,
+    16,
+    17
+   ]
+  }
+ }
+}

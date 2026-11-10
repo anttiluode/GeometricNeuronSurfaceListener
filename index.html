@@ -24,7 +24,7 @@ code{background:#25313d;border-radius:4px;padding:1px 5px;font-size:.88em}pre{ov
 <h1>Two deerskins meet.</h1>
 <p class="lede">What if a neuron listens to another through <strong>its own moving surface</strong>? The sender broadcasts the 16 samples of its checkerboard. The receiver's present checkerboard becomes its receptor mosaic. Their overlap determines how much one affects the other.</p>
 <div class="tag">The original 59-tick forgetting clock is unchanged. No training, no imported theta rhythm.</div>
-<p class="footnote"><a href="#round2">Second round</a>: why the colony goes silent, and a hold-and-release switch. <a href="#round3">Third round</a>: a two-way chain taught by that switch alone. <a href="#round4">Fourth round</a>: what the checkerboard history tells a listener that beat times do not.</p>
+<p class="footnote"><a href="#round2">Second round</a>: why the colony goes silent, and a hold-and-release switch. <a href="#round3">Third round</a>: a two-way chain taught by that switch alone. <a href="#round4">Fourth round</a>: what the checkerboard history tells a listener that beat times do not. <a href="#round5">Fifth round</a>: a receptor learned from those rows replays a taught chain at the taught spacing.</p>
 <section class="panel" aria-label="Live experiment">
 <h2>Live, deterministic two-unit experiment</h2>
 <div class="controls">
@@ -124,6 +124,18 @@ code{background:#25313d;border-radius:4px;padding:1px 5px;font-size:.88em}pre{ov
 <tr><td>Last 4 rows, order thrown away</td><td>1.00</td><td>0.94</td><td>0.03</td></tr></tbody></table>
 <p>Beat times are a clock: perfect until the unit is disturbed. The last four rows warn of over 90% of disturbed beats, four ticks early, which is the loop delay. For that warning the order of the rows does not matter. Order matters only for the long view: 32 rows in order call every regular beat 8 ticks ahead, and none when shuffled.</p>
 <p class="warning">The reader here is a table outside the loop, not a receptor inside a colony. The hand-written trigger from the earlier rounds ignores this warning: it waits for the beat and then overrides the listener's output. Numbers: <a href="results/round4.json">results/round4.json</a>.</p></section>
+<section class="panel" id="round5"><div class="overline">Fifth round · Fable 5.2 · 10 November 2026</div>
+<h2>A receptor learned from a neighbour's rows</h2>
+<p>The units are unconnected while they are taught, by hold and release, in both orders. Each unit learns one thing per neighbour: a table over that neighbour's last one to three checkerboard rows. At its own beat it looks back 9 ticks at what the neighbour that beat just before it was showing. There are no connection weights. At test the four units are held silent and one end is cued.</p>
+<table><thead><tr><th>Lags written in teaching<br>(ticks per hop)</th><th>Cue 0 → 0123<br>colonies of 12</th><th>Cue 3 → 3210</th><th>Hop in replay</th></tr></thead><tbody>
+<tr><td>6, 5, 4</td><td>0</td><td>0</td><td>none</td></tr>
+<tr><td><strong>6, 7, 6</strong></td><td><strong>12</strong></td><td><strong>10</strong></td><td>6</td></tr>
+<tr><td><strong>7, 7, 8</strong></td><td><strong>11</strong></td><td><strong>10</strong></td><td>7</td></tr>
+<tr><td><strong>8, 8, 8</strong></td><td><strong>12</strong></td><td><strong>12</strong></td><td>8</td></tr>
+<tr><td>11, 10, 9 and slower</td><td>0</td><td>0</td><td>none</td></tr></tbody></table>
+<p>Every replay with the right order also had every hop within one tick of the taught lag. A cue never produced the opposite order, and with no cue a taught colony stayed silent. The beat tally of the third round replays at 5 ticks per hop whatever it was taught; this receptor replays the spacing it was taught.</p>
+<p>A receptor that sees only the current row scores 0 of 12 at every gap. Throwing away the order of the rows in its window changes nothing. Random-order teaching and no teaching both score 0.</p>
+<p class="warning">It works only for hops of 6 to 8 ticks. The trigger is hand-written: it plays the unit's own recorded beat by overriding its output, and is on only at test. Also hand-set: a 30-tick refractory, nearest-predecessor credit (Sol's rule), a 30% threshold, and the hold at test. Each test is deterministic once the colony is held, so these are 12 colonies, not 96 trials. Numbers: <a href="results/round5.json">results/round5.json</a>.</p></section>
 <p class="footnote">Scientific boundary: these are real-valued sampled images and Pearson correlation. Their overlap is reciprocal at one instant. It is not quantum interference, not learned attention, and not proof of task-dependent neural communication. The original closed-loop controller and sample table are copied unchanged for audit.</p>
 </main><script src="taps.js"></script><script src="lab.js"></script><script>
 (function(){
