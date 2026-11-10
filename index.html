@@ -24,7 +24,7 @@ code{background:#25313d;border-radius:4px;padding:1px 5px;font-size:.88em}pre{ov
 <h1>Two deerskins meet.</h1>
 <p class="lede">What if a neuron listens to another through <strong>its own moving surface</strong>? The sender broadcasts the 16 samples of its checkerboard. The receiver's present checkerboard becomes its receptor mosaic. Their overlap determines how much one affects the other.</p>
 <div class="tag">The original 59-tick forgetting clock is unchanged. No training, no imported theta rhythm.</div>
-<p class="footnote"><a href="#round2">Second round, below</a>: why the colony goes silent, and a hold-and-release switch that writes timing into it.</p>
+<p class="footnote"><a href="#round2">Second round</a>: why the colony goes silent, and a hold-and-release switch. <a href="#round3">Third round</a>: a two-way chain taught by that switch alone.</p>
 <section class="panel" aria-label="Live experiment">
 <h2>Live, deterministic two-unit experiment</h2>
 <div class="controls">
@@ -102,6 +102,18 @@ code{background:#25313d;border-radius:4px;padding:1px 5px;font-size:.88em}pre{ov
 <tr><td>Fixed taps, weight 0.1</td><td>21</td><td>33</td></tr></tbody></table>
 <p>The old fixed taps pull lags onto a grid 8 ticks apart (6, 14, 38, 46, 54 collect most pairs). The moving surface leaves a written lag alone until it is strong enough to silence the pair. So the surface listener organises less than the rule it replaced.</p>
 <p class="footnote">Not shown: that any of this helps on a task; that a written pattern survives noise; that hold and release work inside a coupled colony. Staggered release reaches 44 of the 59 possible lags, not all. Numbers: <a href="results/round2.json">results/round2.json</a>, from <a href="experiments/round2.py">experiments/round2.py</a>.</p></section>
+<section class="panel" id="round3"><div class="overline">Third round · Fable 5.2 · 10 November 2026</div>
+<h2>A chain taught by hold and release</h2>
+<p>Nothing is forced during teaching. Units 0 to 3 are held silent by the rhythm, then released a few ticks apart, alternating the order 0→1→2→3 and 3→2→1→0. Every beat is the loop's own. A count of which beat came just before which sets the weights, which are then frozen. Then one end is cued.</p>
+<table><thead><tr><th>Taught by</th><th>Cue 0 → 0123</th><th>Cue 3 → 3210</th><th>No cue: 0123 / 3210</th></tr></thead><tbody>
+<tr><td><strong>Hold and release, both orders</strong></td><td><strong>0.69</strong></td><td><strong>0.50</strong></td><td>0.27 / 0.10</td></tr>
+<tr><td>Forced outputs, both orders</td><td>0.75</td><td>0.69</td><td>0.19 / 0.10</td></tr>
+<tr><td>Hand-set chain</td><td>0.71</td><td>0.72</td><td>0.18 / 0.22</td></tr>
+<tr><td>Hold and release, random order each block</td><td>0.07</td><td>0.01</td><td>0.00 / 0.00</td></tr>
+<tr><td>No teaching</td><td>0.06</td><td>0.05</td><td>0.00 / 0.00</td></tr></tbody></table>
+<p class="footnote">Fraction of 96 trials in which units 0 to 3 beat in exactly the cued order within 40 ticks. A cue never produced the opposite order. Every colony was scrambled by a random-order release before testing.</p>
+<p>A colony can be given two orders through its input alone and replay whichever is cued. It works for release gaps of 3 and 4 ticks, weakly for 1, 2 and 5, and not at 8.</p>
+<p class="warning">The trigger and refractory that make replay possible are hand-written and on only at test. The count is a tally kept beside the colony. The order is still chosen from outside. Numbers: <a href="results/round3.json">results/round3.json</a>.</p></section>
 <p class="footnote">Scientific boundary: these are real-valued sampled images and Pearson correlation. Their overlap is reciprocal at one instant. It is not quantum interference, not learned attention, and not proof of task-dependent neural communication. The original closed-loop controller and sample table are copied unchanged for audit.</p>
 </main><script src="taps.js"></script><script src="lab.js"></script><script>
 (function(){

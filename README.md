@@ -4,6 +4,41 @@
 
 *10 November 2026. Antti's experiment prompted by Fable 5.2's reading of the original [Geometric-Neuron / Deerskin Theory](https://github.com/anttiluode/Geometric-Neuron) and the six-loop [ReturnToGeometricNeuron](https://github.com/anttiluode/ReturnToGeometricNeuron) study.*
 
+## Third round: a chain taught by hold and release
+
+*Fable 5.2, 10 November 2026. Code: [experiments/round3.py](experiments/round3.py). Numbers: [results/round3.json](results/round3.json).*
+
+In [ReturnToGeometricNeuron](https://github.com/anttiluode/ReturnToGeometricNeuron) the one rule that built a two-way chain (Sol's nearest-predecessor count) was taught by forcing the units' outputs. Here nothing is forced during teaching. Units 0 to 3 are held silent by the 8-tick rhythm on their input, then released a few ticks apart, and every beat after that is the loop's own. Blocks alternate the order 0→1→2→3 and 3→2→1→0. The same count is applied unchanged, the weights are frozen, and the test is the earlier one: cue one end, score whether units 0 to 3 beat in exactly that order within 40 ticks. Before testing, every colony is scrambled by a hold and a random-order release, so timing left over from teaching cannot stand in for the weights.
+
+| Taught by | Next-in-line weight | Shortcut weight | Cue 0 → 0123 | Cue 3 → 3210 | No cue: 0123 / 3210 |
+|---|---:|---:|---:|---:|---:|
+| **Hold and release, both orders** | 0.170 | 0.042 | **0.69** | **0.50** | 0.27 / 0.10 |
+| Forced outputs, both orders (Sol's teaching) | 0.198 | 0.032 | 0.75 | 0.69 | 0.19 / 0.10 |
+| Hand-set chain | 0.220 | 0.020 | 0.71 | 0.72 | 0.18 / 0.22 |
+| Hold and release, random order each block | 0.105 | 0.108 | 0.07 | 0.01 | 0.00 / 0.00 |
+| No teaching | 0.056 | 0.083 | 0.06 | 0.05 | 0.00 / 0.00 |
+
+Fractions of 96 trials (12 starts, 8 trials each). In no condition did a cue ever produce the opposite order.
+
+So a colony can be given two orders through its input alone, with a rhythm of amplitude 0.2 and the moments it stops, and then replay whichever one is cued. It is somewhat worse than forced teaching, mainly in the 3→0 direction.
+
+**It depends on the release gap.** The count only credits a beat 1 to 5 ticks earlier, and staggered release does not write every lag cleanly:
+
+| Gap between releases (ticks) | Cue 0 → 0123 | Cue 3 → 3210 | Next-in-line / shortcut weight |
+|---|---:|---:|---:|
+| 1 | 0.31 | 0.54 | 0.149 / 0.084 |
+| 2 | 0.33 | 0.20 | 0.159 / 0.066 |
+| 3 | 0.69 | 0.50 | 0.170 / 0.042 |
+| 4 | 0.55 | 0.50 | 0.185 / 0.035 |
+| 5 | 0.12 | 0.37 | 0.137 / 0.027 |
+| 8 | 0.00 | 0.08 | 0.040 / 0.020 |
+
+Measured on an uncoupled colony, a gap of 4 writes lags 4, 8, 12 exactly; a gap of 3 writes 3 and 6 but drops the fourth unit a whole cycle late.
+
+**Limits.** The trigger and refractory that make replay possible are hand-written and switched on only at test, as before. The count is still a tally kept beside the colony; it does not use the unit's variance state. The order is still chosen by an outside hand: what changed is that it arrives as input timing, not as overridden output. Replay without a cue happens in 10 to 27% of windows, so the cue adds about 0.4 on top of that. Nothing here has been tested on a task.
+
+---
+
 ## Second round: why it goes silent, and a hold-and-release switch
 
 *Fable 5.2, 10 November 2026. Code: [quiet.py](quiet.py), [experiments/round2.py](experiments/round2.py). Numbers: [results/round2.json](results/round2.json). The first round below is Sol's and is left as written.*
@@ -152,6 +187,7 @@ Python 3.11+, NumPy:
     python -m unittest discover -s tests -v
     python experiments/probe.py
     python experiments/round2.py
+    python experiments/round3.py
 
 The experiment writes the full numerical receipt to results/probe.json, including every phase pair. The committed [summary](results/summary.json) contains the primary results.
 
