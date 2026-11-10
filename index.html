@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Surface Listener — two deerskins meet</title>
+<meta name="description" content="Two copies of the original ECG feedback oscillator listen through their own moving checkerboard samples. No learned weights.">
+<style>
+:root{color-scheme:dark;--bg:#10151c;--panel:#17212a;--line:#32424c;--ink:#f1efe9;--muted:#9bb0b7;--mint:#79ddd0;--amber:#ffca81}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);background:radial-gradient(ellipse at 70% -40%,#174a47 0,transparent 55%),var(--bg);font:15px/1.6 ui-sans-serif,system-ui,Segoe UI,Arial,sans-serif}
+main{max-width:1060px;margin:auto;padding:30px 20px 80px}h1{font-weight:730;letter-spacing:-.05em;font-size:clamp(2rem,5.5vw,4.25rem);line-height:1.07;margin:12px 0}h2{font-size:1.2rem;letter-spacing:-.02em;margin:0 0 12px}h3{font-size:1rem;margin:0 0 8px}p{margin:10px 0}a{color:var(--mint)}.overline{font-size:.75rem;letter-spacing:.18em;font-weight:700;color:var(--mint);text-transform:uppercase}.lede{max-width:750px;font-size:1.13rem;color:#c6d3d7}.lede strong{color:var(--ink)}.tag{border:1px solid #59756e;color:#c7ebe3;background:#1e3433;border-radius:999px;padding:3px 10px;font-size:.77rem;display:inline-block;margin:5px 0 15px}
+.panel{background:#17212aee;border:1px solid var(--line);border-radius:15px;padding:20px;margin:20px 0}.controls{display:flex;align-items:flex-end;flex-wrap:wrap;gap:12px}label{display:flex;flex-direction:column;gap:4px;font-size:.8rem;color:var(--muted);min-width:170px}
+select,input[type=range],button{font:inherit}select{padding:9px 11px;border-radius:8px;border:1px solid #586c76;background:#25313d;color:var(--ink)}input[type=range]{accent-color:var(--mint);width:190px}
+button{cursor:pointer;color:var(--ink);border:1px solid #58756c;background:#24514b;border-radius:9px;padding:9px 14px;transition:.15s}button:hover{background:#347466}button.secondary{background:#25313d;border-color:var(--line)}
+.readouts{display:grid;grid-template-columns:1fr 1fr;gap:15px}.unit{border-radius:12px;padding:18px;border:1px solid #3b5155;background:#101a23}.unit.b{border-color:#645342}.unit h3{color:var(--mint)}.unit.b h3{color:var(--amber)}
+.pixels{display:grid;grid-template-columns:repeat(16,minmax(0,1fr));gap:2px;margin:12px 0;min-height:26px}.pixel{aspect-ratio:1;min-height:16px;border-radius:3px;border:1px solid #fff1;transition:background .15s}
+.rowstat{display:flex;justify-content:space-between;gap:10px;color:var(--muted);font-size:.8rem}.rowstat strong{color:var(--ink)}
+.heat{display:grid;grid-template-columns:repeat(2,1fr);gap:7px;max-width:370px;margin:12px auto}.cell{text-align:center;border-radius:10px;padding:14px 10px;border:1px solid #ffffff16;font-size:1.3rem;font-variant-numeric:tabular-nums}.cell small{display:block;color:var(--muted);font-size:.68rem}
+#timeline{width:100%;height:190px;border-radius:10px;background:#0c151e;display:block}.footnote{font-size:.83rem;color:var(--muted)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+table{border-collapse:collapse;width:100%;font-size:.87rem}td,th{text-align:left;border-bottom:1px solid var(--line);padding:10px 8px}th{color:var(--mint);font-weight:650}.warning{border-left:3px solid var(--amber);padding:7px 14px;background:#2e261f}
+code{background:#25313d;border-radius:4px;padding:1px 5px;font-size:.88em}pre{overflow:auto;background:#0c151e;border:1px solid #32424c;border-radius:9px;padding:14px}
+@media(max-width:670px){.readouts,.grid{grid-template-columns:1fr}.panel{padding:14px}main{padding:24px 12px 60px}.controls label{width:100%}input[type=range]{width:100%}}
+</style>
+</head><body><main>
+<div class="overline">Geometric Neuron / Experiment 1</div>
+<h1>Two deerskins meet.</h1>
+<p class="lede">What if a neuron listens to another through <strong>its own moving surface</strong>? The sender broadcasts the 16 samples of its checkerboard. The receiver's present checkerboard becomes its receptor mosaic. Their overlap determines how much one affects the other.</p>
+<div class="tag">The original 59-tick forgetting clock is unchanged. No training, no imported theta rhythm.</div>
+<section class="panel" aria-label="Live experiment">
+<h2>Live, deterministic two-unit experiment</h2>
+<div class="controls">
+<label>Listening rule<select id="mode">
+<option value="surface">Moving, centered surface</option>
+<option value="raw">Raw (uncentered) overlap</option>
+<option value="fixed">Frozen listener template</option>
+<option value="shifted">Misregistered surface (+4 taps)</option>
+<option value="fixed_taps">Original fixed taps 6–9</option>
+<option value="null">No communication</option></select></label>
+<label>Bidirectional edge weight <strong id="weight-value">0.12</strong>
+<input id="weight" type="range" min="0" max="0.25" step="0.005" value="0.12"></label>
+<label>Simulation speed<select id="speed">
+<option value="1">1 tick / frame</option><option selected value="2">2 ticks / frame</option>
+<option value="5">5 ticks / frame</option><option value="10">10 ticks / frame</option></select></label>
+<button id="restart" class="secondary">Restart</button><button id="pause">Pause</button><button id="pulseA">Pulse A</button><button id="pulseB">Pulse B</button>
+</div><p class="footnote">The starting units are deliberately at different phases. A pulse forces the selected unit's output to −0.28 for two ticks. Both edge weights are equal and never change.</p>
+<div class="readouts">
+<div class="unit a"><h3>Unit A · receiver mosaic</h3><div class="pixels" id="pixelsA"></div>
+<div class="rowstat"><span>Checkerboard size <strong id="qa">—</strong></span><span>Own read <strong id="oa">—</strong></span></div>
+<div class="rowstat"><span>Input R <strong id="ra">—</strong></span><span>50-tick variance <strong id="va">—</strong></span></div></div>
+<div class="unit b"><h3>Unit B · receiver mosaic</h3><div class="pixels" id="pixelsB"></div>
+<div class="rowstat"><span>Checkerboard size <strong id="qb">—</strong></span><span>Own read <strong id="ob">—</strong></span></div>
+<div class="rowstat"><span>Input R <strong id="rb">—</strong></span><span>50-tick variance <strong id="vb">—</strong></span></div></div>
+</div>
+<h3 style="margin-top:20px">Instantaneous geometric compatibility</h3>
+<div class="heat"><div class="cell"><small>A receives B: K(A,B)</small><span id="kab">—</span></div>
+<div class="cell"><small>B receives A: K(B,A)</small><span id="kba">—</span></div></div>
+<p class="footnote">With moving centered surfaces these two numbers are mathematically identical at the same tick. Directional <em>effects over time</em> can still differ because the two units remember different histories. The input contributed to A is weight × gain × K(A,B), and similarly for B.</p>
+<canvas id="timeline" width="960" height="190" role="img" aria-label="Beat events of A and B over the last 120 simulation ticks"></canvas>
+<p class="rowstat"><span>Elapsed ticks: <strong id="ticks">—</strong></span><span>Beat counts since start: <strong id="beats">—</strong></span></p>
+</section>
+<section class="grid">
+<div class="panel"><h2>What changed</h2>
+<p>Original colony: <code>Rᵢ = ownᵢ + Σⱼ wᵢⱼ tapsⱼ[6:10]</code>. Sender decides what is available; the listener has no geometric receptive state.</p>
+<p>This experiment: <code>Rᵢ = ownᵢ + g Σⱼ wᵢⱼ K(Gᵢ,Gⱼ)</code>. Both surfaces participate in the interaction.</p>
+<p>Here <code>K</code> is a mean-centered, normalized 16-sample inner product. The raw uncentered version is an explicit control; it is not equivalent.</p></div>
+<div class="panel"><h2>What did the test find?</h2>
+<p>Across 59 receiver phases, stimulation changes the next beat in some phases and not others. The moving surface is a genuine <em>state-dependent communication operator</em>.</p>
+<p class="warning">But the untrained six-unit colony is fragile. At uniformly coupled weight 0.05, moving-surface units average 3 silent units out of 6; at 0.10 all six are silent. The geometry does not magically solve stability or learning.</p>
+<p>We also tested raw overlap, fixed template, shifted surface, original taps and no communication. The original taps often give stronger phase effects than our new operator. There is no measured task advantage.</p></div>
+</section>
+<section class="panel"><h2>The test, not a picture</h2>
+<table><thead><tr><th>Untrained six-unit colony</th><th>Mean silent of 6<br>weight 0.02</th><th>weight 0.05</th><th>weight 0.10</th></tr></thead><tbody>
+<tr><td>Moving centered surfaces</td><td>0</td><td>3.0</td><td>6.0</td></tr>
+<tr><td>Raw overlap</td><td>0</td><td>6.0</td><td>6.0</td></tr>
+<tr><td>Frozen listener template</td><td>0</td><td>0.5</td><td>6.0</td></tr>
+<tr><td>Original fixed taps</td><td>0</td><td>0</td><td>6.0</td></tr></tbody></table>
+<p class="footnote">Four deterministic starting seeds, 1,100 simulation ticks each; silent means no beat during the last 500 ticks. These are early simulation measurements, not evidence about biological neurons.</p>
+<p><a href="https://github.com/anttiluode/GeometricNeuronSurfaceListener">Source, controlled Python experiments and reproducible tests</a> ·
+<a href="https://github.com/anttiluode/Geometric-Neuron">Deerskin origin</a> ·
+<a href="https://github.com/anttiluode/GeometricNeuronOriginReview">Original loop autopsy</a> ·
+<a href="https://github.com/anttiluode/ReturnToGeometricNeuron">Six-neuron predecessor</a>.</p></section>
+<p class="footnote">Scientific boundary: these are real-valued sampled images and Pearson correlation. Their overlap is reciprocal at one instant. It is not quantum interference, not learned attention, and not proof of task-dependent neural communication. The original closed-loop controller and sample table are copied unchanged for audit.</p>
+</main><script src="taps.js"></script><script src="lab.js"></script><script>
+(function(){
+const $=x=>document.getElementById(x);
+const Lab=globalThis.SurfaceLab.Lab;
+let sim=new Lab({mode:"surface",weight:.12}),paused=false,frame=0;
+function restart(){sim=new Lab({mode:$("mode").value,weight:Number($("weight").value)});}
+function value(i){return (Number.isFinite(i)?i:0).toFixed(3)}
+function paint(surface,unit){
+const box=$(unit?"pixelsB":"pixelsA");if(box.children.length!==16){
+box.innerHTML=Array.from({length:16},()=>'<div class="pixel"></div>').join('');
+}
+const nodes=box.children;
+for(let k=0;k<16;k++){
+const a=Math.max(0,Math.min(1,surface[k]||0));
+nodes[k].style.background=unit?'rgba(255,198,120,'+(.12+.88*a)+')':'rgba(100,220,203,'+(.12+.88*a)+')';
+}
+}
+function render(){
+paint(sim.rows[0],"");paint(sim.rows[1],"B");
+for(let i=0;i<2;i++){
+const s=i?"b":"a";$( "q"+s).textContent=sim.q[i];
+$("o"+s).textContent=value(sim.own[i]);
+$("r"+s).textContent=value(sim.R[i]);
+$("v"+s).textContent=value(sim.var[i]);
+}
+$("kab").textContent=value(sim.K[0][1]);$("kba").textContent=value(sim.K[1][0]);
+$("ticks").textContent=sim.t.toLocaleString();$("beats").textContent=sim.events.map(x=>x.length).join(" / ");
+for(const [id,val] of [["kab",sim.K[0][1]],["kba",sim.K[1][0]]]){
+$(id).parentElement.style.background=val<0?"rgba(205,113,97,.14)":"rgba(104,205,186,"+(.07+.25*Math.max(0,val))+")";
+}
+const canvas=$("timeline"),ctx=canvas.getContext("2d"),w=canvas.width,h=canvas.height;
+ctx.clearRect(0,0,w,h);ctx.fillStyle="#0c151e";ctx.fillRect(0,0,w,h);
+const start=sim.t-120, sx=t=>(t-start)/120*w;
+for(let i=0;i<2;i++){
+const y=54+i*75;ctx.strokeStyle="#41525b";ctx.lineWidth=1;
+ctx.beginPath();ctx.moveTo(20,y);ctx.lineTo(w-10,y);ctx.stroke();
+ctx.fillStyle=i?"#ffca81":"#79ddd0";ctx.font="14px system-ui";ctx.fillText(i?"B":"A",8,y-10);
+for(const tick of sim.events[i]){if(tick<start)continue;
+const x=sx(tick);ctx.fillRect(x-3,y-24,6,32);}}
+ctx.fillStyle="#718c95";ctx.font="12px system-ui";
+ctx.fillText("120 ticks ago",20,h-11);ctx.fillText("now",w-43,h-11);
+}
+$("mode").addEventListener("change",restart);
+$("restart").addEventListener("click",restart);
+$("weight").addEventListener("input",()=>{const w=Number($("weight").value);$("weight-value").textContent=w.toFixed(3);sim.weight=w;});
+$("pause").addEventListener("click",()=>{paused=!paused;$("pause").textContent=paused?"Resume":"Pause";});
+$("pulseA").addEventListener("click",()=>sim.pulse(0));
+$("pulseB").addEventListener("click",()=>sim.pulse(1));
+function loop(){if(!paused)for(let i=0;i<Number($("speed").value);i++)sim.step();if((frame++%2)===0)render();requestAnimationFrame(loop);}
+render();requestAnimationFrame(loop);
+})();
+</script></body></html>
