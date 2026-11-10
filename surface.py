@@ -59,7 +59,7 @@ def overlap_matrix(rows: np.ndarray, mode: str) -> np.ndarray:
         f = normalized_centered(rows)
         k = np.roll(f, 4, axis=-1) @ f.T
     elif mode == "fixed_taps":
-        k = np.broadcast_to(rows[:, 6:10].sum(axis=1), (n, n)).T.copy()
+        k = np.broadcast_to(rows[:, 6:10].sum(axis=1), (n, n)).copy()
     else:
         k = np.zeros((n, n))
     np.fill_diagonal(k, 0.0)
