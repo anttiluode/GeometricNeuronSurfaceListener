@@ -24,6 +24,7 @@ code{background:#25313d;border-radius:4px;padding:1px 5px;font-size:.88em}pre{ov
 <h1>Two deerskins meet.</h1>
 <p class="lede">What if a neuron listens to another through <strong>its own moving surface</strong>? The sender broadcasts the 16 samples of its checkerboard. The receiver's present checkerboard becomes its receptor mosaic. Their overlap determines how much one affects the other.</p>
 <div class="tag">The original 59-tick forgetting clock is unchanged. No training, no imported theta rhythm.</div>
+<p class="footnote"><a href="#round2">Second round, below</a>: why the colony goes silent, and a hold-and-release switch that writes timing into it.</p>
 <section class="panel" aria-label="Live experiment">
 <h2>Live, deterministic two-unit experiment</h2>
 <div class="controls">
@@ -39,7 +40,7 @@ code{background:#25313d;border-radius:4px;padding:1px 5px;font-size:.88em}pre{ov
 <label>Simulation speed<select id="speed">
 <option value="1">1 tick / frame</option><option selected value="2">2 ticks / frame</option>
 <option value="5">5 ticks / frame</option><option value="10">10 ticks / frame</option></select></label>
-<button id="restart" class="secondary">Restart</button><button id="pause">Pause</button><button id="pulseA">Pulse A</button><button id="pulseB">Pulse B</button>
+<button id="restart" class="secondary">Restart</button><button id="pause">Pause</button><button id="pulseA">Pulse A</button><button id="pulseB">Pulse B</button><button id="holdA" class="secondary">Hold A</button><button id="holdB" class="secondary">Hold B</button>
 </div><p class="footnote">The starting units are deliberately at different phases. A pulse forces the selected unit's output to −0.28 for two ticks. Both edge weights are equal and never change.</p>
 <div class="readouts">
 <div class="unit a"><h3>Unit A · receiver mosaic</h3><div class="pixels" id="pixelsA"></div>
@@ -77,13 +78,37 @@ code{background:#25313d;border-radius:4px;padding:1px 5px;font-size:.88em}pre{ov
 <a href="https://github.com/anttiluode/Geometric-Neuron">Deerskin origin</a> ·
 <a href="https://github.com/anttiluode/GeometricNeuronOriginReview">Original loop autopsy</a> ·
 <a href="https://github.com/anttiluode/ReturnToGeometricNeuron">Six-neuron predecessor</a>.</p></section>
+<section class="panel" id="round2"><div class="overline">Second round · Fable 5.2 · 10 November 2026</div>
+<h2>Why it goes silent, and what the same rhythm is good for</h2>
+<p>Every unit idles with a small ripple that repeats every 8 ticks, twice its loop delay. The unit is tuned to that ripple. A square wave of amplitude 0.1 at that period stops one unit beating completely. A constant input needs about 0.5 to do the same.</p>
+<table><thead><tr><th>Square wave into one unit<br>(beats of 80 normal)</th><th>amplitude 0.05</th><th>0.1</th><th>0.2</th></tr></thead><tbody>
+<tr><td>Period 4</td><td>80</td><td>80</td><td>58</td></tr>
+<tr><td>Period 6</td><td>80</td><td>80</td><td>5</td></tr>
+<tr><td><strong>Period 8</strong></td><td>60</td><td><strong>0</strong></td><td>0</td></tr>
+<tr><td>Period 10</td><td>80</td><td>80</td><td>0</td></tr>
+<tr><td>Period 16</td><td>80</td><td>80</td><td>63</td></tr>
+<tr><td>Period 59</td><td>80</td><td>80</td><td>75</td></tr></tbody></table>
+<p>Idle neighbours send each other exactly this ripple through the overlap, which is how a colony talks itself into silence. The shifted-surface control shows it cleanly: its average heard input is about zero, yet all six units go silent at weight 0.05, and removing the 8-tick band from what is heard brings all six back.</p>
+<p class="warning">No repair fixes the moving-surface colony at every strength. Three were tried: removing the 8-tick band, subtracting the heard signal's own 50-tick average, and keeping the heard signal out of the variance memory. The last is the best single one (0 silent of 6 at weight 0.05, 0.9 at 0.10). All three together give 0 silent at 0.10, but at about a third of the normal beat rate. At 0.20 nothing keeps all six alive. All three are engineered additions.</p>
+<h3>Hold and release</h3>
+<p>Press <strong>Hold A</strong> above: A stops within one cycle while B carries on. Press it again to release. From 48 random starting phases, a unit held with amplitude 0.2 beat exactly 53 ticks after release, every time. The rhythm erases the unit's phase and release starts its clock.</p>
+<p>Six unconnected units released 8 ticks apart beat in the order of release in 24 of 24 trials (0 of 24 without the hold). So a pattern of timing can be written into a colony from outside, with no weights changed.</p>
+<h3>What each listening rule does to a written pattern</h3>
+<table><thead><tr><th>Two units, lag written by staggered release, then coupled for 3,000 ticks</th><th>Distinct lags left<br>(44 written)</th><th>Pairs whose lag moved<br>(of 59)</th></tr></thead><tbody>
+<tr><td>No coupling</td><td>44</td><td>0</td></tr>
+<tr><td>Moving surface, weight 0.1</td><td>41</td><td>0</td></tr>
+<tr><td>Moving surface, weight 0.2</td><td>34</td><td>20, and 6 pairs silent</td></tr>
+<tr><td>Fixed taps, weight 0.05</td><td>34</td><td>12</td></tr>
+<tr><td>Fixed taps, weight 0.1</td><td>21</td><td>33</td></tr></tbody></table>
+<p>The old fixed taps pull lags onto a grid 8 ticks apart (6, 14, 38, 46, 54 collect most pairs). The moving surface leaves a written lag alone until it is strong enough to silence the pair. So the surface listener organises less than the rule it replaced.</p>
+<p class="footnote">Not shown: that any of this helps on a task; that a written pattern survives noise; that hold and release work inside a coupled colony. Staggered release reaches 44 of the 59 possible lags, not all. Numbers: <a href="results/round2.json">results/round2.json</a>, from <a href="experiments/round2.py">experiments/round2.py</a>.</p></section>
 <p class="footnote">Scientific boundary: these are real-valued sampled images and Pearson correlation. Their overlap is reciprocal at one instant. It is not quantum interference, not learned attention, and not proof of task-dependent neural communication. The original closed-loop controller and sample table are copied unchanged for audit.</p>
 </main><script src="taps.js"></script><script src="lab.js"></script><script>
 (function(){
 const $=x=>document.getElementById(x);
 const Lab=globalThis.SurfaceLab.Lab;
 let sim=new Lab({mode:"surface",weight:.12}),paused=false,frame=0;
-function restart(){sim=new Lab({mode:$("mode").value,weight:Number($("weight").value)});}
+function restart(){sim=new Lab({mode:$("mode").value,weight:Number($("weight").value)});for(const [id,n] of [["holdA","A"],["holdB","B"]]){$(id).textContent="Hold "+n;$(id).className="secondary";}}
 function value(i){return (Number.isFinite(i)?i:0).toFixed(3)}
 function paint(surface,unit){
 const box=$(unit?"pixelsB":"pixelsA");if(box.children.length!==16){
@@ -126,6 +151,7 @@ $("weight").addEventListener("input",()=>{const w=Number($("weight").value);$("w
 $("pause").addEventListener("click",()=>{paused=!paused;$("pause").textContent=paused?"Resume":"Pause";});
 $("pulseA").addEventListener("click",()=>sim.pulse(0));
 $("pulseB").addEventListener("click",()=>sim.pulse(1));
+for(const [id,i] of [["holdA",0],["holdB",1]])$(id).addEventListener("click",()=>{sim.hold[i]=!sim.hold[i];$(id).textContent=(sim.hold[i]?"Release ":"Hold ")+(i?"B":"A");$(id).className=sim.hold[i]?"":"secondary";});
 function loop(){if(!paused)for(let i=0;i<Number($("speed").value);i++)sim.step();if((frame++%2)===0)render();requestAnimationFrame(loop);}
 render();requestAnimationFrame(loop);
 })();

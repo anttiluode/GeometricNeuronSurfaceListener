@@ -44,6 +44,8 @@
       this.q=Array(n).fill(0);this.K=Array.from({length:n},()=>Array(n).fill(0));
       this.rows=Array.from({length:n},zeros);
       this.forced=Array(n).fill(0);
+      // Round two: hold[i] adds a small 8-tick square wave (amplitude .2) to unit i's input.
+      this.hold=Array(n).fill(false);
       this.events=Array.from({length:n},()=>[]);
       this.previous=Array(n).fill(false);
       // Let the two original loops settle uncoupled; reset one clock to
@@ -67,6 +69,7 @@
       const R=own.map((x,i)=>{
         let ext=0;
         for(let j=0;j<this.n;j++)if(i!==j)ext+=this.weight*K[i][j]*(this.mode==="fixed_taps"?1:this.gain);
+        if(this.hold[i])ext+=.2*((this.t%8)<4?1:-1);
         return x+ext;
       });
       let v=Array(this.n).fill(0), o=Array(this.n);

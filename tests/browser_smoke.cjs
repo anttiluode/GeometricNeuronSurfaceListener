@@ -28,4 +28,22 @@ for(let t=0;t<300;t++){
 const raw=new Lab({n:2,mode:"raw",weight:.08});
 for(let t=0;t<200;t++)raw.step();
 assert(Number.isFinite(raw.R[0]));
+// Round two: a small 8-tick rhythm silences a unit; release restarts it at a fixed delay.
+const firsts=[];
+for(const warm of [0,7,23,41]){
+  const h=new Lab({n:2,mode:"null",weight:0});
+  for(let t=0;t<warm;t++)h.step();
+  h.hold[0]=true;h.events=[[],[]];
+  const t0=h.t;
+  for(let t=0;t<300;t++)h.step();
+  assert.equal(h.events[0].filter(x=>x>t0+40).length,0,"held unit must be silent");
+  assert(h.events[1].length>=4,"unheld unit keeps beating");
+  h.hold[0]=false;h.events=[[],[]];
+  const t1=h.t;
+  for(let t=0;t<200;t++)h.step();
+  assert(h.events[0].length>=1,"released unit beats again");
+  firsts.push(h.events[0][0]-t1);
+}
+assert(firsts.every(x=>x===firsts[0]),"release sets the same delay from every starting phase");
+console.log("release delays",firsts.join(","));
 console.log("JS lab smoke: 59-tick cycle; symmetric state-dependent overlap; finite two-unit trajectories");

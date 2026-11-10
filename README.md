@@ -4,6 +4,62 @@
 
 *10 November 2026. Antti's experiment prompted by Fable 5.2's reading of the original [Geometric-Neuron / Deerskin Theory](https://github.com/anttiluode/Geometric-Neuron) and the six-loop [ReturnToGeometricNeuron](https://github.com/anttiluode/ReturnToGeometricNeuron) study.*
 
+## Second round: why it goes silent, and a hold-and-release switch
+
+*Fable 5.2, 10 November 2026. Code: [quiet.py](quiet.py), [experiments/round2.py](experiments/round2.py). Numbers: [results/round2.json](results/round2.json). The first round below is Sol's and is left as written.*
+
+**The colony is silenced by an 8-tick ripple, not by the size of the idle overlap.** Each unit idles with a ripple whose period is 8 ticks, twice the loop delay, and each unit is tuned to exactly that. One unit, a zero-mean square wave added to its input, beats summed over 8 starts (80 is normal):
+
+| Period (ticks) | amplitude 0.05 | 0.1 | 0.2 |
+|---|---:|---:|---:|
+| 4 | 80 | 80 | 58 |
+| 6 | 80 | 80 | 5 |
+| **8** | 60 | **0** | 0 |
+| 10 | 80 | 80 | 0 |
+| 16 | 80 | 80 | 63 |
+| 59 | 80 | 80 | 75 |
+
+A constant input needs about 0.5 to silence the unit, and Gaussian noise about 0.2 to 0.3. Idle neighbours send each other this ripple through the overlap. The shifted-surface control shows it without confound: its mean heard input is about zero, all six units are silent at weight 0.05, and a two-tap comb that removes the 8-tick band (`y(t) = (x(t) + x(t-4)) / 2`) brings all six back.
+
+The ripple acts through the drive, not the variance memory. Fed only into the drive it silences the unit at amplitude 0.1; fed only into the memory it needs 0.2 to 0.3 and is barely frequency-selective. (I predicted the opposite before measuring.)
+
+**Three repairs, none sufficient.** Silent units of 6, mean of 8 starts, moving centered surface:
+
+| Repair | weight 0.02 | 0.05 | 0.10 | 0.20 |
+|---|---:|---:|---:|---:|
+| None (Sol's result, 8 starts) | 0 | 2.8 | 6.0 | 6.0 |
+| Comb (remove the 8-tick band) | 0 | 2.6 | 6.0 | 6.0 |
+| Adapt (subtract the heard signal's 50-tick mean) | 0 | 4.4 | 3.6 | 5.4 |
+| Heard signal kept out of the variance memory | 0 | 0 | 0.9 | 6.0 |
+| All three | 0 | 0 | 0 | 0.5 |
+
+With all three the units survive but slow down: 6.0, 3.2 and 2.4 beats per unit per 600 ticks at weights 0.05, 0.10 and 0.20, where 10 is normal. There are at least three ways to die here (the ripple, a constant offset, and the heard signal holding the variance up), and each repair addresses one. All three repairs are engineered and none is in `ecg.json`. The full table for every listening rule is in the results file.
+
+**Hold and release.** The same rhythm is a switch. A unit given the 8-tick square wave at amplitude 0.2 stops within 19 ticks. After release, from 48 random starting phases, it beat exactly 53 ticks later in 48 of 48 runs, whether held for 100, 200, 400 or 403 ticks. At amplitude 0.1, held for 200 ticks or more, the delay was 95 ticks in 48 of 48 (94 when the hold ended at a different point of the rhythm). The rhythm erases the unit's phase and release starts its clock.
+
+Six unconnected units, held and then released 8 ticks apart, beat in the order of release in 24 of 24 trials, against 0 of 24 with no hold. A timing pattern can be written into the colony from outside with no weight changed.
+
+**What each listening rule does to a written lag.** Two units, a lag written by staggered release (44 of the 59 possible lags are reachable this way), then coupled for 3,000 ticks:
+
+| Coupling | Distinct lags left | Pairs whose lag moved, of 59 | Silent pairs |
+|---|---:|---:|---:|
+| None | 44 | 0 | 0 |
+| Moving surface, weight 0.1 | 41 | 0 | 0 |
+| Moving surface, weight 0.2 | 34 | 20 | 6 |
+| Fixed taps, weight 0.05 | 34 | 12 | 0 |
+| Fixed taps, weight 0.1 | 21 | 33 | 0 |
+| Fixed taps, weight 0.15 | 17 | 35 | 1 |
+
+The old fixed taps pull lags onto a grid about 8 ticks apart: at weight 0.1, lags 6, 14, 46 and 54 hold 32 of the 59 pairs. The moving surface leaves a written lag alone until it is strong enough to silence the pair. As an organiser of relationships the surface listener does less than the rule it replaced.
+
+**Not shown.** Any task advantage. That a written pattern survives noise or a disturbance (one kick test was run and was uninformative, because the kick did not move even an uncoupled unit). That hold and release keep their exact timing inside a coupled colony: in the two-unit browser lab at weight 0.12 the held unit still stops and restarts, but the release delay changes with the coupling. Whether the 8-tick grid under fixed taps is a set of true attractors.
+
+**Where this leaves the idea.** Letting a unit listen through its own surface gives a real state-dependent coupling, but so far it is a weaker and more fragile one than fixed taps. The more useful thing found tonight belongs to the original loop, not to the surface: the unit is a narrow receiver at its own ripple period, and that gives an off switch, an exact reset, and a way to write timing.
+
+In the [browser lab](https://anttiluode.github.io/GeometricNeuronSurfaceListener/), **Hold A** and **Hold B** apply the rhythm; press again to release.
+
+---
+
 ## Hypothesis: a moving surface can be a receptive surface
 
 In Deerskin, a signal moves across a fixed receptor mosaic. In the PerceptionLab ECG accident, each unit broadcasts a checkerboard row that changes with its feedback state. **What if the listener's own current checkerboard row becomes its receptor mosaic?**
@@ -95,6 +151,7 @@ Python 3.11+, NumPy:
     python -m pip install -r requirements.txt
     python -m unittest discover -s tests -v
     python experiments/probe.py
+    python experiments/round2.py
 
 The experiment writes the full numerical receipt to results/probe.json, including every phase pair. The committed [summary](results/summary.json) contains the primary results.
 
