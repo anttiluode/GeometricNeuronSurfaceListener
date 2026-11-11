@@ -47,3 +47,19 @@ for(const warm of [0,7,23,41]){
 assert(firsts.every(x=>x===firsts[0]),"release sets the same delay from every starting phase");
 console.log("release delays",firsts.join(","));
 console.log("JS lab smoke: 59-tick cycle; symmetric state-dependent overlap; finite two-unit trajectories");
+// Eighth round: the page's setpoint-wire lab is native.py, beat for beat.
+const {WireLab}=require("../lab.js");
+const fixture=require("./wire_fixture.json");
+for(const key of Object.keys(fixture)){
+  let c;const pulses=key==="pulse"?[[20,2],[120,0]]:[];
+  if(key==="pulse")c=new WireLab({kind:"none"});
+  else{const [kind,wt]=key.split(":");c=new WireLab({kind,weight:Number(wt)});}
+  c.previous=Array(4).fill(false);
+  for(let k=0;k<(key==="pulse"?300:1500);k++){for(const [t,u] of pulses)if(k===t)c.pulse(u);c.step();}
+  assert.deepEqual(c.events,fixture[key],"WireLab must match native.py: "+key);
+}
+const chain=new WireLab({kind:"chain",weight:-5.5});
+for(let t=0;t<3000;t++)chain.step();
+const reached=chain.reach();
+assert(reached.full>=reached.cycles-2,"wave reaches unit 3 with no trigger");
+console.log("JS wire lab: matches native.py; wave reached unit 3 in",reached.full,"of",reached.cycles);

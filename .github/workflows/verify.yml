@@ -8,6 +8,7 @@ on:
       - "tests/**"
       - "lab.js"
       - "taps.js"
+      - "native.py"
       - ".github/workflows/verify.yml"
   workflow_dispatch:
 jobs:

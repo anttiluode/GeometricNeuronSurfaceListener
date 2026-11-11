@@ -104,6 +104,96 @@
       return own;
     }
   }
-  root.SurfaceLab={Lab,kernel,centered,MODES,G,QMIN};
+  /* Eighth round: the setpoint port, as in native.py.
+     Unit j's two beat wires (out_0 + out_1) go to unit i's setpoint_mod with weight v[i][j]:
+         S_i = 0.5 + 0.1 * (1.0 + sum_j v[i][j] * (row_j[0] + row_j[1]) + pulse_i)
+     Nothing overrides an output after the start-up below. With v = 0 it is the original loop. */
+  function wiring(kind,wt,n){
+    const v=Array.from({length:n},()=>Array(n).fill(0));
+    if(kind==="none")return v;
+    for(let i=0;i<n-1;i++){v[i+1][i]=wt;if(kind==="both")v[i][i+1]=wt;}
+    return v;
+  }
+  class WireLab {
+    constructor({n=4,kind="chain",weight=-5.5,settle=650}={}){
+      this.n=n;this.kind=kind;this.weight=weight;this.v=wiring("none",0,n);
+      this.pipe=Array.from({length:4},()=>Array(n).fill(NaN));
+      this.pipe[3]=Array(n).fill(O0);
+      this.hist=Array.from({length:n},()=>Array(50).fill(0));
+      this.count=0;this.t=0;
+      this.own=Array(n).fill(0);this.R=Array(n).fill(0);this.var=Array(n).fill(0);
+      this.q=Array(n).fill(0);this.S=Array(n).fill(S);this.rows=Array.from({length:n},zeros);
+      this.forced=Array(n).fill(0);this.sp=Array(n).fill(0);this.hold=Array(n).fill(false);
+      this.events=Array.from({length:n},()=>[]);this.previous=Array(n).fill(false);
+      this.trace=Array.from({length:n},()=>[]);
+      // Start-up only: unwired units, each clock reset once at a different tick so they
+      // begin at different phases. After this nothing is forced.
+      for(let t=0;t<settle;t++){
+        for(let i=1;i<n;i++)if(t===300+17*i)this.forced[i]=2;
+        this.step();
+      }
+      this.setWiring(kind,weight);this.clear();
+    }
+    setWiring(kind,weight){this.kind=kind;this.weight=weight;this.v=wiring(kind,weight,this.n);}
+    clear(){this.events=Array.from({length:this.n},()=>[]);this.t0=this.t;}
+    pulse(unit,m=-10){if(unit>=0&&unit<this.n){this.sp[unit]=2;this.spM=m;}}
+    step(){
+      const n=this.n,src=this.pipe[0];
+      const live=src.map(Number.isFinite);
+      const q=src.map((x,i)=>qOf(live[i]?x:0));
+      const rows=q.map((x,i)=>live[i]?G[x-QMIN]:zeros());
+      const own=rows.map(r=>r[0]+r[1]+r[2]+r[3]);
+      const wires=rows.map(r=>r[0]+r[1]);
+      const o=Array(n),va=Array(n).fill(0),Sv=Array(n),R=Array(n);
+      for(let i=0;i<n;i++){
+        R[i]=own[i]+(this.hold[i]?.2*((this.t%8)<4?1:-1):0);
+        this.hist[i][this.count%50]=R[i];
+        if(this.count+1>10){
+          const m=Math.min(this.count+1,50);
+          let avg=0;
+          for(let age=1;age<=m;age++)avg+=this.hist[i][(this.count+1-age)%50];
+          avg/=m;
+          let ss=0;
+          for(let age=1;age<=m;age++){const z=this.hist[i][(this.count+1-age)%50]-avg;ss+=z*z;}
+          va[i]=ss/m;
+        }
+        let min=0;
+        for(let j=0;j<n;j++)min+=this.v[i][j]*wires[j];
+        if(this.sp[i]>0){min+=this.spM;this.sp[i]--;}
+        const Si=.5+.1*(1+min);
+        Sv[i]=Si;
+        o[i]=va[i]>TARGET?Si+(2/(1+Math.exp(-3*(R[i]-Si)))-1)/3:
+          Si+Math.tanh(2*(R[i]-Si)*(1+10*Math.abs(va[i]-TARGET)));
+        if(this.forced[i]>0){o[i]=-.28;this.forced[i]--;}
+      }
+      this.count++;this.t++;
+      this.pipe.shift();this.pipe.push(o);
+      this.q=q;this.rows=rows;this.own=own;this.R=R;this.var=va;this.S=Sv;
+      for(let i=0;i<n;i++){
+        const loud=own[i]>3;
+        if(loud&&!this.previous[i])this.events[i].push(this.t-1);
+        this.previous[i]=loud;
+        if(this.events[i].length>400)this.events[i].shift();
+        this.trace[i].push(Sv[i]);if(this.trace[i].length>400)this.trace[i].shift();
+      }
+      return own;
+    }
+    /* Of unit 0's beats, how many were followed down the chain, each hop within 8 ticks. */
+    reach(){
+      const ev=this.events,root=ev[0].filter(t=>t<this.t-30);
+      let full=0;const hops=[];
+      for(const t of root){
+        const at=[t];
+        for(let u=1;u<this.n;u++){
+          const x=ev[u].find(y=>y>at[at.length-1]&&y<=at[at.length-1]+8);
+          if(x===undefined)break;
+          at.push(x);
+        }
+        if(at.length===this.n){full++;for(let k=1;k<at.length;k++)hops.push(at[k]-at[k-1]);}
+      }
+      return {cycles:root.length,full,hops};
+    }
+  }
+  root.SurfaceLab={Lab,WireLab,wiring,kernel,centered,MODES,G,QMIN};
   if(typeof module!=="undefined" && module.exports)module.exports=root.SurfaceLab;
 })(typeof globalThis!=="undefined"?globalThis:this);

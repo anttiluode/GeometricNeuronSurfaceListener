@@ -18,15 +18,45 @@ button{cursor:pointer;color:var(--ink);border:1px solid #58756c;background:#2451
 table{border-collapse:collapse;width:100%;font-size:.87rem}td,th{text-align:left;border-bottom:1px solid var(--line);padding:10px 8px}th{color:var(--mint);font-weight:650}.warning{border-left:3px solid var(--amber);padding:7px 14px;background:#2e261f}
 code{background:#25313d;border-radius:4px;padding:1px 5px;font-size:.88em}pre{overflow:auto;background:#0c151e;border:1px solid #32424c;border-radius:9px;padding:14px}
 @media(max-width:670px){.readouts,.grid{grid-template-columns:1fr}.panel{padding:14px}main{padding:24px 12px 60px}.controls label{width:100%}input[type=range]{width:100%}}
+.units4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:16px}.units4 .unit{padding:14px}.units4 .unit h3{color:var(--c)}.units4 .unit{border-color:color-mix(in srgb,var(--c) 35%,#101a23)}.units4 .pixels{gap:1px}.units4 .pixel{min-height:8px;border-radius:2px}.units4 .rowstat{font-variant-numeric:tabular-nums}.ubtn{display:flex;gap:6px;margin-top:10px}.ubtn button{flex:1;padding:6px 8px;font-size:.82rem}
+#wtimeline{width:100%;height:270px;border-radius:10px;background:#0c151e;display:block;margin-top:16px}.score{font-size:1.02rem;margin:14px 0 4px}.score strong{font-size:1.35rem;font-variant-numeric:tabular-nums}
+@media(max-width:900px){.units4{grid-template-columns:1fr 1fr}}@media(max-width:440px){.units4{grid-template-columns:1fr}}
 </style>
 </head><body><main>
 <div class="overline">Geometric Neuron / Experiment 1</div>
 <h1>Two deerskins meet.</h1>
 <p class="lede">What if a neuron listens to another through <strong>its own moving surface</strong>? The sender broadcasts the 16 samples of its checkerboard. The receiver's present checkerboard becomes its receptor mosaic. Their overlap determines how much one affects the other.</p>
 <div class="tag">The original 59-tick forgetting clock is unchanged. No training, no imported theta rhythm.</div>
-<p class="footnote"><a href="#round2">Second round</a>: why the colony goes silent, and a hold-and-release switch. <a href="#round3">Third round</a>: a two-way chain taught by that switch alone. <a href="#round4">Fourth round</a>: what the checkerboard history tells a listener that beat times do not. <a href="#round5">Fifth round</a>: a receptor learned from those rows replays a taught chain at the taught spacing. <a href="#round6">Sixth round</a>: a free colony keeps whichever taught order it is cued into. <a href="#round7">Seventh round</a>: that kept state is a root, and two sequences can share a unit. <a href="#round8">Eighth round</a>: a unit makes another beat through the setpoint port, with no trigger.</p>
-<section class="panel" aria-label="Live experiment">
-<h2>Live, deterministic two-unit experiment</h2>
+<p class="footnote">The first live panel below is the newest result, the <a href="#wire">setpoint wire</a>. The original <a href="#surface">two-surface lab</a> follows it. <a href="#round2">Second round</a>: why the colony goes silent, and a hold-and-release switch. <a href="#round3">Third round</a>: a two-way chain taught by that switch alone. <a href="#round4">Fourth round</a>: what the checkerboard history tells a listener that beat times do not. <a href="#round5">Fifth round</a>: a receptor learned from those rows replays a taught chain at the taught spacing. <a href="#round6">Sixth round</a>: a free colony keeps whichever taught order it is cued into. <a href="#round7">Seventh round</a>: that kept state is a root, and two sequences can share a unit. <a href="#round8">Eighth round</a>: a unit makes another beat through the setpoint port, with no trigger.</p>
+<section class="panel" id="wire" aria-label="Live setpoint wire experiment">
+<div class="overline">Live · eighth round · 11 November 2026</div>
+<h2>Four units wired through the setpoint port</h2>
+<p>Each unit's two beat wires (<code>out_0</code>, <code>out_1</code>) go to the next unit's <code>setpoint_mod</code>, the port the original node always had. When a unit beats, its neighbour's setpoint dips, and the neighbour beats through its own feedback loop about 4 ticks later. Nothing overrides any output: no trigger, no refractory, no learning.</p>
+<div class="controls">
+<label>Wiring<select id="wkind">
+<option value="chain">Chain 0 → 1 → 2 → 3</option>
+<option value="both">Both directions (runs away)</option>
+<option value="none">No wires</option></select></label>
+<label>Wire weight <strong id="wweight-value">−5.5</strong>
+<input id="wweight" type="range" min="-8" max="-3" step="0.5" value="-5.5"></label>
+<label>Simulation speed<select id="wspeed">
+<option value="1">1 tick / frame</option><option selected value="2">2 ticks / frame</option>
+<option value="5">5 ticks / frame</option><option value="10">10 ticks / frame</option></select></label>
+<button id="wrestart" class="secondary">Restart</button><button id="wpause">Pause</button>
+</div>
+<p class="score">Wave from unit 0 reached unit 3 in <strong id="wfull">0</strong> of <strong id="wcycles">0</strong> cycles <span class="footnote">· hop times seen: <span id="whops">—</span> ticks · beats per unit: <span id="wbeats">—</span></span></p>
+<canvas id="wtimeline" width="960" height="270" role="img" aria-label="Beats and setpoints of the four units over the last 240 ticks"></canvas>
+<p class="footnote">Bars are beats. The thin line under each row is that unit's setpoint: flat at 0.6, dipping when a wire or the Excite button pulls it down. The window is the last 240 ticks.</p>
+<div class="units4" id="wunits"></div>
+<h3 style="margin-top:20px">Things to try</h3>
+<p><strong>Excite</strong> puts a 2-tick pulse on that unit's setpoint port (setpoint −0.4). With no wires, a unit beat exactly 4 ticks later at 48 of 59 starting phases, and within 7 ticks at 56. <strong>Hold</strong> is the 8-tick rhythm from the second round.</p>
+<p>Hold unit 0 in the chain: unit 1 becomes the root on its own 59-tick clock, and the wave 1→2→3 completed in 25 of 25 cycles. Excite unit 0 between its own beats: an extra wave ran down the chain in 8 of 10 tries.</p>
+<p class="warning">Move the weight and the chain breaks. In this page's start, over 51 cycles of unit 0, the wave reached unit 3 in 50 at −5.5, 49 at −4.0, 50 at −8.0, but 18 at −4.5, 15 at −6.0 and 0 at −3.5. Hop times vary from 1 to 7 ticks. Wired in both directions the units re-excite each other and beat about five times too often, because the unit has no refractory period. The weights are set by hand.</p>
+<p class="footnote">This simulator matches <a href="native.py">native.py</a> beat for beat (tested). Units start unwired and at different phases; each clock is reset once during start-up and nothing is forced after that.</p>
+</section>
+<section class="panel" id="surface" aria-label="Live experiment">
+<div class="overline">Live · first round</div>
+<h2>Two units listening through their surfaces</h2>
 <div class="controls">
 <label>Listening rule<select id="mode">
 <option value="surface">Moving, centered surface</option>
@@ -178,6 +208,7 @@ code{background:#25313d;border-radius:4px;padding:1px 5px;font-size:.88em}pre{ov
 <tr><td>−1.0</td><td>5</td></tr>
 <tr><td>−2.4</td><td>0</td></tr></tbody></table>
 <p>Inside the band the unit beats 4 ticks later through its own feedback loop and keeps its own period from there. With each unit's two beat wires going to the next unit's setpoint port, a wave travels 0→1→2→3 with no trigger at all: in 294 of 294 cycles at weight −5.5, and in 0 to 257 of 294 at other weights, with hop times that vary between 1 and 7 ticks.</p>
+<p>The <a href="#wire">live panel at the top of the page</a> runs this chain.</p>
 <p class="warning">It is not clean and it is not a memory yet. The unit has no refractory period, so wires in both directions run away (up to 375 beats where 25 is normal). Two inputs on the same tick cancel. No weights were learned. Numbers: <a href="results/round8.json">results/round8.json</a>.</p></section>
 <p class="footnote">Scientific boundary: these are real-valued sampled images and Pearson correlation. Their overlap is reciprocal at one instant. It is not quantum interference, not learned attention, and not proof of task-dependent neural communication. The original closed-loop controller and sample table are copied unchanged for audit.</p>
 </main><script src="taps.js"></script><script src="lab.js"></script><script>
@@ -230,6 +261,50 @@ $("pulseA").addEventListener("click",()=>sim.pulse(0));
 $("pulseB").addEventListener("click",()=>sim.pulse(1));
 for(const [id,i] of [["holdA",0],["holdB",1]])$(id).addEventListener("click",()=>{sim.hold[i]=!sim.hold[i];$(id).textContent=(sim.hold[i]?"Release ":"Hold ")+(i?"B":"A");$(id).className=sim.hold[i]?"":"secondary";});
 function loop(){if(!paused)for(let i=0;i<Number($("speed").value);i++)sim.step();if((frame++%2)===0)render();requestAnimationFrame(loop);}
+render();requestAnimationFrame(loop);
+})();
+</script><script>
+(function(){
+const $=x=>document.getElementById(x);
+const WireLab=globalThis.SurfaceLab.WireLab,N=4,COL=["#79ddd0","#ffca81","#b9a8ff","#ff9f8e"];
+let sim,paused=false,frame=0;
+const box=$("wunits");
+box.innerHTML=Array.from({length:N},(_,i)=>'<div class="unit" style="--c:'+COL[i]+'"><h3>Unit '+i+'</h3><div class="pixels" id="wpx'+i+'">'+'<div class="pixel"></div>'.repeat(16)+'</div><div class="rowstat"><span>Square size <strong id="wq'+i+'">—</strong></span><span>Setpoint <strong id="ws'+i+'">—</strong></span></div><div class="ubtn"><button id="wex'+i+'">Excite</button><button id="wh'+i+'" class="secondary">Hold</button></div></div>').join("");
+function restart(){sim=new WireLab({kind:$("wkind").value,weight:Number($("wweight").value)});for(let i=0;i<N;i++){$("wh"+i).textContent="Hold";$("wh"+i).className="secondary";}}
+function render(){
+for(let i=0;i<N;i++){
+const px=$("wpx"+i).children,row=sim.rows[i];
+for(let k=0;k<16;k++){const a=Math.max(0,Math.min(1,row[k]||0));px[k].style.background=COL[i];px[k].style.opacity=.1+.9*a;}
+$("wq"+i).textContent=sim.q[i];$("ws"+i).textContent=sim.S[i].toFixed(2);
+}
+const r=sim.reach(),h={};r.hops.forEach(x=>h[x]=1);
+$("wfull").textContent=r.full;$("wcycles").textContent=r.cycles;
+$("whops").textContent=Object.keys(h).length?Object.keys(h).join(", "):"—";
+$("wbeats").textContent=sim.events.map(e=>e.length).join(" / ");
+const cv=$("wtimeline"),ctx=cv.getContext("2d"),dpr=window.devicePixelRatio||1,w=cv.clientWidth,hh=cv.clientHeight,span=240,start=sim.t-span,x0=34,sx=t=>x0+(t-start)/span*(w-x0-8);
+if(cv.width!==Math.round(w*dpr)){cv.width=Math.round(w*dpr);cv.height=Math.round(hh*dpr);}
+ctx.setTransform(dpr,0,0,dpr,0,0);
+ctx.fillStyle="#0c151e";ctx.fillRect(0,0,w,hh);
+for(let i=0;i<N;i++){
+const y=44+i*58;
+ctx.strokeStyle="#2c3b44";ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x0,y);ctx.lineTo(w-8,y);ctx.stroke();
+ctx.fillStyle=COL[i];ctx.font="14px system-ui";ctx.fillText(String(i),12,y-6);
+for(const t of sim.events[i]){if(t<start)continue;ctx.fillRect(sx(t)-2.5,y-26,5,26);}
+const tr=sim.trace[i],n=tr.length;ctx.strokeStyle=COL[i];ctx.globalAlpha=.75;ctx.lineWidth=1.5;ctx.beginPath();
+for(let k=Math.max(0,n-span);k<n;k++){const t=sim.t-n+k,yy=y+8+Math.max(0,Math.min(1,(.6-tr[k])/1.2))*18;if(k===Math.max(0,n-span))ctx.moveTo(sx(t),yy);else ctx.lineTo(sx(t),yy);}
+ctx.stroke();ctx.globalAlpha=1;
+}
+ctx.fillStyle="#718c95";ctx.font="12px system-ui";ctx.fillText("240 ticks ago",x0,hh-8);ctx.fillText("now",w-36,hh-8);
+}
+$("wkind").addEventListener("change",restart);$("wrestart").addEventListener("click",restart);
+$("wweight").addEventListener("input",()=>{const v=Number($("wweight").value);$("wweight-value").textContent=v.toFixed(1).replace("-","−");sim.setWiring(sim.kind,v);sim.clear();});
+$("wpause").addEventListener("click",()=>{paused=!paused;$("wpause").textContent=paused?"Resume":"Pause";});
+for(let i=0;i<N;i++){
+$("wex"+i).addEventListener("click",()=>sim.pulse(i));
+$("wh"+i).addEventListener("click",()=>{sim.hold[i]=!sim.hold[i];$("wh"+i).textContent=sim.hold[i]?"Release":"Hold";$("wh"+i).className=sim.hold[i]?"":"secondary";});
+}
+restart();
+function loop(){if(!paused)for(let k=0;k<Number($("wspeed").value);k++)sim.step();if((frame++%2)===0)render();requestAnimationFrame(loop);}
 render();requestAnimationFrame(loop);
 })();
 </script></body></html>

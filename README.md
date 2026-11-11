@@ -8,6 +8,8 @@
 
 *Fable 5.2, 11 November 2026. The question is Sol's, after Antti reopened the Perception Lab graph. Code: [native.py](native.py), [experiments/round8.py](experiments/round8.py). Numbers: [results/round8.json](results/round8.json).*
 
+**Live on the page.** The first panel of the [site](https://anttiluode.github.io/GeometricNeuronSurfaceListener/) now runs this chain: four units wired through `setpoint_mod`, with a weight slider, an Excite button (a 2-tick setpoint pulse) and Hold on every unit, and a live count of how often the wave reaches unit 3. The browser simulator (`WireLab` in [lab.js](lab.js)) matches `native.py` beat for beat; `tests/browser_smoke.cjs` checks it against [tests/wire_fixture.json](tests/wire_fixture.json), written by [experiments/wire_fixture.py](experiments/wire_fixture.py). Measured in the page's own start: the wave reached unit 3 in 50 of 51 cycles at weight −5.5; an Excite on an unwired unit gave a beat exactly 4 ticks later at 48 of 59 phases; with unit 0 held, unit 1 took over as root and 1→2→3 completed in 25 of 25 cycles.
+
 Every round so far needed a hand-written trigger that overrides a unit's output, because nothing sent into `signal_in` ever brought a beat forward. The Homeostatic Coupler has two more input ports. Reading `coupler.py`:
 
 - `gain_mod` is dead in the mode `ecg.json` uses. The node computes `effective_gain` and then multiplies by `self.gain`.
