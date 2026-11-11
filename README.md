@@ -1,4 +1,4 @@
-# GeometricNeuronSurfaceListener — two deerskins meet
+# GeometricNeuronSurfaceListener — two deerskins meet (V 26)
 
 **[Open the offline browser laboratory](https://anttiluode.github.io/GeometricNeuronSurfaceListener/)** · [Python coupling operator](surface.py) · [Controlled experiment](experiments/probe.py) · [Results](results/summary.json) · [Successful Python test run and full JSON artifact](https://github.com/anttiluode/GeometricNeuronSurfaceListener/actions/runs/42859969157)
 
