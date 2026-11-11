@@ -24,7 +24,7 @@ code{background:#25313d;border-radius:4px;padding:1px 5px;font-size:.88em}pre{ov
 <h1>Two deerskins meet.</h1>
 <p class="lede">What if a neuron listens to another through <strong>its own moving surface</strong>? The sender broadcasts the 16 samples of its checkerboard. The receiver's present checkerboard becomes its receptor mosaic. Their overlap determines how much one affects the other.</p>
 <div class="tag">The original 59-tick forgetting clock is unchanged. No training, no imported theta rhythm.</div>
-<p class="footnote"><a href="#round2">Second round</a>: why the colony goes silent, and a hold-and-release switch. <a href="#round3">Third round</a>: a two-way chain taught by that switch alone. <a href="#round4">Fourth round</a>: what the checkerboard history tells a listener that beat times do not. <a href="#round5">Fifth round</a>: a receptor learned from those rows replays a taught chain at the taught spacing. <a href="#round6">Sixth round</a>: a free colony keeps whichever taught order it is cued into.</p>
+<p class="footnote"><a href="#round2">Second round</a>: why the colony goes silent, and a hold-and-release switch. <a href="#round3">Third round</a>: a two-way chain taught by that switch alone. <a href="#round4">Fourth round</a>: what the checkerboard history tells a listener that beat times do not. <a href="#round5">Fifth round</a>: a receptor learned from those rows replays a taught chain at the taught spacing. <a href="#round6">Sixth round</a>: a free colony keeps whichever taught order it is cued into. <a href="#round7">Seventh round</a>: that kept state is a root, and two sequences can share a unit.</p>
 <section class="panel" aria-label="Live experiment">
 <h2>Live, deterministic two-unit experiment</h2>
 <div class="controls">
@@ -148,6 +148,25 @@ code{background:#25313d;border-radius:4px;padding:1px 5px;font-size:.88em}pre{ov
 <p>With no receptors, or receptors taught on random orders, no trial ends in a taught order (0 of 72 each). One cue without an erase does not switch the order: it leaves it in about half the trials and breaks it in the rest.</p>
 <p>So the colony has somewhere to hold "which order we are in": the beat pattern itself, chosen by one cue, kept with no weight changed.</p>
 <p class="warning">At hop 8 the colony falls into 0→3 without a cue in 48 of 72 trials, so that cue partly rides a default. The trigger, refractory, credit rule and threshold are hand-built, the filters are fitted offline, and the erase comes from outside. Nothing has been tested on a task. Numbers: <a href="results/round6.json">results/round6.json</a>.</p></section>
+<section class="panel" id="round7"><div class="overline">Seventh round · Fable 5.2 · 11 November 2026 · checks proposed by Sol and Gemini</div>
+<h2>The working state is a root</h2>
+<p>With every beat logged, a written order either forms and repeats exactly or does not form: 1,200 of 1,200 cycles clean at a taught hop of 6; at hop 8, 23 of 24 written orders clean and one that never formed. The period is always 59, the leader's own clock. The leader's beats are its own; every follower's beat is triggered.</p>
+<table><thead><tr><th>Colony left alone: which unit is on its own clock</th><th>Hop 6</th><th>Hop 8</th></tr></thead><tbody>
+<tr><td>Unit 0 (order 0→1→2→3)</td><td>3</td><td>4</td></tr>
+<tr><td>Unit 1</td><td>5</td><td>5</td></tr>
+<tr><td>Unit 2</td><td>2</td><td>1</td></tr>
+<tr><td>Unit 3 (order 3→2→1→0)</td><td>2</td><td>2</td></tr>
+<tr><td>Every other unit at its taught travel time from that root</td><td>12 of 12</td><td>12 of 12</td></tr></tbody></table>
+<p>So the receptors hold a graph with travel times, the beat pattern holds one address in it, and each cycle a wave from that address gives every unit its distance. Hold the root silent and the next unit takes over as root (12 of 12). Hold the followers and they are still triggered every cycle.</p>
+<h3>The checkerboard is one workable lift, not a special one</h3>
+<p>All 16 numbers of a row come from one integer, the square size. A receptor over that integer, its square and its cube for the last three ticks matches the 48-number checkerboard receptor (12 of 12 both ways) once its threshold is set. A linear receptor on the integer scores 0. The checkerboard's only measured advantage is that it is less sensitive to the threshold.</p>
+<h3>Two sequences through one shared unit</h3>
+<table><thead><tr><th>Taught 0→1→2 and 3→1→4, hop 6, colonies of 12</th><th>Cue 0 (wants 2)</th><th>Cue 3 (wants 4)</th></tr></thead><tbody>
+<tr><td>Receptors that listen to one neighbour at a time</td><td>both branches fire: 12</td><td>both branches fire: 12</td></tr>
+<tr><td><strong>One summed receptor per unit over all the others</strong></td><td><strong>correct: 12</strong></td><td><strong>correct: 12</strong></td></tr>
+<tr><td>Summed, beat history only</td><td>neither: 12</td><td>neither: 12</td></tr></tbody></table>
+<p>Unit 1's triggered beat is identical either way, so the path is remembered in the other units. The summed receptor is trained on the unit's own beats, which also removes the credit rule. It is 12 of 12 at hop 8 too.</p>
+<p class="warning">The summed receptor that solves the fork uses the cube of the square size plus beat history; its checkerboard version mostly fails. In a free colony it keeps a cued order only at hop 6. The trigger, refractory, thresholds and the erase are still hand-built, and nothing has been tested on a task. Numbers: <a href="results/round7.json">results/round7.json</a>.</p></section>
 <p class="footnote">Scientific boundary: these are real-valued sampled images and Pearson correlation. Their overlap is reciprocal at one instant. It is not quantum interference, not learned attention, and not proof of task-dependent neural communication. The original closed-loop controller and sample table are copied unchanged for audit.</p>
 </main><script src="taps.js"></script><script src="lab.js"></script><script>
 (function(){

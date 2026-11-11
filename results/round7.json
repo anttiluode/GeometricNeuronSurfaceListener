@@ -1,0 +1,357 @@
+{
+ "spec": {
+  "seeds": 12,
+  "threshold_default": 0.3,
+  "refractory": 30,
+  "latency": 9,
+  "rows": 3,
+  "beat_ticks": 24,
+  "ridge": 0.001
+ },
+ "stability": {
+  "gap6": {
+   "written_orders": 24,
+   "cycles_logged": 1200,
+   "cycles_deviating": 0,
+   "leader_periods_seen": [
+    59
+   ],
+   "follower_beats_that_were_their_own": 0,
+   "leader_beats_that_were_triggered": 0
+  },
+  "gap8": {
+   "written_orders": 24,
+   "cycles_logged": 1200,
+   "cycles_deviating": 50,
+   "leader_periods_seen": [
+    59
+   ],
+   "follower_beats_that_were_their_own": 51,
+   "leader_beats_that_were_triggered": 0
+  }
+ },
+ "roots": {
+  "gap6": {
+   "settled_states_by_root": {
+    "[3]": 2,
+    "[0]": 3,
+    "[1]": 5,
+    "[2]": 2
+   },
+   "single_root_states": 12,
+   "of_those_all_units_at_taught_distance_from_root": 12,
+   "root_held_new_root": {
+    "[1]": 12
+   },
+   "followers_held_still_triggered_every_cycle_of_12": 12
+  },
+  "gap8": {
+   "settled_states_by_root": {
+    "[3]": 2,
+    "[0]": 4,
+    "[1]": 5,
+    "[2]": 1
+   },
+   "single_root_states": 12,
+   "of_those_all_units_at_taught_distance_from_root": 12,
+   "root_held_new_root": {
+    "[1]": 12
+   },
+   "followers_held_still_triggered_every_cycle_of_12": 12
+  }
+ },
+ "scalar": {
+  "rows_thr0.1_gap6": {
+   "cue0_of_12": 12,
+   "cue3_of_12": 12,
+   "silent_without_cue_of_12": 12
+  },
+  "rows_thr0.2_gap6": {
+   "cue0_of_12": 12,
+   "cue3_of_12": 12,
+   "silent_without_cue_of_12": 12
+  },
+  "rows_thr0.3_gap6": {
+   "cue0_of_12": 12,
+   "cue3_of_12": 11,
+   "silent_without_cue_of_12": 12
+  },
+  "q_thr0.1_gap6": {
+   "cue0_of_12": 0,
+   "cue3_of_12": 0,
+   "silent_without_cue_of_12": 12
+  },
+  "q_thr0.2_gap6": {
+   "cue0_of_12": 0,
+   "cue3_of_12": 0,
+   "silent_without_cue_of_12": 12
+  },
+  "q_thr0.3_gap6": {
+   "cue0_of_12": 0,
+   "cue3_of_12": 0,
+   "silent_without_cue_of_12": 12
+  },
+  "qcubic_thr0.1_gap6": {
+   "cue0_of_12": 12,
+   "cue3_of_12": 12,
+   "silent_without_cue_of_12": 12
+  },
+  "qcubic_thr0.2_gap6": {
+   "cue0_of_12": 12,
+   "cue3_of_12": 12,
+   "silent_without_cue_of_12": 12
+  },
+  "qcubic_thr0.3_gap6": {
+   "cue0_of_12": 0,
+   "cue3_of_12": 0,
+   "silent_without_cue_of_12": 12
+  },
+  "rows_thr0.1_gap8": {
+   "cue0_of_12": 12,
+   "cue3_of_12": 12,
+   "silent_without_cue_of_12": 12
+  },
+  "rows_thr0.2_gap8": {
+   "cue0_of_12": 12,
+   "cue3_of_12": 12,
+   "silent_without_cue_of_12": 12
+  },
+  "rows_thr0.3_gap8": {
+   "cue0_of_12": 12,
+   "cue3_of_12": 11,
+   "silent_without_cue_of_12": 12
+  },
+  "q_thr0.1_gap8": {
+   "cue0_of_12": 0,
+   "cue3_of_12": 0,
+   "silent_without_cue_of_12": 12
+  },
+  "q_thr0.2_gap8": {
+   "cue0_of_12": 0,
+   "cue3_of_12": 0,
+   "silent_without_cue_of_12": 12
+  },
+  "q_thr0.3_gap8": {
+   "cue0_of_12": 0,
+   "cue3_of_12": 0,
+   "silent_without_cue_of_12": 12
+  },
+  "qcubic_thr0.1_gap8": {
+   "cue0_of_12": 12,
+   "cue3_of_12": 12,
+   "silent_without_cue_of_12": 12
+  },
+  "qcubic_thr0.2_gap8": {
+   "cue0_of_12": 0,
+   "cue3_of_12": 0,
+   "silent_without_cue_of_12": 12
+  },
+  "qcubic_thr0.3_gap8": {
+   "cue0_of_12": 0,
+   "cue3_of_12": 0,
+   "silent_without_cue_of_12": 12
+  }
+ },
+ "fork": {
+  "pairwise_rows+beats_thr0.3_gap6": {
+   "cue0_wants_2": {
+    "both": 12
+   },
+   "cue3_wants_4": {
+    "both": 12
+   },
+   "cue1_alone_who_follows": {
+    "2+4": 12
+   }
+  },
+  "pairwise_qcubic+beats_thr0.2_gap6": {
+   "cue0_wants_2": {
+    "both": 12
+   },
+   "cue3_wants_4": {
+    "both": 12
+   },
+   "cue1_alone_who_follows": {
+    "2+4": 12
+   }
+  },
+  "joint_rows+beats_thr0.3_gap6": {
+   "cue0_wants_2": {
+    "wrong_only": 1,
+    "both": 11
+   },
+   "cue3_wants_4": {
+    "wrong_only": 1,
+    "both": 11
+   },
+   "cue1_alone_who_follows": {
+    "2+4": 12
+   }
+  },
+  "joint_beats_thr0.3_gap6": {
+   "cue0_wants_2": {
+    "neither": 12
+   },
+   "cue3_wants_4": {
+    "neither": 12
+   },
+   "cue1_alone_who_follows": {
+    "neither": 12
+   }
+  },
+  "joint_qcubic_thr0.3_gap6": {
+   "cue0_wants_2": {
+    "correct": 12
+   },
+   "cue3_wants_4": {
+    "correct": 12
+   },
+   "cue1_alone_who_follows": {
+    "2+4": 12
+   }
+  },
+  "joint_qcubic+beats_thr0.3_gap6": {
+   "cue0_wants_2": {
+    "correct": 12
+   },
+   "cue3_wants_4": {
+    "correct": 12
+   },
+   "cue1_alone_who_follows": {
+    "2+4": 12
+   }
+  },
+  "pairwise_rows+beats_thr0.3_gap8": {
+   "cue0_wants_2": {
+    "both": 12
+   },
+   "cue3_wants_4": {
+    "both": 12
+   },
+   "cue1_alone_who_follows": {
+    "2+4": 12
+   }
+  },
+  "pairwise_qcubic+beats_thr0.2_gap8": {
+   "cue0_wants_2": {
+    "both": 10,
+    "wrong_only": 2
+   },
+   "cue3_wants_4": {
+    "both": 10,
+    "correct": 2
+   },
+   "cue1_alone_who_follows": {
+    "2+4": 10,
+    "4": 2
+   }
+  },
+  "joint_rows+beats_thr0.3_gap8": {
+   "cue0_wants_2": {
+    "both": 6,
+    "correct": 5,
+    "wrong_only": 1
+   },
+   "cue3_wants_4": {
+    "correct": 4,
+    "both": 7,
+    "wrong_only": 1
+   },
+   "cue1_alone_who_follows": {
+    "2+4": 8,
+    "neither": 4
+   }
+  },
+  "joint_beats_thr0.3_gap8": {
+   "cue0_wants_2": {
+    "neither": 12
+   },
+   "cue3_wants_4": {
+    "neither": 12
+   },
+   "cue1_alone_who_follows": {
+    "neither": 12
+   }
+  },
+  "joint_qcubic_thr0.3_gap8": {
+   "cue0_wants_2": {
+    "neither": 12
+   },
+   "cue3_wants_4": {
+    "neither": 12
+   },
+   "cue1_alone_who_follows": {
+    "neither": 12
+   }
+  },
+  "joint_qcubic+beats_thr0.3_gap8": {
+   "cue0_wants_2": {
+    "correct": 12
+   },
+   "cue3_wants_4": {
+    "correct": 12
+   },
+   "cue1_alone_who_follows": {
+    "neither": 12
+   }
+  }
+ },
+ "joint_qcubic_beats_chain": {
+  "gap5": {
+   "held_cue0_of_12": 12,
+   "held_cue3_of_12": 12,
+   "silent_without_cue_of_12": 12,
+   "free_erase_cue0_keeps_0123_of_12": null,
+   "free_erase_cue3_keeps_3210_of_12": null
+  },
+  "gap6": {
+   "held_cue0_of_12": 12,
+   "held_cue3_of_12": 12,
+   "silent_without_cue_of_12": 12,
+   "free_erase_cue0_keeps_0123_of_12": 12,
+   "free_erase_cue3_keeps_3210_of_12": 12
+  },
+  "gap7": {
+   "held_cue0_of_12": 12,
+   "held_cue3_of_12": 12,
+   "silent_without_cue_of_12": 12,
+   "free_erase_cue0_keeps_0123_of_12": null,
+   "free_erase_cue3_keeps_3210_of_12": null
+  },
+  "gap8": {
+   "held_cue0_of_12": 12,
+   "held_cue3_of_12": 12,
+   "silent_without_cue_of_12": 12,
+   "free_erase_cue0_keeps_0123_of_12": 0,
+   "free_erase_cue3_keeps_3210_of_12": 0
+  },
+  "gap9": {
+   "held_cue0_of_12": 12,
+   "held_cue3_of_12": 12,
+   "silent_without_cue_of_12": 12,
+   "free_erase_cue0_keeps_0123_of_12": null,
+   "free_erase_cue3_keeps_3210_of_12": null
+  },
+  "gap10": {
+   "held_cue0_of_12": 12,
+   "held_cue3_of_12": 12,
+   "silent_without_cue_of_12": 12,
+   "free_erase_cue0_keeps_0123_of_12": 0,
+   "free_erase_cue3_keeps_3210_of_12": 0
+  },
+  "gap12": {
+   "held_cue0_of_12": 12,
+   "held_cue3_of_12": 12,
+   "silent_without_cue_of_12": 12,
+   "free_erase_cue0_keeps_0123_of_12": null,
+   "free_erase_cue3_keeps_3210_of_12": null
+  },
+  "gap16": {
+   "held_cue0_of_12": 0,
+   "held_cue3_of_12": 0,
+   "silent_without_cue_of_12": 0,
+   "free_erase_cue0_keeps_0123_of_12": null,
+   "free_erase_cue3_keeps_3210_of_12": null
+  }
+ }
+}

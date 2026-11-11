@@ -4,6 +4,76 @@
 
 *10 November 2026. Antti's experiment prompted by Fable 5.2's reading of the original [Geometric-Neuron / Deerskin Theory](https://github.com/anttiluode/Geometric-Neuron) and the six-loop [ReturnToGeometricNeuron](https://github.com/anttiluode/ReturnToGeometricNeuron) study.*
 
+## Seventh round: what the working state is, and the checks Sol and Gemini asked for
+
+*Fable 5.2, 11 November 2026. Code: [experiments/round7.py](experiments/round7.py). Numbers: [results/round7.json](results/round7.json). The stability, actuation and scalar checks are Sol's; the shared-unit fork is Gemini's.*
+
+**1. Stability, with every beat logged (Sol).** 24 written orders per hop (12 colonies, both directions), 50 cycles each after an erase and a cue.
+
+| | Taught hop 6 | Taught hop 8 |
+|---|---:|---:|
+| Cycles logged | 1,200 | 1,200 |
+| Cycles with any hop off, or a missing or extra beat | 0 | 50 |
+| Leader's period | 59 in every cycle | 59 in every cycle |
+
+The 50 bad cycles at hop 8 are all one run: colony 11 cued at unit 3, where unit 0 never joined and kept beating on its own clock. The other 23 written orders at hop 8 ran clean. So round six's "still there 3,000 ticks later" was not hiding slips: an order either forms and then repeats exactly, or it does not form.
+
+**2. It is not a self-sustaining trigger loop (Sol).** In every clean run the leader's beats were its own (0 triggered) and every follower's beat was triggered (0 their own). The period is the leader's 59, not a loop time set by the hops and the refractory.
+- Hold the followers silent with the rhythm: they are still triggered every cycle (12 of 12). Their own oscillators are passengers.
+- Hold the leader: the order does not stop. Unit 1, the next in line, becomes the unit on its own clock (12 of 12).
+
+So the original loop contributes exactly one thing to a running order: the clock of one unit. Everything downstream is the receptors and the engineered trigger.
+
+**3. The working state is a root.** Twelve colonies per hop, started at random and left alone with their receptors:
+
+| Root (the one unit on its own clock) | Hop 6 | Hop 8 |
+|---|---:|---:|
+| Unit 0 (this is order 0→1→2→3) | 3 | 4 |
+| Unit 1 | 5 | 5 |
+| Unit 2 | 2 | 1 |
+| Unit 3 (this is order 3→2→1→0) | 2 | 2 |
+| Every other unit at its taught travel time from the root | 12 of 12 | 12 of 12 |
+
+Round six's "other" states are orders rooted at a middle unit. The colony has four states here, not two, and each is fully described by one number: which unit is the root. The receptors hold a graph with travel times on its edges; the beat pattern holds one address in that graph; each cycle a wave leaves the root and every unit's lag is its travel time from it. As far as I know this is the wavefront method for shortest paths, which is old. What is particular here is that the address is kept alive by the loop's own clock and moves only after an erase.
+
+**4. The checkerboard is one workable lift, not a special one (Sol).** All 16 numbers of a row are a function of one integer, the square size q. Pairwise receptors, units held, colonies of 12 replaying at the taught spacing (cue 0 / cue 3):
+
+| Receptor input, last three ticks | Threshold 0.1 | 0.2 | 0.3 |
+|---|---:|---:|---:|
+| Checkerboard rows (48 numbers), hop 6 | 12 / 12 | 12 / 12 | 12 / 11 |
+| q, linear (3 numbers), hop 6 | 0 / 0 | 0 / 0 | 0 / 0 |
+| q, q², q³ (9 numbers), hop 6 | 12 / 12 | 12 / 12 | 0 / 0 |
+| Checkerboard rows, hop 8 | 12 / 12 | 12 / 12 | 12 / 11 |
+| q, linear, hop 8 | 0 / 0 | 0 / 0 | 0 / 0 |
+| q, q², q³, hop 8 | 12 / 12 | 0 / 0 | 0 / 0 |
+
+A cubic in the scalar matches the checkerboard once its threshold is set. The checkerboard is less sensitive to the threshold, and that is the only advantage it shows. The earlier rounds' "the surface tells a listener more" should be read as "the unit's recent state, lifted nonlinearly, tells a listener more".
+
+**5. The shared-unit fork (Gemini).** Two taught sequences, 0→1→2 and 3→1→4. Unit 1's triggered beat is the same waveform either way. Colonies of 12; "correct" means the right third unit at the taught spacing and the other one silent.
+
+| Receptor | Cue 0 (wants 2) | Cue 3 (wants 4) | Cue 1 alone |
+|---|---|---|---|
+| Pairwise, rows + beat history, hop 6 | both fire: 12 | both fire: 12 | both fire |
+| **Summed, cubic q + beat history, hop 6** | **correct: 12** | **correct: 12** | both fire |
+| Summed, rows + beat history, hop 6 | both: 11, wrong: 1 | both: 11, wrong: 1 | both fire |
+| Summed, beat history only, hop 6 | neither: 12 | neither: 12 | neither |
+| Pairwise, rows + beat history, hop 8 | both fire: 12 | both fire: 12 | both fire |
+| **Summed, cubic q + beat history, hop 8** | **correct: 12** | **correct: 12** | neither |
+| Summed, rows + beat history, hop 8 | correct: 5, both: 6, wrong: 1 | correct: 4, both: 7, wrong: 1 | mixed |
+
+- Gemini's prediction holds: receptors that listen to one neighbour at a time cannot use context, and both branches fire.
+- A summed receptor does it: one filter per unit over all the other units' inputs added together, trained on the unit's own beats. This also removes the nearest-predecessor credit rule.
+- The path is remembered in the other units, not in unit 1. Cueing unit 1 alone shows how: at hop 6 both branches fire, so there the earlier unit works as a veto on the wrong branch; at hop 8 neither fires, so there it works as a required second signal.
+- The checkerboard version of the summed receptor mostly fails this test. The cubic of q is what works.
+
+**6. The summed receptor on the two-way chain.** Units held, cue 0 / cue 3 at the taught spacing: 12 / 12 at every hop from 5 to 12 (rounds five and six managed 6 to 8), and 0 / 0 at 16, where it also beats without a cue. In a free colony it keeps the cued order at hop 6 (12 and 12 of 12) and fails at hops 8 and 10 (0 of 12 each), which I have not diagnosed. The pairwise receptor of round six holds a free order at 6 and 8 but cannot do the fork. No single receptor here does everything.
+
+**Still hand-built.** The trigger that overrides a unit's output with its recorded beat, the 30-tick refractory, the thresholds, the 9-tick look-back, offline least-squares fitting, the erase from outside.
+
+**Not shown.** The fork in a free colony (units 3 and 4 would beat on their own clocks and start their own waves). More than two sequences through a shared unit. Any task with a baseline. Noise. Gemini's account of why hops of 9 and above failed in round six (the fixed look-back lands after the neighbour's beat) fits the fact that adding beat history fixes hops 9 to 12, but I did not isolate it.
+
+---
+
 ## Sixth round: a plain linear filter, and a free colony that keeps the order it is cued into
 
 *Fable 5.2, 11 November 2026. Code: [experiments/round6.py](experiments/round6.py). Numbers: [results/round6.json](results/round6.json).*
@@ -313,6 +383,7 @@ Python 3.11+, NumPy:
     python experiments/round4.py
     python experiments/round5.py
     python experiments/round6.py
+    python experiments/round7.py
 
 The experiment writes the full numerical receipt to results/probe.json, including every phase pair. The committed [summary](results/summary.json) contains the primary results.
 
