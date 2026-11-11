@@ -24,7 +24,7 @@ code{background:#25313d;border-radius:4px;padding:1px 5px;font-size:.88em}pre{ov
 <h1>Two deerskins meet.</h1>
 <p class="lede">What if a neuron listens to another through <strong>its own moving surface</strong>? The sender broadcasts the 16 samples of its checkerboard. The receiver's present checkerboard becomes its receptor mosaic. Their overlap determines how much one affects the other.</p>
 <div class="tag">The original 59-tick forgetting clock is unchanged. No training, no imported theta rhythm.</div>
-<p class="footnote"><a href="#round2">Second round</a>: why the colony goes silent, and a hold-and-release switch. <a href="#round3">Third round</a>: a two-way chain taught by that switch alone. <a href="#round4">Fourth round</a>: what the checkerboard history tells a listener that beat times do not. <a href="#round5">Fifth round</a>: a receptor learned from those rows replays a taught chain at the taught spacing. <a href="#round6">Sixth round</a>: a free colony keeps whichever taught order it is cued into. <a href="#round7">Seventh round</a>: that kept state is a root, and two sequences can share a unit.</p>
+<p class="footnote"><a href="#round2">Second round</a>: why the colony goes silent, and a hold-and-release switch. <a href="#round3">Third round</a>: a two-way chain taught by that switch alone. <a href="#round4">Fourth round</a>: what the checkerboard history tells a listener that beat times do not. <a href="#round5">Fifth round</a>: a receptor learned from those rows replays a taught chain at the taught spacing. <a href="#round6">Sixth round</a>: a free colony keeps whichever taught order it is cued into. <a href="#round7">Seventh round</a>: that kept state is a root, and two sequences can share a unit. <a href="#round8">Eighth round</a>: a unit makes another beat through the setpoint port, with no trigger.</p>
 <section class="panel" aria-label="Live experiment">
 <h2>Live, deterministic two-unit experiment</h2>
 <div class="controls">
@@ -167,6 +167,18 @@ code{background:#25313d;border-radius:4px;padding:1px 5px;font-size:.88em}pre{ov
 <tr><td>Summed, beat history only</td><td>neither: 12</td><td>neither: 12</td></tr></tbody></table>
 <p>Unit 1's triggered beat is identical either way, so the path is remembered in the other units. The summed receptor is trained on the unit's own beats, which also removes the credit rule. It is 12 of 12 at hop 8 too.</p>
 <p class="warning">The summed receptor that solves the fork uses the cube of the square size plus beat history; its checkerboard version mostly fails. In a free colony it keeps a cued order only at hop 6. The trigger, refractory, thresholds and the erase are still hand-built, and nothing has been tested on a task. Numbers: <a href="results/round7.json">results/round7.json</a>.</p></section>
+<section class="panel" id="round8"><div class="overline">Eighth round · Fable 5.2 · 11 November 2026 · question from Sol</div>
+<h2>The setpoint port: one unit makes another beat with nothing bolted on</h2>
+<p>Every earlier round needed a hand-written trigger that overrides a unit's output. The original Homeostatic Coupler node has a port the experiments never used. <code>setpoint_mod</code> carries a constant 1.0 in <code>ecg.json</code>, which sets the setpoint to 0.6. (<code>gain_mod</code> is read and never used.) Opening that port changes nothing else.</p>
+<table><thead><tr><th>Setpoint during a 2-tick pulse</th><th>Beat evoked within 5 ticks<br>(of 57 phases)</th></tr></thead><tbody>
+<tr><td>+1.4 down to −0.1</td><td>0</td></tr>
+<tr><td><strong>−0.2</strong></td><td><strong>49</strong></td></tr>
+<tr><td><strong>−0.4</strong></td><td><strong>48</strong></td></tr>
+<tr><td><strong>−0.6</strong></td><td><strong>49</strong></td></tr>
+<tr><td>−1.0</td><td>5</td></tr>
+<tr><td>−2.4</td><td>0</td></tr></tbody></table>
+<p>Inside the band the unit beats 4 ticks later through its own feedback loop and keeps its own period from there. With each unit's two beat wires going to the next unit's setpoint port, a wave travels 0→1→2→3 with no trigger at all: in 294 of 294 cycles at weight −5.5, and in 0 to 257 of 294 at other weights, with hop times that vary between 1 and 7 ticks.</p>
+<p class="warning">It is not clean and it is not a memory yet. The unit has no refractory period, so wires in both directions run away (up to 375 beats where 25 is normal). Two inputs on the same tick cancel. No weights were learned. Numbers: <a href="results/round8.json">results/round8.json</a>.</p></section>
 <p class="footnote">Scientific boundary: these are real-valued sampled images and Pearson correlation. Their overlap is reciprocal at one instant. It is not quantum interference, not learned attention, and not proof of task-dependent neural communication. The original closed-loop controller and sample table are copied unchanged for audit.</p>
 </main><script src="taps.js"></script><script src="lab.js"></script><script>
 (function(){

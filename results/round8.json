@@ -1,0 +1,254 @@
+{
+ "spec": {
+  "seeds": 12,
+  "beat_wires": "out_0 + out_1 of the sender",
+  "setpoint": "0.5 + 0.1 * (1.0 + weighted beat wires)"
+ },
+ "pulse": {
+  "-30": {
+   "setpoint_during_pulse": -2.4,
+   "phases": 57,
+   "beat_evoked_within_5_ticks": 0,
+   "next_beat_unchanged": 14,
+   "ticks_to_following_beat": []
+  },
+  "-16": {
+   "setpoint_during_pulse": -1.0,
+   "phases": 57,
+   "beat_evoked_within_5_ticks": 5,
+   "next_beat_unchanged": 52,
+   "ticks_to_following_beat": [
+    3,
+    59,
+    60,
+    61
+   ]
+  },
+  "-12": {
+   "setpoint_during_pulse": -0.6,
+   "phases": 57,
+   "beat_evoked_within_5_ticks": 49,
+   "next_beat_unchanged": 5,
+   "ticks_to_following_beat": [
+    58,
+    59
+   ]
+  },
+  "-10": {
+   "setpoint_during_pulse": -0.4,
+   "phases": 57,
+   "beat_evoked_within_5_ticks": 48,
+   "next_beat_unchanged": 5,
+   "ticks_to_following_beat": [
+    58,
+    59
+   ]
+  },
+  "-8": {
+   "setpoint_during_pulse": -0.2,
+   "phases": 57,
+   "beat_evoked_within_5_ticks": 49,
+   "next_beat_unchanged": 5,
+   "ticks_to_following_beat": [
+    58,
+    59
+   ]
+  },
+  "-7.5": {
+   "setpoint_during_pulse": -0.15,
+   "phases": 57,
+   "beat_evoked_within_5_ticks": 8,
+   "next_beat_unchanged": 6,
+   "ticks_to_following_beat": [
+    58,
+    59
+   ]
+  },
+  "-7": {
+   "setpoint_during_pulse": -0.1,
+   "phases": 57,
+   "beat_evoked_within_5_ticks": 0,
+   "next_beat_unchanged": 34,
+   "ticks_to_following_beat": []
+  },
+  "-6": {
+   "setpoint_during_pulse": -0.0,
+   "phases": 57,
+   "beat_evoked_within_5_ticks": 0,
+   "next_beat_unchanged": 55,
+   "ticks_to_following_beat": []
+  },
+  "-4": {
+   "setpoint_during_pulse": 0.2,
+   "phases": 57,
+   "beat_evoked_within_5_ticks": 0,
+   "next_beat_unchanged": 57,
+   "ticks_to_following_beat": []
+  },
+  "-2": {
+   "setpoint_during_pulse": 0.4,
+   "phases": 57,
+   "beat_evoked_within_5_ticks": 0,
+   "next_beat_unchanged": 55,
+   "ticks_to_following_beat": []
+  },
+  "2": {
+   "setpoint_during_pulse": 0.8,
+   "phases": 57,
+   "beat_evoked_within_5_ticks": 0,
+   "next_beat_unchanged": 52,
+   "ticks_to_following_beat": []
+  },
+  "4": {
+   "setpoint_during_pulse": 1.0,
+   "phases": 57,
+   "beat_evoked_within_5_ticks": 0,
+   "next_beat_unchanged": 34,
+   "ticks_to_following_beat": []
+  },
+  "8": {
+   "setpoint_during_pulse": 1.4,
+   "phases": 57,
+   "beat_evoked_within_5_ticks": 0,
+   "next_beat_unchanged": 7,
+   "ticks_to_following_beat": []
+  },
+  "second_pulse_d_ticks_after_evoked_beat_evokes_again": {
+   "1": true,
+   "2": true,
+   "3": true,
+   "4": false,
+   "5": true,
+   "6": true,
+   "7": true,
+   "8": true,
+   "9": true,
+   "10": true,
+   "11": true,
+   "12": true
+  }
+ },
+ "chain": {
+  "-3": {
+   "root_cycles": 294,
+   "cycles_where_the_wave_reached_unit_3": 12,
+   "hop_ticks_seen": {
+    "5": 24,
+    "7": 12
+   },
+   "follower_beats_per_root_beat": 0.9887179487179488
+  },
+  "-3.5": {
+   "root_cycles": 294,
+   "cycles_where_the_wave_reached_unit_3": 0,
+   "hop_ticks_seen": {},
+   "follower_beats_per_root_beat": 0.873034188034188
+  },
+  "-4": {
+   "root_cycles": 294,
+   "cycles_where_the_wave_reached_unit_3": 244,
+   "hop_ticks_seen": {
+    "3": 463,
+    "6": 269
+   },
+   "follower_beats_per_root_beat": 0.9882478632478633
+  },
+  "-4.5": {
+   "root_cycles": 294,
+   "cycles_where_the_wave_reached_unit_3": 85,
+   "hop_ticks_seen": {
+    "2": 30,
+    "3": 73,
+    "4": 55,
+    "5": 12,
+    "6": 49,
+    "7": 36
+   },
+   "follower_beats_per_root_beat": 0.9351709401709402
+  },
+  "-5": {
+   "root_cycles": 294,
+   "cycles_where_the_wave_reached_unit_3": 197,
+   "hop_ticks_seen": {
+    "3": 197,
+    "7": 394
+   },
+   "follower_beats_per_root_beat": 0.8793162393162394
+  },
+  "-5.5": {
+   "root_cycles": 294,
+   "cycles_where_the_wave_reached_unit_3": 294,
+   "hop_ticks_seen": {
+    "2": 181,
+    "3": 134,
+    "4": 94,
+    "5": 44,
+    "7": 429
+   },
+   "follower_beats_per_root_beat": 1.1700000000000002
+  },
+  "-6": {
+   "root_cycles": 294,
+   "cycles_where_the_wave_reached_unit_3": 91,
+   "hop_ticks_seen": {
+    "1": 66,
+    "3": 25,
+    "4": 91,
+    "7": 91
+   },
+   "follower_beats_per_root_beat": 1.267820512820513
+  },
+  "-7": {
+   "root_cycles": 294,
+   "cycles_where_the_wave_reached_unit_3": 233,
+   "hop_ticks_seen": {
+    "3": 246,
+    "4": 100,
+    "5": 60,
+    "6": 293
+   },
+   "follower_beats_per_root_beat": 1.0929487179487178
+  },
+  "-8": {
+   "root_cycles": 294,
+   "cycles_where_the_wave_reached_unit_3": 257,
+   "hop_ticks_seen": {
+    "1": 25,
+    "2": 86,
+    "4": 341,
+    "5": 282,
+    "6": 37
+   },
+   "follower_beats_per_root_beat": 1.1672222222222224
+  }
+ },
+ "two_way": {
+  "-4": {
+   "beats_per_unit_in_1500_ticks_mean": 102.47916666666667,
+   "min": 93.75,
+   "max": 107.25,
+   "one_per_cycle_would_be": 25
+  },
+  "-5.5": {
+   "beats_per_unit_in_1500_ticks_mean": 234.375,
+   "min": 125.0,
+   "max": 375.0,
+   "one_per_cycle_would_be": 25
+  },
+  "-8": {
+   "beats_per_unit_in_1500_ticks_mean": 34.895833333333336,
+   "min": 18.75,
+   "max": 69.0,
+   "one_per_cycle_would_be": 25
+  }
+ },
+ "third_unit_beats_of_12": {
+  "A alone": 12,
+  "B 0 ticks after A": 0,
+  "B 1 ticks after A": 12,
+  "B 2 ticks after A": 12,
+  "B 3 ticks after A": 12,
+  "B 5 ticks after A": 12,
+  "B 10 ticks after A": 12
+ }
+}

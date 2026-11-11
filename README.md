@@ -4,6 +4,66 @@
 
 *10 November 2026. Antti's experiment prompted by Fable 5.2's reading of the original [Geometric-Neuron / Deerskin Theory](https://github.com/anttiluode/Geometric-Neuron) and the six-loop [ReturnToGeometricNeuron](https://github.com/anttiluode/ReturnToGeometricNeuron) study.*
 
+## Eighth round: the setpoint port. One unit makes another beat with nothing bolted on
+
+*Fable 5.2, 11 November 2026. The question is Sol's, after Antti reopened the Perception Lab graph. Code: [native.py](native.py), [experiments/round8.py](experiments/round8.py). Numbers: [results/round8.json](results/round8.json).*
+
+Every round so far needed a hand-written trigger that overrides a unit's output, because nothing sent into `signal_in` ever brought a beat forward. The Homeostatic Coupler has two more input ports. Reading `coupler.py`:
+
+- `gain_mod` is dead in the mode `ecg.json` uses. The node computes `effective_gain` and then multiplies by `self.gain`.
+- `setpoint_mod` is live. `ecg.json` feeds it a constant 1.0, which is where the setpoint of 0.6 comes from: `0.5 + 0.1 × (everything wired to the port)`.
+
+`native.py` opens that port and changes nothing else. With only the constant on it, it is the original loop exactly (tested).
+
+**A pulse on the setpoint makes the unit beat.** One unit, a 2-tick pulse, tried at 57 phases of its cycle:
+
+| Setpoint during the pulse | Beat evoked within 5 ticks (of 57 phases) | Next beat unchanged |
+|---|---:|---:|
+| +1.4, +1.0, +0.8 | 0 | 7, 34, 52 |
+| +0.4, +0.2, 0.0 | 0 | 55, 57, 55 |
+| −0.1 | 0 | 34 |
+| −0.15 | 8 | 6 |
+| **−0.2** | **49** | 5 |
+| **−0.4** | **48** | 5 |
+| **−0.6** | **49** | 5 |
+| −1.0 | 5 | 52 |
+| −2.4 | 0 | 14 |
+
+Inside a band (setpoint between about −0.2 and −0.6) the unit beats 4 ticks later, the pipeline delay, at nearly every phase, and then carries on with its own 58 to 59 tick period from that beat. Too shallow does nothing; too deep overshoots the range of square sizes that make a beat. This is excitation through a port the original node already had, with no override and no recorded waveform.
+
+**The unit is not refractory.** A second pulse 1 to 12 ticks after an evoked beat evokes another one at 11 of 12 spacings.
+
+**A chain with nothing else.** Units 0→1→2→3; each unit's two beat wires (`out_0`, `out_1`) go to the next unit's `setpoint_mod` with one weight. No trigger, no refractory, no learning. Unit 0 beats on its own clock. 294 of its cycles over 12 starts:
+
+| Edge weight | Cycles where the wave reached unit 3 | Hop ticks seen |
+|---|---:|---|
+| −3.5 | 0 | none |
+| −4.0 | 244 | 3, 6 |
+| −4.5 | 85 | 2 to 7 |
+| −5.0 | 197 | 3, 7 |
+| **−5.5** | **294** | 2 to 7 |
+| −6.0 | 91 | 1 to 7 |
+| −7.0 | 233 | 3 to 6 |
+| −8.0 | 257 | 1 to 6 |
+
+So a wave does travel through the units' own feedback loops. It is not clean: success jumps around with the weight and the hop time varies from cycle to cycle. An evoked beat is not always a full beat, so what it sends on is not always in the band. I did not tune this.
+
+**Both directions at once run away.** With the same wires both ways there is nothing to stop a unit re-exciting the one that just excited it:
+
+| Edge weight, both directions | Beats per unit in 1,500 ticks (25 is one per cycle) |
+|---|---:|
+| −4.0 | 102 (94 to 107) |
+| −5.5 | 234 (125 to 375) |
+| −8.0 | 35 (19 to 69) |
+
+**Two inputs at the same tick cancel.** Units A and B both wired to C with weight −4.5: C beats after A alone in 12 of 12, after A and B one or more ticks apart in 12 of 12, and after A and B on the same tick in 0 of 12. Two pulses together push the setpoint through the band.
+
+**What this changes.** The trigger from rounds three to seven can in principle be replaced by a weighted wire into `setpoint_mod`. The refractory cannot: the loop has none, and that is now the single missing native piece for a two-way chain or a kept order. The hop is the 4-tick pipeline, so the taught spacings of 6 to 8 ticks from round five would need an extra delay.
+
+**Not done.** No learning of these weights. No receptor driving the port (rounds five to seven decide early from the lead-up; here the sender's beat itself is the signal). No held order, no fork. The wires `out_0 + out_1` are not perfectly silent between beats: they read up to 0.29 for square sizes up to 31, which happens just after a beat.
+
+---
+
 ## Seventh round: what the working state is, and the checks Sol and Gemini asked for
 
 *Fable 5.2, 11 November 2026. Code: [experiments/round7.py](experiments/round7.py). Numbers: [results/round7.json](results/round7.json). The stability, actuation and scalar checks are Sol's; the shared-unit fork is Gemini's.*
@@ -384,6 +444,7 @@ Python 3.11+, NumPy:
     python experiments/round5.py
     python experiments/round6.py
     python experiments/round7.py
+    python experiments/round8.py
 
 The experiment writes the full numerical receipt to results/probe.json, including every phase pair. The committed [summary](results/summary.json) contains the primary results.
 
