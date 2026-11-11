@@ -28,18 +28,22 @@ code{background:#25313d;border-radius:4px;padding:1px 5px;font-size:.88em}pre{ov
 <h1>Two deerskins meet.</h1>
 <p class="lede">What if a neuron listens to another through <strong>its own moving surface</strong>? The sender broadcasts the 16 samples of its checkerboard. The receiver's present checkerboard becomes its receptor mosaic. Their overlap determines how much one affects the other.</p>
 <div class="tag">The original 59-tick forgetting clock is unchanged. No training, no imported theta rhythm.</div>
-<p class="footnote">The first live panel below is the newest result, the <a href="#wire">setpoint wire</a>. Then the <a href="#constant">constant on the setpoint port</a>, and the original <a href="#surface">two-surface lab</a>. <a href="#round2">Second round</a>: why the colony goes silent, and a hold-and-release switch. <a href="#round3">Third round</a>: a two-way chain taught by that switch alone. <a href="#round4">Fourth round</a>: what the checkerboard history tells a listener that beat times do not. <a href="#round5">Fifth round</a>: a receptor learned from those rows replays a taught chain at the taught spacing. <a href="#round6">Sixth round</a>: a free colony keeps whichever taught order it is cued into. <a href="#round7">Seventh round</a>: that kept state is a root, and two sequences can share a unit. <a href="#round8">Eighth round</a>: a unit makes another beat through the setpoint port, with no trigger.</p>
+<p class="footnote">The first live panel below is the newest result, the <a href="#wire">setpoint wire</a>. Then the <a href="#constant">constant on the setpoint port</a>, and the original <a href="#surface">two-surface lab</a>. <a href="#round2">Second round</a>: why the colony goes silent, and a hold-and-release switch. <a href="#round3">Third round</a>: a two-way chain taught by that switch alone. <a href="#round4">Fourth round</a>: what the checkerboard history tells a listener that beat times do not. <a href="#round5">Fifth round</a>: a receptor learned from those rows replays a taught chain at the taught spacing. <a href="#round6">Sixth round</a>: a free colony keeps whichever taught order it is cued into. <a href="#round7">Seventh round</a>: that kept state is a root, and two sequences can share a unit. <a href="#round8">Eighth round</a>: a unit makes another beat through the setpoint port, with no trigger. <a href="#round10">Tenth round</a>: a silent unit is an exact relay and keeps nothing.</p>
 <section class="panel" id="wire" aria-label="Live setpoint wire experiment">
-<div class="overline">Live · eighth round · 11 November 2026</div>
+<div class="overline">Live · rounds eight and ten · 11 November 2026</div>
 <h2>Four units wired through the setpoint port</h2>
-<p>Each unit's two beat wires (<code>out_0</code>, <code>out_1</code>) go to the next unit's <code>setpoint_mod</code>, the port the original node always had. When a unit beats, its neighbour's setpoint dips, and the neighbour beats through its own feedback loop about 4 ticks later. Nothing overrides any output: no trigger, no refractory, no learning.</p>
+<p>Each unit's two beat wires (<code>out_0</code>, <code>out_1</code>) go to the next unit's <code>setpoint_mod</code>, the port the original node always had. When a unit beats, its neighbour's setpoint dips, and the neighbour beats through its own feedback loop 4 ticks later. Nothing overrides any output: no trigger, no refractory, no learning.</p>
+<p>Unit 0 keeps the original constant (1.0) and beats by itself. Units 1 to 3 start with their Constant Signal at 1.6, where a unit has no beats of its own (ninth round), so every beat you see on them was passed along the wire.</p>
 <div class="controls">
 <label>Wiring<select id="wkind">
 <option value="chain">Chain 0 → 1 → 2 → 3</option>
 <option value="both">Both directions (runs away)</option>
 <option value="none">No wires</option></select></label>
-<label>Wire weight <strong id="wweight-value">−5.5</strong>
-<input id="wweight" type="range" min="-8" max="-3" step="0.5" value="-5.5"></label>
+<label>Constant of units 1–3<select id="wfollow">
+<option value="1.6">1.6 · silent by themselves</option>
+<option value="1">1.0 · original, each has its own clock</option></select></label>
+<label>Wire weight <strong id="wweight-value">−6.0</strong>
+<input id="wweight" type="range" min="-8" max="-3" step="0.5" value="-6"></label>
 <label>Simulation speed<select id="wspeed">
 <option value="1">1 tick / frame</option><option selected value="2">2 ticks / frame</option>
 <option value="5">5 ticks / frame</option><option value="10">10 ticks / frame</option></select></label>
@@ -47,13 +51,16 @@ code{background:#25313d;border-radius:4px;padding:1px 5px;font-size:.88em}pre{ov
 </div>
 <p class="score">Wave from unit 0 reached unit 3 in <strong id="wfull">0</strong> of <strong id="wcycles">0</strong> cycles <span class="footnote">· hop times seen: <span id="whops">—</span> ticks · beats per unit: <span id="wbeats">—</span></span></p>
 <canvas id="wtimeline" width="960" height="270" role="img" aria-label="Beats and setpoints of the four units over the last 240 ticks"></canvas>
-<p class="footnote">Bars are beats. The thin line under each row is that unit's setpoint: flat at 0.6, dipping when a wire or the Excite button pulls it down. The window is the last 240 ticks.</p>
+<p class="footnote">Bars are beats. The thin line under each row is that unit's setpoint, dipping when a wire or the Excite button pulls it down. The window is the last 240 ticks.</p>
 <div class="units4" id="wunits"></div>
 <h3 style="margin-top:20px">Things to try</h3>
-<p><strong>Excite</strong> puts a 2-tick pulse on that unit's setpoint port (setpoint −0.4). With no wires, a unit beat exactly 4 ticks later at 48 of 59 starting phases, and within 7 ticks at 56. <strong>Hold</strong> is the 8-tick rhythm from the second round.</p>
-<p>Hold unit 0 in the chain: unit 1 becomes the root on its own 59-tick clock, and the wave 1→2→3 completed in 25 of 25 cycles. Excite unit 0 between its own beats: an extra wave ran down the chain in 8 of 10 tries.</p>
-<p class="warning">Move the weight and the chain breaks. In this page's start, over 51 cycles of unit 0, the wave reached unit 3 in 50 at −5.5, 49 at −4.0, 50 at −8.0, but 18 at −4.5, 15 at −6.0 and 0 at −3.5. Hop times vary from 1 to 7 ticks. Wired in both directions the units re-excite each other and beat about five times too often, because the unit has no refractory period. The weights are set by hand.</p>
-<p class="footnote">This simulator matches <a href="native.py">native.py</a> beat for beat (tested). Units start unwired and at different phases; each clock is reset once during start-up and nothing is forced after that.</p>
+<p><strong>Excite</strong> puts a 2-tick pulse on that unit's setpoint port. A silent unit (constant 1.6) beat exactly 4 ticks later at 59 of 59 moments tried, once, and then went quiet again. A unit with its own clock (constant 1.0) did so at 48 of 59 phases. <strong>Hold</strong> is the 8-tick rhythm from the second round.</p>
+<p>Hold unit 0 with silent followers: the whole chain stops. Then Excite unit 1: exactly one wave runs 1→2→3 at 4 ticks per hop (10 of 10 tries). So the chain is a relay line that carries what it is given and keeps nothing.</p>
+<div style="overflow-x:auto"><table><thead><tr><th>Wave reached unit 3, of 51 cycles of unit 0<br>(this page's start)</th><th>−4.0</th><th>−5.0</th><th>−5.5</th><th>−6.0</th><th>−6.5</th><th>−7.0</th><th>−8.0</th></tr></thead><tbody>
+<tr><td><strong>Units 1–3 silent (1.6)</strong></td><td>0</td><td>51</td><td>1</td><td><strong>51</strong></td><td><strong>51</strong></td><td>50</td><td>0</td></tr>
+<tr><td>Units 1–3 original (1.0)</td><td>49</td><td>34</td><td>50</td><td>15</td><td>35</td><td>38</td><td>50</td></tr></tbody></table></div>
+<p class="warning">Silent followers make the wave exact where it works (one beat per unit, 4 ticks per hop at −6.0 and −6.5), but only inside a band of weights, with a hole at −5.5 that I have not diagnosed. Wired in both directions the units still re-excite each other and beat about seven times too often, because a unit has no refractory period. The weights and constants are set by hand, and nothing is stored.</p>
+<p class="footnote">This simulator matches <a href="native.py">native.py</a> beat for beat (tested). Each clock is reset once during start-up and nothing is forced after that.</p>
 </section>
 <section class="panel" id="constant" aria-label="Live setpoint constant experiment">
 <div class="overline">Live · ninth round · 11 November 2026 · Antti's observation</div>
@@ -75,8 +82,8 @@ code{background:#25313d;border-radius:4px;padding:1px 5px;font-size:.88em}pre{ov
 <tr><td>1.10</td><td>0.61</td><td>59 and 60</td><td>0.16, 0.09, 0.04</td></tr>
 <tr><td>1.35</td><td>0.635</td><td>58</td><td>0.19, 0.15, 0.15</td></tr>
 <tr><td>1.40</td><td>0.64</td><td>115</td><td>every second beat is missed</td></tr>
-<tr><td>1.45 to 2.00</td><td>0.645 to 0.70</td><td>no beats</td><td>the unit never leaves damping</td></tr></tbody></table>
-<p>All five of Antti's observations reproduce. The saw grows with the constant, and when it is large enough the 50-tick variance never falls below 0.1, so the unit never amplifies and never beats. Whether the saw holds steady (1.0) or dies away (1.05, 1.1) is not a smooth trend: it depends on which whole-number square sizes the output lands on.</p>
+<tr><td>1.45 to 2.00</td><td>0.645 to 0.70</td><td>no beats</td><td>damping 92% of the time at 1.45, all of it from 1.6</td></tr></tbody></table>
+<p>All five of Antti's observations reproduce. The saw grows with the constant, and when it is large enough the 50-tick variance never falls below 0.1, so the unit rarely or never amplifies and does not beat. Whether the saw holds steady (1.0) or dies away (1.05, 1.1) is not a smooth trend: it depends on which whole-number square sizes the output lands on.</p>
 <p class="warning">Removing the saw does not rescue a colony. Six units from the first round, all set to constant 0 before coupling: at weight 0.05 the moving-surface colony had 4.1 silent units of 6 (0.9 at the original constant), and the fixed-tap colony 5.5 (1.1 at the original). These are single units with 16 samples per row; Antti's 2,048-sample observation is not modelled here. Numbers: <a href="results/round9.json">results/round9.json</a>.</p>
 </section>
 <section class="panel" id="surface" aria-label="Live experiment">
@@ -235,6 +242,17 @@ code{background:#25313d;border-radius:4px;padding:1px 5px;font-size:.88em}pre{ov
 <p>Inside the band the unit beats 4 ticks later through its own feedback loop and keeps its own period from there. With each unit's two beat wires going to the next unit's setpoint port, a wave travels 0→1→2→3 with no trigger at all: in 294 of 294 cycles at weight −5.5, and in 0 to 257 of 294 at other weights, with hop times that vary between 1 and 7 ticks.</p>
 <p>The <a href="#wire">live panel at the top of the page</a> runs this chain.</p>
 <p class="warning">It is not clean and it is not a memory yet. The unit has no refractory period, so wires in both directions run away (up to 375 beats where 25 is normal). Two inputs on the same tick cancel. No weights were learned. Numbers: <a href="results/round8.json">results/round8.json</a>.</p></section>
+<section class="panel" id="round10"><div class="overline">Tenth round · Fable 5.2 · 11 November 2026 · experiment proposed by Sol</div>
+<h2>A silent unit is an exact relay, and keeps nothing</h2>
+<p>Set a unit's constant to 1.45 or more and it has no beats of its own, from 12 of 12 random starts. Then give it the same 2-tick setpoint pulse that round eight used.</p>
+<table><thead><tr><th>Receiver's constant</th><th>Beat evoked by one pulse<br>(of 59 moments)</th><th>After 10 pulses, beats in the next 1,500 ticks</th></tr></thead><tbody>
+<tr><td>1.0 (beats by itself)</td><td>47</td><td>keeps its own clock</td></tr>
+<tr><td>1.35 (beats by itself)</td><td>48</td><td>keeps its own clock</td></tr>
+<tr><td><strong>1.45</strong></td><td><strong>55</strong></td><td><strong>0</strong></td></tr>
+<tr><td><strong>1.5, 1.6, 1.8, 2.0</strong></td><td><strong>59</strong></td><td><strong>0</strong></td></tr></tbody></table>
+<p>The silent unit is more excitable than the beating one, answers 4 ticks after the pulse, and answers a second pulse at every gap from 2 to 59 ticks. With unit A beating by itself and wired to silent B at weight −5.5 or −7, B beat once after every beat of A (51 of 51). When A was silenced, B had no beats in the next 1,500 ticks.</p>
+<p>So Sol's three questions come out as: excitable, yes; recovery, immediate; persistence, none. At each constant the unit has one fate. The wire is a gate and a relay, not a memory. A chain of eight such units passed 50 of 50 beats to the far end at 4 ticks per hop.</p>
+<p class="warning">The pulse only works for setpoint dips of about −8 to −12 on the port; shallower or deeper does nothing. The chain works in a band of weights (−5 to −7) with a hole at −5.5. Both directions still run away. Numbers: <a href="results/round10.json">results/round10.json</a>.</p></section>
 <p class="footnote">Scientific boundary: these are real-valued sampled images and Pearson correlation. Their overlap is reciprocal at one instant. It is not quantum interference, not learned attention, and not proof of task-dependent neural communication. The original closed-loop controller and sample table are copied unchanged for audit.</p>
 </main><script src="taps.js"></script><script src="lab.js"></script><script>
 (function(){
@@ -295,7 +313,7 @@ const WireLab=globalThis.SurfaceLab.WireLab,N=4,COL=["#79ddd0","#ffca81","#b9a8f
 let sim,paused=false,frame=0;
 const box=$("wunits");
 box.innerHTML=Array.from({length:N},(_,i)=>'<div class="unit" style="--c:'+COL[i]+'"><h3>Unit '+i+'</h3><div class="pixels" id="wpx'+i+'">'+'<div class="pixel"></div>'.repeat(16)+'</div><div class="rowstat"><span>Square size <strong id="wq'+i+'">—</strong></span><span>Setpoint <strong id="ws'+i+'">—</strong></span></div><div class="ubtn"><button id="wex'+i+'">Excite</button><button id="wh'+i+'" class="secondary">Hold</button></div></div>').join("");
-function restart(){sim=new WireLab({kind:$("wkind").value,weight:Number($("wweight").value)});for(let i=0;i<N;i++){$("wh"+i).textContent="Hold";$("wh"+i).className="secondary";}}
+function restart(){sim=new WireLab({kind:$("wkind").value,weight:Number($("wweight").value),followers:Number($("wfollow").value)});for(let i=0;i<N;i++){$("wh"+i).textContent="Hold";$("wh"+i).className="secondary";}}
 function render(){
 for(let i=0;i<N;i++){
 const px=$("wpx"+i).children,row=sim.rows[i];
@@ -316,12 +334,12 @@ ctx.strokeStyle="#2c3b44";ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x0,y);ctx.l
 ctx.fillStyle=COL[i];ctx.font="14px system-ui";ctx.fillText(String(i),12,y-6);
 for(const t of sim.events[i]){if(t<start)continue;ctx.fillRect(sx(t)-2.5,y-26,5,26);}
 const tr=sim.trace[i],n=tr.length;ctx.strokeStyle=COL[i];ctx.globalAlpha=.75;ctx.lineWidth=1.5;ctx.beginPath();
-for(let k=Math.max(0,n-span);k<n;k++){const t=sim.t-n+k,yy=y+8+Math.max(0,Math.min(1,(.6-tr[k])/1.2))*18;if(k===Math.max(0,n-span))ctx.moveTo(sx(t),yy);else ctx.lineTo(sx(t),yy);}
+for(let k=Math.max(0,n-span);k<n;k++){const t=sim.t-n+k,yy=y+8+Math.max(0,Math.min(1,(.66-tr[k])/1.2))*18;if(k===Math.max(0,n-span))ctx.moveTo(sx(t),yy);else ctx.lineTo(sx(t),yy);}
 ctx.stroke();ctx.globalAlpha=1;
 }
 ctx.fillStyle="#718c95";ctx.font="12px system-ui";ctx.fillText("240 ticks ago",x0,hh-8);ctx.fillText("now",w-36,hh-8);
 }
-$("wkind").addEventListener("change",restart);$("wrestart").addEventListener("click",restart);
+$("wkind").addEventListener("change",restart);$("wfollow").addEventListener("change",restart);$("wrestart").addEventListener("click",restart);
 $("wweight").addEventListener("input",()=>{const v=Number($("wweight").value);$("wweight-value").textContent=v.toFixed(1).replace("-","−");sim.setWiring(sim.kind,v);sim.clear();});
 $("wpause").addEventListener("click",()=>{paused=!paused;$("wpause").textContent=paused?"Resume":"Pause";});
 for(let i=0;i<N;i++){
@@ -337,7 +355,7 @@ render();requestAnimationFrame(loop);
 const $=x=>document.getElementById(x);
 const WireLab=globalThis.SurfaceLab.WireLab;
 const sim=new WireLab({n:1,kind:"none"});
-function setC(c){sim.c=c;$("cslider").value=c;$("cval").textContent=c.toFixed(2);$("csp").textContent=(.5+.1*c).toFixed(3);}
+function setC(c){sim.cs[0]=c;$("cslider").value=c;$("cval").textContent=c.toFixed(2);$("csp").textContent=(.5+.1*c).toFixed(3);}
 $("cslider").addEventListener("input",()=>setC(Number($("cslider").value)));
 document.querySelectorAll("#constant button[data-c]").forEach(b=>b.addEventListener("click",()=>setC(Number(b.dataset.c))));
 let frame=0;
@@ -346,7 +364,7 @@ const cv=$("ctrace"),ctx=cv.getContext("2d"),dpr=window.devicePixelRatio||1,w=cv
 if(cv.width!==Math.round(w*dpr)){cv.width=Math.round(w*dpr);cv.height=Math.round(h*dpr);}
 ctx.setTransform(dpr,0,0,dpr,0,0);ctx.fillStyle="#0c151e";ctx.fillRect(0,0,w,h);
 const o=sim.out[0],hot=sim.hot[0],n=o.length,k0=Math.max(0,n-span),x=k=>8+(k-(n-span))/span*(w-16),lo=-.5,hi=1.7,y=v=>12+(hi-Math.max(lo,Math.min(hi,v)))/(hi-lo)*(h-44);
-const S=.5+.1*sim.c;ctx.strokeStyle="#32424c";ctx.setLineDash([4,4]);ctx.beginPath();ctx.moveTo(8,y(S));ctx.lineTo(w-8,y(S));ctx.stroke();ctx.setLineDash([]);
+const S=.5+.1*sim.cs[0];ctx.strokeStyle="#32424c";ctx.setLineDash([4,4]);ctx.beginPath();ctx.moveTo(8,y(S));ctx.lineTo(w-8,y(S));ctx.stroke();ctx.setLineDash([]);
 ctx.fillStyle="#718c95";ctx.font="12px system-ui";ctx.fillText("setpoint",12,y(S)-5);
 ctx.strokeStyle="#79ddd0";ctx.lineWidth=1.5;ctx.beginPath();
 for(let k=k0;k<n;k++){if(k===k0)ctx.moveTo(x(k),y(o[k]));else ctx.lineTo(x(k),y(o[k]));}

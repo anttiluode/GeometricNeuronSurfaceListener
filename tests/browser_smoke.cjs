@@ -53,11 +53,16 @@ const fixture=require("./wire_fixture.json");
 for(const key of Object.keys(fixture)){
   let c;const pulses=key==="pulse"?[[20,2],[120,0]]:[];
   if(key==="pulse")c=new WireLab({kind:"none"});
-  else{const [kind,wt]=key.split(":");c=new WireLab({kind,weight:Number(wt)});}
+  else{const [kind,wt,cf]=key.split(":");c=new WireLab({kind,weight:Number(wt),followers:cf?Number(cf):1});}
   c.previous=Array(4).fill(false);
   for(let k=0;k<(key==="pulse"?300:1500);k++){for(const [t,u] of pulses)if(k===t)c.pulse(u);c.step();}
   assert.deepEqual(c.events,fixture[key],"WireLab must match native.py: "+key);
 }
+const quiet=new WireLab({kind:"chain",weight:-6,followers:1.6});
+for(let t=0;t<3000;t++)quiet.step();
+const qr=quiet.reach();
+assert.equal(qr.full,qr.cycles,"silent followers relay every beat");
+assert(qr.hops.slice(3).every(h=>h===4),"after the first wave every hop is 4 ticks");
 const chain=new WireLab({kind:"chain",weight:-5.5});
 for(let t=0;t<3000;t++)chain.step();
 const reached=chain.reach();

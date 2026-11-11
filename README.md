@@ -4,6 +4,42 @@
 
 *10 November 2026. Antti's experiment prompted by Fable 5.2's reading of the original [Geometric-Neuron / Deerskin Theory](https://github.com/anttiluode/Geometric-Neuron) and the six-loop [ReturnToGeometricNeuron](https://github.com/anttiluode/ReturnToGeometricNeuron) study.*
 
+## Tenth round: a silent unit is an exact relay, and keeps nothing
+
+*Fable 5.2, 11 November 2026. The experiment is Sol's. Code: [experiments/round10.py](experiments/round10.py). Numbers: [results/round10.json](results/round10.json). Live in the first panel of the [site](https://anttiluode.github.io/GeometricNeuronSurfaceListener/).*
+
+With the Constant Signal at 1.45 or more a unit has no beats of its own (0 beats in 3,000 ticks from 12 of 12 random starts; below that, every start gives the same beat count, so each constant has one fate). The same 2-tick setpoint pulse (−10 on the port) into receivers at different constants:
+
+| Receiver's constant | Beat evoked (of 59 moments) | Latency | After 10 pulses, beats in next 1,500 ticks |
+|---|---:|---|---:|
+| 1.0 | 47 | 4 or 5 | own clock |
+| 1.35 | 48 | 4 | own clock |
+| 1.45 | 55 | 4 or 5 | 0 |
+| 1.5 to 2.0 | 59 | 4 | 0 |
+
+- **Excitable:** a silent unit answers at every moment tried, more reliably than a beating one.
+- **Recovery:** a second identical pulse 2 to 59 ticks after the first evokes a beat at every gap.
+- **Persistence:** none. After the input stops the unit is silent again.
+- **A wired to B:** A at constant 1.0, B at 1.45, 1.6 or 2.0. At weight −5.5 or −7, B beat once after each of A's beats (51 of 51; 50 of 51 at constant 2.0, weight −7). At −3, −4 and −9, never. With A silenced by the hold, B had 0 beats.
+
+**The chain from round eight, with silent followers.** Unit 0 at constant 1.0, the rest at 1.6. Six starts, 300 cycles:
+
+| Weight | Followers at 1.0: wave reached unit 3 | Followers at 1.6 | Hop ticks at 1.6 |
+|---|---:|---:|---|
+| −4.0 | 250 | 0 | |
+| −5.0 | 201 | 300 | 4, 5 |
+| −5.5 | 300 | 63 | 4, 5 |
+| −6.0 | 110 | **300** | 4 only |
+| −6.5 | 252 | **300** | 4 only |
+| −7.0 | 226 | 300 | 3, 4, 5 |
+| −8.0 | 300 | 0 | |
+
+At −6.0 and −6.5 every unit beats exactly once per cycle and every hop is 4 ticks; a chain of eight passed 50 of 50. Wired in both directions it still runs away (250 beats per unit where 51 is one per cycle).
+
+So the setpoint wire is a gate and a relay, not a memory. What is still missing for a kept order is the same piece as before: a refractory period, so that two-way wires do not run away. The hole at −5.5 is not diagnosed.
+
+Correction to the ninth round (Sol): at 1.45 the unit damps 92.5% of the time, not all of it; it is fully damped from 1.6.
+
 ## Ninth round: the constant on the setpoint port
 
 *Fable 5.2, 11 November 2026. The observation is Antti's, made by hand in the original Perception Lab graph. Code: [experiments/round9.py](experiments/round9.py). Numbers: [results/round9.json](results/round9.json). Live on the [site](https://anttiluode.github.io/GeometricNeuronSurfaceListener/#constant).*
@@ -19,7 +55,7 @@ Antti turned the Constant Signal wired to `setpoint_mod` and saw: at 0 the saw b
 | 1.10 | 0.61 | 59 and 60 | 0.16, 0.09, 0.04 |
 | 1.35 | 0.635 | 58 | 0.19, 0.15, 0.15 |
 | 1.40 | 0.64 | 115 | every second beat missed |
-| 1.45 to 2.00 | 0.645 to 0.70 | none | never leaves damping |
+| 1.45 to 2.00 | 0.645 to 0.70 | none | damping 92% of the time at 1.45, all of it from 1.6 |
 
 - **The saw grows with the constant.** When it is large enough, the 50-tick variance never falls below 0.1, the unit never amplifies, and it never beats.
 - **Steady or dying saw is not a smooth trend.** 1.0 holds steady, 1.05 and 1.1 die away, 1.35 holds steady. It depends on which whole-number square sizes the output lands on.
