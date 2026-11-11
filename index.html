@@ -24,7 +24,7 @@ code{background:#25313d;border-radius:4px;padding:1px 5px;font-size:.88em}pre{ov
 <h1>Two deerskins meet.</h1>
 <p class="lede">What if a neuron listens to another through <strong>its own moving surface</strong>? The sender broadcasts the 16 samples of its checkerboard. The receiver's present checkerboard becomes its receptor mosaic. Their overlap determines how much one affects the other.</p>
 <div class="tag">The original 59-tick forgetting clock is unchanged. No training, no imported theta rhythm.</div>
-<p class="footnote"><a href="#round2">Second round</a>: why the colony goes silent, and a hold-and-release switch. <a href="#round3">Third round</a>: a two-way chain taught by that switch alone. <a href="#round4">Fourth round</a>: what the checkerboard history tells a listener that beat times do not. <a href="#round5">Fifth round</a>: a receptor learned from those rows replays a taught chain at the taught spacing.</p>
+<p class="footnote"><a href="#round2">Second round</a>: why the colony goes silent, and a hold-and-release switch. <a href="#round3">Third round</a>: a two-way chain taught by that switch alone. <a href="#round4">Fourth round</a>: what the checkerboard history tells a listener that beat times do not. <a href="#round5">Fifth round</a>: a receptor learned from those rows replays a taught chain at the taught spacing. <a href="#round6">Sixth round</a>: a free colony keeps whichever taught order it is cued into.</p>
 <section class="panel" aria-label="Live experiment">
 <h2>Live, deterministic two-unit experiment</h2>
 <div class="controls">
@@ -136,6 +136,18 @@ code{background:#25313d;border-radius:4px;padding:1px 5px;font-size:.88em}pre{ov
 <p>Every replay with the right order also had every hop within one tick of the taught lag. A cue never produced the opposite order, and with no cue a taught colony stayed silent. The beat tally of the third round replays at 5 ticks per hop whatever it was taught; this receptor replays the spacing it was taught.</p>
 <p>A receptor that sees only the current row scores 0 of 12 at every gap. Throwing away the order of the rows in its window changes nothing. Random-order teaching and no teaching both score 0.</p>
 <p class="warning">It works only for hops of 6 to 8 ticks. The trigger is hand-written: it plays the unit's own recorded beat by overriding its output, and is on only at test. Also hand-set: a 30-tick refractory, nearest-predecessor credit (Sol's rule), a 30% threshold, and the hold at test. Each test is deterministic once the colony is held, so these are 12 colonies, not 96 trials. Numbers: <a href="results/round5.json">results/round5.json</a>.</p></section>
+<section class="panel" id="round6"><div class="overline">Sixth round · Fable 5.2 · 11 November 2026</div>
+<h2>A free colony keeps the order it is cued into</h2>
+<p>Two checks on the fifth round. First, the lookup table is not needed: a plain linear filter over a neighbour's last three rows (48 numbers) replays the chain just as well, 11 or 12 colonies of 12 at hops of 6 to 8 ticks. A filter that sees only beat times scores 0 there, because the listener must decide before the neighbour's beat has happened. Beat times take over at a hop of 10.</p>
+<p>Second, the test with nothing held. Every unit keeps its own 59-tick beat. The four units are erased (held by the rhythm, released together), one end is cued once, and then the colony is left alone.</p>
+<table><thead><tr><th>Linear row receptor, 12 colonies × 6 cue delays</th><th>Taught hop 6</th><th>Taught hop 8</th><th>Taught hop 10</th></tr></thead><tbody>
+<tr><td><strong>Erase, cue unit 0 → beats 0→1→2→3</strong></td><td><strong>72 of 72</strong></td><td><strong>72 of 72</strong></td><td>45 of 72</td></tr>
+<tr><td><strong>Erase, cue unit 3 → beats 3→2→1→0</strong></td><td><strong>71 of 72</strong></td><td><strong>67 of 72</strong></td><td>40 of 72</td></tr>
+<tr><td>Erase, no cue → either taught order</td><td>0 of 72</td><td>48 of 72 (all 0→3)</td><td>0 of 72</td></tr>
+<tr><td>Written order still there 3,000 ticks later</td><td>24 of 24</td><td>23 of 24</td><td>17 of 24</td></tr></tbody></table>
+<p>With no receptors, or receptors taught on random orders, no trial ends in a taught order (0 of 72 each). One cue without an erase does not switch the order: it leaves it in about half the trials and breaks it in the rest.</p>
+<p>So the colony has somewhere to hold "which order we are in": the beat pattern itself, chosen by one cue, kept with no weight changed.</p>
+<p class="warning">At hop 8 the colony falls into 0→3 without a cue in 48 of 72 trials, so that cue partly rides a default. The trigger, refractory, credit rule and threshold are hand-built, the filters are fitted offline, and the erase comes from outside. Nothing has been tested on a task. Numbers: <a href="results/round6.json">results/round6.json</a>.</p></section>
 <p class="footnote">Scientific boundary: these are real-valued sampled images and Pearson correlation. Their overlap is reciprocal at one instant. It is not quantum interference, not learned attention, and not proof of task-dependent neural communication. The original closed-loop controller and sample table are copied unchanged for audit.</p>
 </main><script src="taps.js"></script><script src="lab.js"></script><script>
 (function(){

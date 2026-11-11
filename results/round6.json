@@ -1,0 +1,433 @@
+{
+ "spec": {
+  "seeds": 12,
+  "threshold": 0.3,
+  "refractory": 30,
+  "latency": 9,
+  "rows_in_linear_filter": 3,
+  "beat_ticks_in_linear_filter": 24,
+  "ridge": 0.001,
+  "erase_hold_ticks": 160,
+  "cue_delays_after_release": [
+   0,
+   5,
+   10,
+   15,
+   20,
+   25
+  ]
+ },
+ "held": {
+  "table_thr0.3_gap5": {
+   "cue0_timed_of_12": 0,
+   "cue3_timed_of_12": 0,
+   "silent_without_cue_of_12": 12
+  },
+  "rows_linear_thr0.3_gap5": {
+   "cue0_timed_of_12": 0,
+   "cue3_timed_of_12": 0,
+   "silent_without_cue_of_12": 12
+  },
+  "beat_linear_thr0.3_gap5": {
+   "cue0_timed_of_12": 0,
+   "cue3_timed_of_12": 0,
+   "silent_without_cue_of_12": 12
+  },
+  "beat_linear_thr0.2_gap5": {
+   "cue0_timed_of_12": 0,
+   "cue3_timed_of_12": 0,
+   "silent_without_cue_of_12": 12
+  },
+  "both_linear_thr0.3_gap5": {
+   "cue0_timed_of_12": 0,
+   "cue3_timed_of_12": 0,
+   "silent_without_cue_of_12": 12
+  },
+  "table_thr0.3_gap6": {
+   "cue0_timed_of_12": 12,
+   "cue3_timed_of_12": 10,
+   "silent_without_cue_of_12": 12
+  },
+  "rows_linear_thr0.3_gap6": {
+   "cue0_timed_of_12": 11,
+   "cue3_timed_of_12": 11,
+   "silent_without_cue_of_12": 12
+  },
+  "beat_linear_thr0.3_gap6": {
+   "cue0_timed_of_12": 0,
+   "cue3_timed_of_12": 0,
+   "silent_without_cue_of_12": 12
+  },
+  "beat_linear_thr0.2_gap6": {
+   "cue0_timed_of_12": 0,
+   "cue3_timed_of_12": 0,
+   "silent_without_cue_of_12": 12
+  },
+  "both_linear_thr0.3_gap6": {
+   "cue0_timed_of_12": 12,
+   "cue3_timed_of_12": 12,
+   "silent_without_cue_of_12": 12
+  },
+  "table_thr0.3_gap7": {
+   "cue0_timed_of_12": 11,
+   "cue3_timed_of_12": 10,
+   "silent_without_cue_of_12": 12
+  },
+  "rows_linear_thr0.3_gap7": {
+   "cue0_timed_of_12": 11,
+   "cue3_timed_of_12": 11,
+   "silent_without_cue_of_12": 12
+  },
+  "beat_linear_thr0.3_gap7": {
+   "cue0_timed_of_12": 0,
+   "cue3_timed_of_12": 0,
+   "silent_without_cue_of_12": 12
+  },
+  "beat_linear_thr0.2_gap7": {
+   "cue0_timed_of_12": 0,
+   "cue3_timed_of_12": 0,
+   "silent_without_cue_of_12": 12
+  },
+  "both_linear_thr0.3_gap7": {
+   "cue0_timed_of_12": 11,
+   "cue3_timed_of_12": 11,
+   "silent_without_cue_of_12": 12
+  },
+  "table_thr0.3_gap8": {
+   "cue0_timed_of_12": 12,
+   "cue3_timed_of_12": 12,
+   "silent_without_cue_of_12": 12
+  },
+  "rows_linear_thr0.3_gap8": {
+   "cue0_timed_of_12": 12,
+   "cue3_timed_of_12": 11,
+   "silent_without_cue_of_12": 12
+  },
+  "beat_linear_thr0.3_gap8": {
+   "cue0_timed_of_12": 0,
+   "cue3_timed_of_12": 0,
+   "silent_without_cue_of_12": 12
+  },
+  "beat_linear_thr0.2_gap8": {
+   "cue0_timed_of_12": 0,
+   "cue3_timed_of_12": 0,
+   "silent_without_cue_of_12": 12
+  },
+  "both_linear_thr0.3_gap8": {
+   "cue0_timed_of_12": 12,
+   "cue3_timed_of_12": 12,
+   "silent_without_cue_of_12": 12
+  },
+  "table_thr0.3_gap9": {
+   "cue0_timed_of_12": 0,
+   "cue3_timed_of_12": 0,
+   "silent_without_cue_of_12": 12
+  },
+  "rows_linear_thr0.3_gap9": {
+   "cue0_timed_of_12": 1,
+   "cue3_timed_of_12": 1,
+   "silent_without_cue_of_12": 12
+  },
+  "beat_linear_thr0.3_gap9": {
+   "cue0_timed_of_12": 0,
+   "cue3_timed_of_12": 0,
+   "silent_without_cue_of_12": 12
+  },
+  "beat_linear_thr0.2_gap9": {
+   "cue0_timed_of_12": 0,
+   "cue3_timed_of_12": 0,
+   "silent_without_cue_of_12": 12
+  },
+  "both_linear_thr0.3_gap9": {
+   "cue0_timed_of_12": 1,
+   "cue3_timed_of_12": 1,
+   "silent_without_cue_of_12": 12
+  },
+  "table_thr0.3_gap10": {
+   "cue0_timed_of_12": 0,
+   "cue3_timed_of_12": 0,
+   "silent_without_cue_of_12": 12
+  },
+  "rows_linear_thr0.3_gap10": {
+   "cue0_timed_of_12": 5,
+   "cue3_timed_of_12": 3,
+   "silent_without_cue_of_12": 12
+  },
+  "beat_linear_thr0.3_gap10": {
+   "cue0_timed_of_12": 3,
+   "cue3_timed_of_12": 4,
+   "silent_without_cue_of_12": 12
+  },
+  "beat_linear_thr0.2_gap10": {
+   "cue0_timed_of_12": 12,
+   "cue3_timed_of_12": 12,
+   "silent_without_cue_of_12": 12
+  },
+  "both_linear_thr0.3_gap10": {
+   "cue0_timed_of_12": 6,
+   "cue3_timed_of_12": 4,
+   "silent_without_cue_of_12": 12
+  },
+  "table_thr0.3_gap12": {
+   "cue0_timed_of_12": 0,
+   "cue3_timed_of_12": 0,
+   "silent_without_cue_of_12": 12
+  },
+  "rows_linear_thr0.3_gap12": {
+   "cue0_timed_of_12": 0,
+   "cue3_timed_of_12": 0,
+   "silent_without_cue_of_12": 12
+  },
+  "beat_linear_thr0.3_gap12": {
+   "cue0_timed_of_12": 0,
+   "cue3_timed_of_12": 0,
+   "silent_without_cue_of_12": 12
+  },
+  "beat_linear_thr0.2_gap12": {
+   "cue0_timed_of_12": 1,
+   "cue3_timed_of_12": 0,
+   "silent_without_cue_of_12": 12
+  },
+  "both_linear_thr0.3_gap12": {
+   "cue0_timed_of_12": 2,
+   "cue3_timed_of_12": 2,
+   "silent_without_cue_of_12": 12
+  },
+  "table_thr0.3_gap16": {
+   "cue0_timed_of_12": 0,
+   "cue3_timed_of_12": 0,
+   "silent_without_cue_of_12": 12
+  },
+  "rows_linear_thr0.3_gap16": {
+   "cue0_timed_of_12": 0,
+   "cue3_timed_of_12": 0,
+   "silent_without_cue_of_12": 12
+  },
+  "beat_linear_thr0.3_gap16": {
+   "cue0_timed_of_12": 0,
+   "cue3_timed_of_12": 3,
+   "silent_without_cue_of_12": 10
+  },
+  "beat_linear_thr0.2_gap16": {
+   "cue0_timed_of_12": 1,
+   "cue3_timed_of_12": 0,
+   "silent_without_cue_of_12": 11
+  },
+  "both_linear_thr0.3_gap16": {
+   "cue0_timed_of_12": 0,
+   "cue3_timed_of_12": 1,
+   "silent_without_cue_of_12": 12
+  }
+ },
+ "free": {
+  "rows_linear_gap6": {
+   "settled": {
+    "F": 3,
+    "B": 2,
+    "other": 7
+   },
+   "same_state_3000_ticks_later_of_12": 12,
+   "erase_then_cue0": {
+    "F": 72
+   },
+   "erase_then_cue3": {
+    "F": 1,
+    "B": 71
+   },
+   "erase_no_cue": {
+    "other": 72
+   },
+   "written_order_kept_3000_ticks_of_24": 24,
+   "single_cue0_from_F_or_B": {
+    "trials": 100,
+    "unchanged": 47,
+    "flipped": 2,
+    "broken": 51
+   },
+   "single_cue3_from_F_or_B": {
+    "trials": 100,
+    "unchanged": 48,
+    "flipped": 3,
+    "broken": 49
+   }
+  },
+  "rows_linear_gap8": {
+   "settled": {
+    "F": 4,
+    "B": 2,
+    "other": 6
+   },
+   "same_state_3000_ticks_later_of_12": 12,
+   "erase_then_cue0": {
+    "F": 72
+   },
+   "erase_then_cue3": {
+    "B": 67,
+    "other": 5
+   },
+   "erase_no_cue": {
+    "F": 48,
+    "other": 24
+   },
+   "written_order_kept_3000_ticks_of_24": 23,
+   "single_cue0_from_F_or_B": {
+    "trials": 120,
+    "unchanged": 56,
+    "flipped": 0,
+    "broken": 64
+   },
+   "single_cue3_from_F_or_B": {
+    "trials": 120,
+    "unchanged": 58,
+    "flipped": 0,
+    "broken": 62
+   }
+  },
+  "rows_linear_gap10": {
+   "settled": {
+    "F": 1,
+    "B": 1,
+    "other": 10
+   },
+   "same_state_3000_ticks_later_of_12": 12,
+   "erase_then_cue0": {
+    "F": 45,
+    "other": 27
+   },
+   "erase_then_cue3": {
+    "B": 40,
+    "other": 32
+   },
+   "erase_no_cue": {
+    "other": 72
+   },
+   "written_order_kept_3000_ticks_of_24": 17
+  },
+  "table_gap6": {
+   "settled": {
+    "F": 3,
+    "B": 2,
+    "other": 7
+   },
+   "same_state_3000_ticks_later_of_12": 12,
+   "erase_then_cue0": {
+    "F": 72
+   },
+   "erase_then_cue3": {
+    "F": 8,
+    "B": 62,
+    "other": 2
+   },
+   "erase_no_cue": {
+    "other": 72
+   },
+   "written_order_kept_3000_ticks_of_24": 24
+  },
+  "table_gap8": {
+   "settled": {
+    "F": 3,
+    "B": 2,
+    "other": 7
+   },
+   "same_state_3000_ticks_later_of_12": 12,
+   "erase_then_cue0": {
+    "F": 72
+   },
+   "erase_then_cue3": {
+    "B": 72
+   },
+   "erase_no_cue": {
+    "F": 50,
+    "other": 22
+   },
+   "written_order_kept_3000_ticks_of_24": 24
+  },
+  "table_gap10": {
+   "settled": {
+    "F": 1,
+    "B": 1,
+    "other": 10
+   },
+   "same_state_3000_ticks_later_of_12": 12,
+   "erase_then_cue0": {
+    "F": 45,
+    "other": 27
+   },
+   "erase_then_cue3": {
+    "B": 40,
+    "other": 32
+   },
+   "erase_no_cue": {
+    "other": 72
+   },
+   "written_order_kept_3000_ticks_of_24": 17
+  },
+  "beat_linear_gap8": {
+   "settled": {
+    "other": 12
+   },
+   "same_state_3000_ticks_later_of_12": 12,
+   "erase_then_cue0": {
+    "other": 72
+   },
+   "erase_then_cue3": {
+    "other": 72
+   },
+   "erase_no_cue": {
+    "other": 72
+   },
+   "written_order_kept_3000_ticks_of_24": 0
+  },
+  "beat_linear_gap10": {
+   "settled": {
+    "B": 1,
+    "other": 11
+   },
+   "same_state_3000_ticks_later_of_12": 12,
+   "erase_then_cue0": {
+    "F": 15,
+    "other": 57
+   },
+   "erase_then_cue3": {
+    "B": 20,
+    "other": 52
+   },
+   "erase_no_cue": {
+    "other": 72
+   },
+   "written_order_kept_3000_ticks_of_24": 7
+  },
+  "none_gap8": {
+   "settled": {
+    "other": 12
+   },
+   "same_state_3000_ticks_later_of_12": 12,
+   "erase_then_cue0": {
+    "other": 72
+   },
+   "erase_then_cue3": {
+    "other": 72
+   },
+   "erase_no_cue": {
+    "other": 72
+   },
+   "written_order_kept_3000_ticks_of_24": 0
+  },
+  "rows_linear_gap8_random_order_teaching": {
+   "settled": {
+    "other": 12
+   },
+   "same_state_3000_ticks_later_of_12": 12,
+   "erase_then_cue0": {
+    "other": 72
+   },
+   "erase_then_cue3": {
+    "other": 72
+   },
+   "erase_no_cue": {
+    "other": 72
+   },
+   "written_order_kept_3000_ticks_of_24": 0
+  }
+ }
+}

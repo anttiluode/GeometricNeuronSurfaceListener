@@ -4,6 +4,55 @@
 
 *10 November 2026. Antti's experiment prompted by Fable 5.2's reading of the original [Geometric-Neuron / Deerskin Theory](https://github.com/anttiluode/Geometric-Neuron) and the six-loop [ReturnToGeometricNeuron](https://github.com/anttiluode/ReturnToGeometricNeuron) study.*
 
+## Sixth round: a plain linear filter, and a free colony that keeps the order it is cued into
+
+*Fable 5.2, 11 November 2026. Code: [experiments/round6.py](experiments/round6.py). Numbers: [results/round6.json](results/round6.json).*
+
+Two fair checks on round five.
+
+**1. The lookup table is not needed.** Four receptors were taught on the same hold-and-release data with the same credit rule and given round five's test (units held, one end cued). Colonies of 12 that replayed the cued order at the taught spacing, cue 0 / cue 3:
+
+| Hop taught (ticks) | Table over rows (round five) | Linear filter over the last 3 rows | Linear filter over beat times only | Both linear inputs |
+|---|---:|---:|---:|---:|
+| 5 | 0 / 0 | 0 / 0 | 0 / 0 | 0 / 0 |
+| 6 | 12 / 10 | 11 / 11 | 0 / 0 | 12 / 12 |
+| 7 | 11 / 10 | 11 / 11 | 0 / 0 | 11 / 11 |
+| 8 | 12 / 12 | 12 / 11 | 0 / 0 | 12 / 12 |
+| 9 | 0 / 0 | 1 / 1 | 0 / 0 | 1 / 1 |
+| 10 | 0 / 0 | 5 / 3 | 3 / 4 (12 / 12 at threshold 0.2) | 6 / 4 |
+| 12 | 0 / 0 | 0 / 0 | 0 / 0 | 2 / 2 |
+| 16 | 0 / 0 | 0 / 0 | 0 / 3 | 0 / 1 |
+
+- The linear filter over rows is `R = Σ h(τ)·G(t−τ)` with 48 numbers per neighbour. It does what the table did. Sol was right to call this ordinary signal processing: the receptor is a small temporal filter.
+- The checkerboard is still needed for hops of 6 to 8 ticks. A filter that sees only the neighbour's beat times scores 0 there at either threshold, because the listener has to decide before the neighbour's beat has happened. Only the lead-up on the surface is early enough.
+- Beat times take over at a hop of 10 (12 of 12 at threshold 0.2), where the rows mostly fail. That is round four's split again: the surface is the short warning, beat times are the clock.
+- Hops of 5, 9, 12 and 16 fail for every receptor. Not diagnosed.
+
+**2. In a free colony the taught order becomes a rhythm the colony keeps.** Nothing is held at test; every unit has its own 59-tick beat. A colony is in state F if units 0 to 3 beat 0→1→2→3 with every hop within one tick of the taught lag, B for 3→2→1→0, and "other" otherwise. Linear row receptor, 12 colonies:
+
+| | Taught hop 6 | Taught hop 8 | Taught hop 10 |
+|---|---:|---:|---:|
+| Left alone after a random start: F / B / other | 3 / 2 / 7 | 4 / 2 / 6 | 1 / 1 / 10 |
+| Same state 3,000 ticks later | 12 of 12 | 12 of 12 | 12 of 12 |
+| **Erase, then cue unit 0** → F | **72 of 72** | **72 of 72** | 45 of 72 |
+| **Erase, then cue unit 3** → B | **71 of 72** | **67 of 72** | 40 of 72 |
+| Erase, no cue → F / B / other | 0 / 0 / 72 | 48 / 0 / 24 | 0 / 0 / 72 |
+| Written order still there 3,000 ticks later | 24 of 24 | 23 of 24 | 17 of 24 |
+
+"Erase" is the hold from round two: the four units get the 8-tick rhythm for 160 ticks and are released together. The cue is one triggered beat at one end, 0 to 25 ticks after release (six delays per colony). After that nothing touches the colony.
+
+- **Controls, hop 8:** with no receptors, with receptors taught on random release orders, and with the beat-time filter, every trial ends in "other" (72 of 72 each).
+- **One cue without an erase does not switch the order.** From F or B, a single cue at 20 phases of the cycle left the order unchanged in about half the trials, broke it in the other half, and flipped it in 0 to 3 of 100. The units that would have to follow are still refractory.
+- **The no-cue case at hop 8 is biased.** After an erase with no cue, 48 of 72 trials fall into F by themselves. So at hop 8 the cue for B does real work and the cue for F partly rides a default.
+
+So the colony now has what the cue test in ReturnToGeometricNeuron lacked: somewhere to hold "which order we are in". It is held in the beat pattern itself, not in a weight, it lasts at least 3,000 ticks, and it is chosen by a single cue after an erase.
+
+**Still hand-built.** The trigger (plays the unit's recorded beat by overriding its output), the 30-tick refractory, the nearest-predecessor credit, the 9-tick look-back, the threshold. The linear filters are an offline ridge least-squares fit, not a rule running inside the units. The erase is applied from outside.
+
+**Not shown.** Any task. More than four units or two orders. Noise. The colonies left alone that end in "other" were not sorted further; in exploratory runs they were chains led from a middle unit. Test conditions are deterministic given a colony, so the unit of evidence is 12 colonies with six cue delays each.
+
+---
+
 ## Fifth round: a receptor learned from a neighbour's rows
 
 *Fable 5.2, 10 November 2026. Code: [experiments/round5.py](experiments/round5.py). Numbers: [results/round5.json](results/round5.json).*
@@ -263,6 +312,7 @@ Python 3.11+, NumPy:
     python experiments/round3.py
     python experiments/round4.py
     python experiments/round5.py
+    python experiments/round6.py
 
 The experiment writes the full numerical receipt to results/probe.json, including every phase pair. The committed [summary](results/summary.json) contains the primary results.
 
