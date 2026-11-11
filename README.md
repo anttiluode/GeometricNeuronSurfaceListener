@@ -4,6 +4,29 @@
 
 *10 November 2026. Antti's experiment prompted by Fable 5.2's reading of the original [Geometric-Neuron / Deerskin Theory](https://github.com/anttiluode/Geometric-Neuron) and the six-loop [ReturnToGeometricNeuron](https://github.com/anttiluode/ReturnToGeometricNeuron) study.*
 
+## Ninth round: the constant on the setpoint port
+
+*Fable 5.2, 11 November 2026. The observation is Antti's, made by hand in the original Perception Lab graph. Code: [experiments/round9.py](experiments/round9.py). Numbers: [results/round9.json](results/round9.json). Live on the [site](https://anttiluode.github.io/GeometricNeuronSurfaceListener/#constant).*
+
+Antti turned the Constant Signal wired to `setpoint_mod` and saw: at 0 the saw between beats disappears, at 0.5 it is small, at 1.0 it is there, at 1.1 it shrinks toward the next beat, at 2.0 there is no ECG. The reduced loop reproduces all five. One unit, 3,000 ticks to settle, 3,000 measured; the saw is the peak-to-peak swing of the coupler output between beats, in thirds of the quiet stretch.
+
+| Constant | Setpoint | Beat interval | Saw: first, middle, last third |
+|---|---|---|---|
+| 0.00 | 0.50 | 60 | 0.01, 0.00, 0.00 |
+| 0.50 | 0.55 | 60 | 0.03, 0.01, 0.01 |
+| 1.00 (original) | 0.60 | 59 | 0.12, 0.08, 0.08 |
+| 1.05 | 0.605 | 60 | 0.12, 0.05, 0.00 |
+| 1.10 | 0.61 | 59 and 60 | 0.16, 0.09, 0.04 |
+| 1.35 | 0.635 | 58 | 0.19, 0.15, 0.15 |
+| 1.40 | 0.64 | 115 | every second beat missed |
+| 1.45 to 2.00 | 0.645 to 0.70 | none | never leaves damping |
+
+- **The saw grows with the constant.** When it is large enough, the 50-tick variance never falls below 0.1, the unit never amplifies, and it never beats.
+- **Steady or dying saw is not a smooth trend.** 1.0 holds steady, 1.05 and 1.1 die away, 1.35 holds steady. It depends on which whole-number square sizes the output lands on.
+- **Removing the saw does not rescue a colony.** Six units set to constant 0 before coupling, weight 0.05, 8 starts: 4.1 silent of 6 under the moving surface (0.9 at the original constant) and 5.5 under fixed taps (1.1 at the original). So the saw between beats is not what silences a colony by itself.
+
+Not modelled: Antti also saw that with a vector length of 2,048 the stretch between beats is flat at 1.1 and the saw returns at 0.5. The sample table here is for 16 samples per row.
+
 ## Eighth round: the setpoint port. One unit makes another beat with nothing bolted on
 
 *Fable 5.2, 11 November 2026. The question is Sol's, after Antti reopened the Perception Lab graph. Code: [native.py](native.py), [experiments/round8.py](experiments/round8.py). Numbers: [results/round8.json](results/round8.json).*

@@ -115,8 +115,8 @@
     return v;
   }
   class WireLab {
-    constructor({n=4,kind="chain",weight=-5.5,settle=650}={}){
-      this.n=n;this.kind=kind;this.weight=weight;this.v=wiring("none",0,n);
+    constructor({n=4,kind="chain",weight=-5.5,settle=650,c=1}={}){
+      this.n=n;this.c=1;this.out=Array.from({length:n},()=>[]);this.hot=Array.from({length:n},()=>[]);this.kind=kind;this.weight=weight;this.v=wiring("none",0,n);
       this.pipe=Array.from({length:4},()=>Array(n).fill(NaN));
       this.pipe[3]=Array(n).fill(O0);
       this.hist=Array.from({length:n},()=>Array(50).fill(0));
@@ -132,7 +132,7 @@
         for(let i=1;i<n;i++)if(t===300+17*i)this.forced[i]=2;
         this.step();
       }
-      this.setWiring(kind,weight);this.clear();
+      this.setWiring(kind,weight);this.c=c;this.clear();
     }
     setWiring(kind,weight){this.kind=kind;this.weight=weight;this.v=wiring(kind,weight,this.n);}
     clear(){this.events=Array.from({length:this.n},()=>[]);this.t0=this.t;}
@@ -160,7 +160,7 @@
         let min=0;
         for(let j=0;j<n;j++)min+=this.v[i][j]*wires[j];
         if(this.sp[i]>0){min+=this.spM;this.sp[i]--;}
-        const Si=.5+.1*(1+min);
+        const Si=.5+.1*(this.c+min);   // this.c is the Constant Signal node (1.0 in ecg.json)
         Sv[i]=Si;
         o[i]=va[i]>TARGET?Si+(2/(1+Math.exp(-3*(R[i]-Si)))-1)/3:
           Si+Math.tanh(2*(R[i]-Si)*(1+10*Math.abs(va[i]-TARGET)));
@@ -175,6 +175,8 @@
         this.previous[i]=loud;
         if(this.events[i].length>400)this.events[i].shift();
         this.trace[i].push(Sv[i]);if(this.trace[i].length>400)this.trace[i].shift();
+        this.out[i].push(o[i]);if(this.out[i].length>400)this.out[i].shift();
+        this.hot[i].push(va[i]>TARGET);if(this.hot[i].length>400)this.hot[i].shift();
       }
       return own;
     }

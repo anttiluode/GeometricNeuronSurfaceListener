@@ -1,0 +1,840 @@
+{
+ "sweep": [
+  {
+   "constant": 0.0,
+   "setpoint": 0.5,
+   "beats_in_3000_ticks": 50,
+   "damping_fraction": 0.883,
+   "beat_intervals": [
+    60
+   ],
+   "ripple_first_middle_last_third": [
+    0.01,
+    0.0,
+    0.0
+   ],
+   "square_sizes_between_beats": [
+    43,
+    44
+   ]
+  },
+  {
+   "constant": 0.05,
+   "setpoint": 0.505,
+   "beats_in_3000_ticks": 50,
+   "damping_fraction": 0.883,
+   "beat_intervals": [
+    60
+   ],
+   "ripple_first_middle_last_third": [
+    0.01,
+    0.01,
+    0.01
+   ],
+   "square_sizes_between_beats": [
+    43,
+    44
+   ]
+  },
+  {
+   "constant": 0.1,
+   "setpoint": 0.51,
+   "beats_in_3000_ticks": 50,
+   "damping_fraction": 0.883,
+   "beat_intervals": [
+    60
+   ],
+   "ripple_first_middle_last_third": [
+    0.022,
+    0.01,
+    0.01
+   ],
+   "square_sizes_between_beats": [
+    43,
+    44,
+    45
+   ]
+  },
+  {
+   "constant": 0.15,
+   "setpoint": 0.515,
+   "beats_in_3000_ticks": 50,
+   "damping_fraction": 0.883,
+   "beat_intervals": [
+    60
+   ],
+   "ripple_first_middle_last_third": [
+    0.022,
+    0.0,
+    0.0
+   ],
+   "square_sizes_between_beats": [
+    43,
+    44,
+    45
+   ]
+  },
+  {
+   "constant": 0.2,
+   "setpoint": 0.52,
+   "beats_in_3000_ticks": 50,
+   "damping_fraction": 0.883,
+   "beat_intervals": [
+    60
+   ],
+   "ripple_first_middle_last_third": [
+    0.023,
+    0.0,
+    0.0
+   ],
+   "square_sizes_between_beats": [
+    43,
+    44,
+    45
+   ]
+  },
+  {
+   "constant": 0.25,
+   "setpoint": 0.525,
+   "beats_in_3000_ticks": 50,
+   "damping_fraction": 0.883,
+   "beat_intervals": [
+    60
+   ],
+   "ripple_first_middle_last_third": [
+    0.023,
+    0.023,
+    0.023
+   ],
+   "square_sizes_between_beats": [
+    43,
+    45
+   ]
+  },
+  {
+   "constant": 0.3,
+   "setpoint": 0.53,
+   "beats_in_3000_ticks": 50,
+   "damping_fraction": 0.883,
+   "beat_intervals": [
+    60
+   ],
+   "ripple_first_middle_last_third": [
+    0.038,
+    0.0,
+    0.0
+   ],
+   "square_sizes_between_beats": [
+    43,
+    44,
+    45,
+    46
+   ]
+  },
+  {
+   "constant": 0.35,
+   "setpoint": 0.535,
+   "beats_in_3000_ticks": 50,
+   "damping_fraction": 0.883,
+   "beat_intervals": [
+    60
+   ],
+   "ripple_first_middle_last_third": [
+    0.038,
+    0.0,
+    0.0
+   ],
+   "square_sizes_between_beats": [
+    43,
+    44,
+    45,
+    46
+   ]
+  },
+  {
+   "constant": 0.4,
+   "setpoint": 0.54,
+   "beats_in_3000_ticks": 50,
+   "damping_fraction": 0.883,
+   "beat_intervals": [
+    60
+   ],
+   "ripple_first_middle_last_third": [
+    0.038,
+    0.013,
+    0.013
+   ],
+   "square_sizes_between_beats": [
+    43,
+    44,
+    45,
+    46
+   ]
+  },
+  {
+   "constant": 0.45,
+   "setpoint": 0.545,
+   "beats_in_3000_ticks": 50,
+   "damping_fraction": 0.883,
+   "beat_intervals": [
+    60
+   ],
+   "ripple_first_middle_last_third": [
+    0.039,
+    0.013,
+    0.013
+   ],
+   "square_sizes_between_beats": [
+    43,
+    44,
+    45,
+    46
+   ]
+  },
+  {
+   "constant": 0.5,
+   "setpoint": 0.55,
+   "beats_in_3000_ticks": 50,
+   "damping_fraction": 0.883,
+   "beat_intervals": [
+    60
+   ],
+   "ripple_first_middle_last_third": [
+    0.028,
+    0.013,
+    0.013
+   ],
+   "square_sizes_between_beats": [
+    44,
+    45,
+    46
+   ]
+  },
+  {
+   "constant": 0.55,
+   "setpoint": 0.555,
+   "beats_in_3000_ticks": 50,
+   "damping_fraction": 0.883,
+   "beat_intervals": [
+    60
+   ],
+   "ripple_first_middle_last_third": [
+    0.057,
+    0.013,
+    0.0
+   ],
+   "square_sizes_between_beats": [
+    43,
+    44,
+    45,
+    46,
+    47
+   ]
+  },
+  {
+   "constant": 0.6,
+   "setpoint": 0.56,
+   "beats_in_3000_ticks": 50,
+   "damping_fraction": 0.883,
+   "beat_intervals": [
+    60
+   ],
+   "ripple_first_middle_last_third": [
+    0.058,
+    0.013,
+    0.0
+   ],
+   "square_sizes_between_beats": [
+    43,
+    44,
+    45,
+    46,
+    47
+   ]
+  },
+  {
+   "constant": 0.65,
+   "setpoint": 0.565,
+   "beats_in_3000_ticks": 50,
+   "damping_fraction": 0.883,
+   "beat_intervals": [
+    60
+   ],
+   "ripple_first_middle_last_third": [
+    0.058,
+    0.029,
+    0.029
+   ],
+   "square_sizes_between_beats": [
+    43,
+    44,
+    46,
+    47
+   ]
+  },
+  {
+   "constant": 0.7,
+   "setpoint": 0.57,
+   "beats_in_3000_ticks": 50,
+   "damping_fraction": 0.883,
+   "beat_intervals": [
+    60
+   ],
+   "ripple_first_middle_last_third": [
+    0.089,
+    0.041,
+    0.029
+   ],
+   "square_sizes_between_beats": [
+    42,
+    43,
+    44,
+    46,
+    47,
+    48
+   ]
+  },
+  {
+   "constant": 0.75,
+   "setpoint": 0.575,
+   "beats_in_3000_ticks": 50,
+   "damping_fraction": 0.883,
+   "beat_intervals": [
+    60
+   ],
+   "ripple_first_middle_last_third": [
+    0.08,
+    0.03,
+    0.0
+   ],
+   "square_sizes_between_beats": [
+    43,
+    44,
+    45,
+    46,
+    47,
+    48
+   ]
+  },
+  {
+   "constant": 0.8,
+   "setpoint": 0.58,
+   "beats_in_3000_ticks": 50,
+   "damping_fraction": 0.883,
+   "beat_intervals": [
+    60
+   ],
+   "ripple_first_middle_last_third": [
+    0.081,
+    0.03,
+    0.016
+   ],
+   "square_sizes_between_beats": [
+    43,
+    44,
+    45,
+    46,
+    47,
+    48
+   ]
+  },
+  {
+   "constant": 0.85,
+   "setpoint": 0.585,
+   "beats_in_3000_ticks": 50,
+   "damping_fraction": 0.883,
+   "beat_intervals": [
+    60
+   ],
+   "ripple_first_middle_last_third": [
+    0.081,
+    0.03,
+    0.016
+   ],
+   "square_sizes_between_beats": [
+    43,
+    44,
+    45,
+    46,
+    47,
+    48
+   ]
+  },
+  {
+   "constant": 0.9,
+   "setpoint": 0.59,
+   "beats_in_3000_ticks": 50,
+   "damping_fraction": 0.883,
+   "beat_intervals": [
+    60
+   ],
+   "ripple_first_middle_last_third": [
+    0.116,
+    0.062,
+    0.049
+   ],
+   "square_sizes_between_beats": [
+    42,
+    43,
+    44,
+    47,
+    48,
+    49
+   ]
+  },
+  {
+   "constant": 0.95,
+   "setpoint": 0.595,
+   "beats_in_3000_ticks": 50,
+   "damping_fraction": 0.883,
+   "beat_intervals": [
+    60
+   ],
+   "ripple_first_middle_last_third": [
+    0.117,
+    0.062,
+    0.05
+   ],
+   "square_sizes_between_beats": [
+    42,
+    43,
+    44,
+    47,
+    48,
+    49
+   ]
+  },
+  {
+   "constant": 1.0,
+   "setpoint": 0.6,
+   "beats_in_3000_ticks": 51,
+   "damping_fraction": 0.898,
+   "beat_intervals": [
+    59
+   ],
+   "ripple_first_middle_last_third": [
+    0.118,
+    0.084,
+    0.084
+   ],
+   "square_sizes_between_beats": [
+    42,
+    43,
+    48,
+    49
+   ]
+  },
+  {
+   "constant": 1.05,
+   "setpoint": 0.605,
+   "beats_in_3000_ticks": 50,
+   "damping_fraction": 0.883,
+   "beat_intervals": [
+    60
+   ],
+   "ripple_first_middle_last_third": [
+    0.119,
+    0.051,
+    0.0
+   ],
+   "square_sizes_between_beats": [
+    42,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49
+   ]
+  },
+  {
+   "constant": 1.1,
+   "setpoint": 0.61,
+   "beats_in_3000_ticks": 50,
+   "damping_fraction": 0.892,
+   "beat_intervals": [
+    59,
+    60
+   ],
+   "ripple_first_middle_last_third": [
+    0.156,
+    0.086,
+    0.036
+   ],
+   "square_sizes_between_beats": [
+    41,
+    43,
+    44,
+    45,
+    47,
+    48,
+    49,
+    50
+   ]
+  },
+  {
+   "constant": 1.15,
+   "setpoint": 0.615,
+   "beats_in_3000_ticks": 51,
+   "damping_fraction": 0.898,
+   "beat_intervals": [
+    59
+   ],
+   "ripple_first_middle_last_third": [
+    0.157,
+    0.086,
+    0.073
+   ],
+   "square_sizes_between_beats": [
+    41,
+    43,
+    44,
+    48,
+    49,
+    50
+   ]
+  },
+  {
+   "constant": 1.2,
+   "setpoint": 0.62,
+   "beats_in_3000_ticks": 51,
+   "damping_fraction": 0.898,
+   "beat_intervals": [
+    59
+   ],
+   "ripple_first_middle_last_third": [
+    0.149,
+    0.087,
+    0.074
+   ],
+   "square_sizes_between_beats": [
+    42,
+    43,
+    44,
+    48,
+    49,
+    50
+   ]
+  },
+  {
+   "constant": 1.25,
+   "setpoint": 0.625,
+   "beats_in_3000_ticks": 51,
+   "damping_fraction": 0.906,
+   "beat_intervals": [
+    58,
+    59
+   ],
+   "ripple_first_middle_last_third": [
+    0.197,
+    0.124,
+    0.112
+   ],
+   "square_sizes_between_beats": [
+    40,
+    42,
+    43,
+    49,
+    50,
+    51
+   ]
+  },
+  {
+   "constant": 1.3,
+   "setpoint": 0.63,
+   "beats_in_3000_ticks": 51,
+   "damping_fraction": 0.906,
+   "beat_intervals": [
+    58,
+    59
+   ],
+   "ripple_first_middle_last_third": [
+    0.199,
+    0.125,
+    0.113
+   ],
+   "square_sizes_between_beats": [
+    40,
+    42,
+    43,
+    49,
+    50,
+    51
+   ]
+  },
+  {
+   "constant": 1.35,
+   "setpoint": 0.635,
+   "beats_in_3000_ticks": 52,
+   "damping_fraction": 0.913,
+   "beat_intervals": [
+    58
+   ],
+   "ripple_first_middle_last_third": [
+    0.192,
+    0.153,
+    0.153
+   ],
+   "square_sizes_between_beats": [
+    41,
+    42,
+    50,
+    51
+   ]
+  },
+  {
+   "constant": 1.4,
+   "setpoint": 0.64,
+   "beats_in_3000_ticks": 26,
+   "damping_fraction": 0.922,
+   "beat_intervals": [
+    115
+   ],
+   "ripple_first_middle_last_third": [
+    0.239,
+    1.177,
+    0.193
+   ],
+   "square_sizes_between_beats": [
+    24,
+    26,
+    27,
+    39,
+    41,
+    42,
+    50,
+    51,
+    52,
+    61,
+    62,
+    83
+   ]
+  },
+  {
+   "constant": 1.45,
+   "setpoint": 0.645,
+   "beats_in_3000_ticks": 0,
+   "damping_fraction": 0.925,
+   "output_range": [
+    0.666,
+    0.975
+   ],
+   "square_sizes": [
+    38,
+    39,
+    41,
+    51,
+    52,
+    53
+   ]
+  },
+  {
+   "constant": 1.5,
+   "setpoint": 0.65,
+   "beats_in_3000_ticks": 0,
+   "damping_fraction": 1.0,
+   "output_range": [
+    0.7,
+    0.943
+   ],
+   "square_sizes": [
+    39,
+    41,
+    51,
+    52
+   ]
+  },
+  {
+   "constant": 1.55,
+   "setpoint": 0.655,
+   "beats_in_3000_ticks": 0,
+   "damping_fraction": 0.94,
+   "output_range": [
+    0.404,
+    1.573
+   ],
+   "square_sizes": [
+    25,
+    38,
+    40,
+    41,
+    51,
+    52,
+    53,
+    83
+   ]
+  },
+  {
+   "constant": 1.6,
+   "setpoint": 0.66,
+   "beats_in_3000_ticks": 0,
+   "damping_fraction": 1.0,
+   "output_range": [
+    0.705,
+    0.944
+   ],
+   "square_sizes": [
+    40,
+    52
+   ]
+  },
+  {
+   "constant": 1.65,
+   "setpoint": 0.665,
+   "beats_in_3000_ticks": 0,
+   "damping_fraction": 1.0,
+   "output_range": [
+    0.676,
+    0.963
+   ],
+   "square_sizes": [
+    38,
+    40,
+    52,
+    53
+   ]
+  },
+  {
+   "constant": 1.7,
+   "setpoint": 0.67,
+   "beats_in_3000_ticks": 0,
+   "damping_fraction": 1.0,
+   "output_range": [
+    0.679,
+    0.967
+   ],
+   "square_sizes": [
+    38,
+    53
+   ]
+  },
+  {
+   "constant": 1.75,
+   "setpoint": 0.675,
+   "beats_in_3000_ticks": 0,
+   "damping_fraction": 1.0,
+   "output_range": [
+    0.681,
+    0.965
+   ],
+   "square_sizes": [
+    39,
+    53
+   ]
+  },
+  {
+   "constant": 1.8,
+   "setpoint": 0.68,
+   "beats_in_3000_ticks": 0,
+   "damping_fraction": 1.0,
+   "output_range": [
+    0.653,
+    0.982
+   ],
+   "square_sizes": [
+    37,
+    39,
+    53,
+    54
+   ]
+  },
+  {
+   "constant": 1.85,
+   "setpoint": 0.685,
+   "beats_in_3000_ticks": 0,
+   "damping_fraction": 1.0,
+   "output_range": [
+    0.655,
+    0.987
+   ],
+   "square_sizes": [
+    37,
+    54
+   ]
+  },
+  {
+   "constant": 1.9,
+   "setpoint": 0.69,
+   "beats_in_3000_ticks": 0,
+   "damping_fraction": 1.0,
+   "output_range": [
+    0.658,
+    0.991
+   ],
+   "square_sizes": [
+    37,
+    54
+   ]
+  },
+  {
+   "constant": 1.95,
+   "setpoint": 0.695,
+   "beats_in_3000_ticks": 0,
+   "damping_fraction": 1.0,
+   "output_range": [
+    0.63,
+    1.001
+   ],
+   "square_sizes": [
+    36,
+    38,
+    54,
+    55
+   ]
+  },
+  {
+   "constant": 2.0,
+   "setpoint": 0.7,
+   "beats_in_3000_ticks": 0,
+   "damping_fraction": 1.0,
+   "output_range": [
+    0.632,
+    1.006
+   ],
+   "square_sizes": [
+    36,
+    38,
+    54,
+    55
+   ]
+  }
+ ],
+ "mean_silent_units_of_6_by_weight": {
+  "surface, constant 0.0": {
+   "0.02": 0.0,
+   "0.05": 4.125,
+   "0.1": 6.0,
+   "0.2": 6.0
+  },
+  "surface, constant 0.5": {
+   "0.02": 0.0,
+   "0.05": 4.125,
+   "0.1": 6.0,
+   "0.2": 6.0
+  },
+  "surface, constant 1.0": {
+   "0.02": 0.0,
+   "0.05": 0.875,
+   "0.1": 6.0,
+   "0.2": 6.0
+  },
+  "fixed_taps, constant 0.0": {
+   "0.02": 0.0,
+   "0.05": 5.5,
+   "0.1": 6.0,
+   "0.2": 6.0
+  },
+  "fixed_taps, constant 0.5": {
+   "0.02": 0.0,
+   "0.05": 3.25,
+   "0.1": 6.0,
+   "0.2": 6.0
+  },
+  "fixed_taps, constant 1.0": {
+   "0.02": 0.0,
+   "0.05": 1.125,
+   "0.1": 6.0,
+   "0.2": 6.0
+  }
+ }
+}

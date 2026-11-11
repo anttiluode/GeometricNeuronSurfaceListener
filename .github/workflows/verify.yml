@@ -9,6 +9,7 @@ on:
       - "lab.js"
       - "taps.js"
       - "native.py"
+      - "index.html"
       - ".github/workflows/verify.yml"
   workflow_dispatch:
 jobs:
